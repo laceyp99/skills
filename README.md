@@ -4,6 +4,34 @@ This repo is a shared collection of AI agent skills I use in my own workflow. So
 
 The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files.
 
+## Quickstart
+
+Install interactively with the open `skills` CLI:
+
+```bash
+npx skills@latest add laceyp99/skills
+```
+
+That command will fetch this GitHub repo, show the available skills, and let you choose which agent or agents to install them into.
+
+To install every skill globally without prompts:
+
+```bash
+npx skills@latest add laceyp99/skills -g --skill '*' --agent '*' -y
+```
+
+To install one skill for Codex:
+
+```bash
+npx skills@latest add laceyp99/skills -g -a codex --skill visual-coding-plan -y
+```
+
+To preview what is available without installing:
+
+```bash
+npx skills@latest add laceyp99/skills --list
+```
+
 ## Included Skills
 
 | Skill | Purpose | Notes |
@@ -46,6 +74,8 @@ Copy-Item -Recurse .\visual-coding-plan $HOME\.codex\skills\
 ```
 
 Repeat that command for any other skill directory you want to install.
+
+The manual copy flow is still useful when you are editing a skill locally. For normal installation from GitHub, prefer the `npx skills@latest add laceyp99/skills` quickstart above.
 
 ## Planning Workflow Notes
 

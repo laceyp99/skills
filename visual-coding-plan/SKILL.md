@@ -15,17 +15,15 @@ Always produce one Markdown file named or formatted as `plan.md` unless the user
 
 The plan must prioritize, in this order:
 1. Human summary and narrative reviewability.
-2. Decision log.
-3. Agent task list with stable IDs.
-4. File impact matrix.
-5. Risk matrix.
-6. Test/verification plan.
-7. Acceptance criteria.
-8. Restricted HTML blocks.
-9. Execution map.
-10. Architecture sketch.
-11. Sequence diagram.
-12. Phase timeline.
+2. Visual overview for fast review.
+3. Decision log.
+4. Risk matrix.
+5. Agent task list with stable IDs.
+6. Phase implementation plan.
+7. File impact matrix.
+8. Test/verification plan.
+9. Acceptance criteria.
+10. Restricted HTML blocks.
 
 Do not create MDX. Do not use custom JSX components. Do not rely on a custom renderer. The plan must remain useful if Mermaid does not render and if HTML collapsibles are displayed as plain markup.
 
@@ -50,13 +48,23 @@ Use this section order by default. Omit optional diagram sections only when they
 
 ## Human Summary
 
+## Visual Overview
+
+### Execution Map
+
+### Architecture Sketch
+
+### Sequence Diagram
+
 ## Decision Log
+
+## Risk Matrix
 
 ## Agent Task List
 
-## File Impact Matrix
+## Phase Implementation Plan
 
-## Risk Matrix
+## File Impact Matrix
 
 ## Test / Verification Plan
 
@@ -69,14 +77,6 @@ Use this section order by default. Omit optional diagram sections only when they
 ## Agent Handoff Prompt
 
 ## Additional Context
-
-## Execution Map
-
-## Architecture Sketch
-
-## Sequence Diagram
-
-## Phase Timeline
 ```
 
 ### Human Summary
@@ -95,6 +95,22 @@ Use a Markdown table. Include meaningful choices only; do not invent fake decisi
 
 If no meaningful decisions are known yet, include a short note: `No major implementation decisions are locked yet; resolve the unknowns first.`
 
+### Visual Overview
+
+Place review-helpful visuals near the top of the plan so they orient the human reviewer before the detailed task tables. Use this section for a compact execution map and, when useful, architecture or sequence diagrams.
+
+Keep the visuals summarizing the plan, not replacing it. The executable source of truth remains the Markdown task list, phase plan, risk matrix, verification plan, and acceptance criteria.
+
+### Risk Matrix
+
+Use a Markdown table with practical mitigations. Put risks before the task list so they can shape execution order, stop conditions, and verification.
+
+```markdown
+| Risk | Level | Why it matters | Mitigation |
+|---|---|---|---|
+| {{risk}} | High/Medium/Low | {{impact}} | {{specific mitigation}} |
+```
+
 ### Agent Task List
 
 Every actionable task must have a stable, unique, kebab-case ID in backticks. Tasks should be ordered for execution.
@@ -106,6 +122,35 @@ Every actionable task must have a stable, unique, kebab-case ID in backticks. Ta
 ```
 
 Good task IDs are short, durable, and action-oriented. Avoid vague tasks like `fix-stuff` or `update-code`.
+
+Tasks should be ordered enough to guide execution, but do not turn the task list into a commit-by-commit script unless the user explicitly asks for that level of control. Preserve room for the executing agent to inspect the codebase, follow local patterns, and adjust file-level details while keeping the plan's intent.
+
+### Phase Implementation Plan
+
+Use phases to balance structure with agent judgment. Each phase should define:
+
+- `Goal`: what this phase is trying to accomplish.
+- `Likely work`: stable-ID tasks that are expected but may adjust after inspection.
+- `Expected outcome`: what should be true when the phase is complete.
+- `Flexibility`: what the agent may adapt without asking for review.
+
+```markdown
+### Phase 1: Inspect and Confirm Direction
+
+Goal: Verify the repo facts that the plan depends on.
+
+Likely work:
+- [ ] `inspect-current-flow` Confirm the relevant files, routes, data flow, or APIs.
+- [ ] `confirm-existing-patterns` Identify existing helpers, conventions, and test commands.
+
+Expected outcome:
+The agent knows whether the proposed path still fits the codebase.
+
+Flexibility:
+The agent may adjust later tasks if inspection finds a better existing pattern.
+```
+
+Do not prescribe exact commits, exact file edits, or rigid sequencing unless those details are confirmed and necessary. A fully flooded commit plan belongs in a stricter planning workflow; this skill should usually create an intent-driven implementation plan.
 
 ### File Impact Matrix
 
@@ -119,16 +164,6 @@ Use a Markdown table. If files are known, list paths. If files are uncertain, li
 ```
 
 Actions should usually be `Inspect`, `Create`, `Modify`, `Delete`, `Move`, or `Unknown`.
-
-### Risk Matrix
-
-Use a Markdown table with practical mitigations.
-
-```markdown
-| Risk | Level | Why it matters | Mitigation |
-|---|---|---|---|
-| {{risk}} | High/Medium/Low | {{impact}} | {{specific mitigation}} |
-```
 
 ### Test / Verification Plan
 
@@ -226,15 +261,15 @@ Banned HTML:
 
 Use at most one default execution map. Prefer `flowchart TD`. Keep labels short. Maximum 10 nodes unless the user asks for more detail.
 
-```markdown
+````markdown
 ```mermaid
 flowchart TD
   A[Inspect current state] --> B[Confirm implementation path]
-  B --> C[Make smallest safe change]
+  B --> C[Make smallest coherent change]
   C --> D[Verify behavior]
   D --> E[Handoff results]
 ```
-```
+````
 
 Avoid long file paths, backticks, quotes, braces, parentheses, and punctuation-heavy labels inside Mermaid nodes. Put detailed file paths in tables, not diagrams.
 
@@ -242,20 +277,20 @@ Avoid long file paths, backticks, quotes, braces, parentheses, and punctuation-h
 
 Include only when the task involves at least three interacting parts. Label uncertain architecture as proposed.
 
-```markdown
+````markdown
 ```mermaid
 flowchart LR
   UI[UI] --> API[API route]
   API --> Service[Service layer]
   Service --> Data[Data store]
 ```
-```
+````
 
 ### Sequence Diagram
 
 Include only for request/response, webhook, auth, event, or multi-system flows. Keep participants to 5 or fewer.
 
-```markdown
+````markdown
 ```mermaid
 sequenceDiagram
   participant User
@@ -269,11 +304,11 @@ sequenceDiagram
   Service-->>API: Return result
   API-->>UI: Return response
 ```
-```
+````
 
-### Phase Timeline
+### Phase Implementation Plan
 
-Use Markdown as the source of truth. Add a very small Mermaid phase summary only if it clarifies the plan. Do not use Gantt charts by default.
+Use Markdown as the source of truth. Keep phases open enough for task completion and repo-aware judgment, but specific enough that the agent understands the intended order and expected outcomes. Add a very small Mermaid phase summary only if it clarifies the plan. Do not use Gantt charts by default.
 
 ## Simplicity and Fallback Rules
 
@@ -291,9 +326,11 @@ Before finalizing, verify:
 - No MDX, JSX, imports, or custom components are present.
 - Every actionable task has a unique stable ID.
 - The Human Summary explains the work and order clearly.
+- The Visual Overview appears near the top when diagrams help review.
 - The Decision Log includes real decisions or explicitly says none are locked.
+- The Risk Matrix appears before execution tasks and includes specific mitigations.
+- The Phase Implementation Plan defines goals, likely work, expected outcomes, and flexibility boundaries without becoming a commit script.
 - The File Impact Matrix distinguishes confirmed files from uncertain areas.
-- The Risk Matrix includes specific mitigations.
 - The Verification Plan is proportional to the work.
 - Acceptance Criteria are observable.
 - Stop Conditions are included.

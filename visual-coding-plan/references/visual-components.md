@@ -8,11 +8,23 @@ Purpose: keep the reviewer engaged and oriented. Explain the work in normal lang
 
 Format: paragraphs, optionally followed by a compact snapshot table.
 
+## Visual Overview
+
+Purpose: make diagrams part of the review path instead of appendix material. Use this section immediately after the Human Summary when visuals help the reviewer understand flow, architecture, or runtime interactions.
+
+Format: optional subsections for Execution Map, Architecture Sketch, and Sequence Diagram. Keep diagrams compact and summarize the Markdown plan rather than replacing it.
+
 ## Decision Log
 
 Purpose: expose the choices behind the plan so a junior-ish developer can review the reasoning and a code agent has fewer chances to wander.
 
 Format: Markdown table with `Decision`, `Choice`, `Why`, and `Confidence`.
+
+## Risk Matrix
+
+Purpose: prevent reckless execution and help the human reviewer judge the plan before reading implementation tasks. Risks should influence task order, verification, and stop conditions.
+
+Format: Markdown table with `Risk`, `Level`, `Why it matters`, and `Mitigation`.
 
 ## Agent Task List with Stable IDs
 
@@ -20,17 +32,21 @@ Purpose: make the plan executable, trackable, resumable, and easy to reference.
 
 Format: Markdown task list. Each task starts with a unique kebab-case ID in backticks.
 
+Keep tasks ordered enough to guide execution, but do not turn them into a commit-by-commit script unless the user explicitly asks for strict commit planning.
+
+## Phase Implementation Plan
+
+Purpose: provide a review-friendly implementation path while preserving room for repo-aware judgment.
+
+Format: Markdown phase sections with `Goal`, `Likely work`, `Expected outcome`, and `Flexibility`.
+
+Use `Likely work` for stable-ID tasks that are expected but may adapt after inspection. Use `Flexibility` to say what the executing agent may adjust without asking for review.
+
 ## File Impact Matrix
 
 Purpose: show likely scope and risk. Use confirmed paths only when known. Use areas/inspection targets when uncertain.
 
 Format: Markdown table with `File / Area`, `Action`, `Purpose`, and `Risk`.
-
-## Risk Matrix
-
-Purpose: prevent reckless execution. Risks should influence task order, verification, and stop conditions.
-
-Format: Markdown table with `Risk`, `Level`, `Why it matters`, and `Mitigation`.
 
 ## Test / Verification Plan
 
@@ -79,8 +95,8 @@ Purpose: show runtime interactions over time.
 
 Use only for auth, API, webhook, event, or request/response flows. Keep participant count low.
 
-## Phase Timeline
+## Phase Implementation Plan Diagrams
 
-Purpose: show the work breakdown in review-friendly chunks.
+Purpose: optionally summarize the phase breakdown visually.
 
-Markdown headings and task lists are the source of truth. Mermaid summaries are optional and should stay small.
+Markdown phase sections are the source of truth. Mermaid summaries are optional and should stay small. Do not use Gantt charts by default.

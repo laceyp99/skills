@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+
+# Local editor and agent state
+.vscode/
+.idea/
+.codex/
+.openai/
+
+# Temporary files
+*.tmp
+*.temp
+*.log

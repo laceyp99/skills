@@ -1,0 +1,6 @@
+interface:
+  display_name: Prelude
+  short_description: Investigate issues before choosing a fix
+
+policy:
+  allow_implicit_invocation: false

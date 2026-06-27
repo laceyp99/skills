@@ -1,0 +1,3 @@
+interface:
+  display_name: "pr-actical"
+  short_description: "Push a branch and create or update a GitHub draft PR."

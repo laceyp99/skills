@@ -1,0 +1,11 @@
+interface:
+  display_name: Visual Coding Plan
+  short_description: Create GitHub-safe visual plan.md files for human review and
+    code-agent execution.
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

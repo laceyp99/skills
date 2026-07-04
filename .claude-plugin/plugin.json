@@ -1,10 +1,8 @@
 {
   "name": "laceyp99-skills",
   "skills": [
-    "./branch-planner",
     "./grill-me",
     "./pr-actical",
-    "./pr-creator",
     "./prelude",
     "./visual-coding-plan"
   ]

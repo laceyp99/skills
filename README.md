@@ -36,21 +36,17 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `branch-planner` | Turn a rough feature, fix, refactor, or chore idea into a scoped branch plan. | This is my older planning workflow. It focuses on branch names, commit sequencing, validation, risks, and a local `plan.md`. I am keeping it here for reference while moving my planning workflow toward `visual-coding-plan`. |
-| `visual-coding-plan` | Create GitHub-safe and VS Code-safe visual project plans in a single `plan.md`. | This is the direction I am actively moving toward. It uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. It is still being optimized. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
-| `pr-creator` | Draft a local `PR.md` for the current branch. | Reads branch scope, diffs, commits, and PR templates, then prepares a human-reviewable PR description. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
+| `visual-coding-plan` | Create GitHub-safe and VS Code-safe visual project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 
 ## Repository Layout
 
 ```text
 .
-├── branch-planner/
 ├── grill-me/
 ├── pr-actical/
-├── pr-creator/
 ├── prelude/
 └── visual-coding-plan/
 ```
@@ -77,13 +73,16 @@ Repeat that command for any other skill directory you want to install.
 
 The manual copy flow is still useful when you are editing a skill locally. For normal installation from GitHub, prefer the `npx skills@latest add laceyp99/skills` quickstart above.
 
-## Planning Workflow Notes
+## Workflow Notes
 
-`branch-planner` represents my old way of planning coding work: narrow the scope, suggest branch names, break the work into commits, and write a `plan.md` that can guide implementation.
+`prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
 
-`visual-coding-plan` is my newer planning direction. Instead of focusing mainly on branch and commit structure, it tries to create a plan that is more useful to both people and coding agents: a plain Markdown artifact with stable task IDs, decision logs, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
+`visual-coding-plan` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, decision logs, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
 
-The visual planning skill is not final. I am still optimizing the structure, the level of detail, and how much visual markup is helpful before it becomes noise.
+`grill-me` (from Matt Pocock) is for unresolved thinking. It asks one decision-shaping question at a time and gives a recommended answer, which helps turn a fuzzy plan into explicit choices.
+
+`pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
+
 
 ## Provenance
 

@@ -28,7 +28,7 @@ If `plan.md` is missing, internally contradictory, or impossible to map into wor
 Use the user's current request to choose the mode.
 
 - **Hand Holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
-- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits or walk the commit plan autonomously. Stop right before pushing the local branch for the user to review, unless the user explicitily asks for it.
+- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits or walk the commit plan autonomously. Stop right before pushing the local branch for the user to review, unless the user explicitly asks for it.
 
 Treat plan commit entries as logical work boundaries in both modes. Do not run `git commit` in hand holding mode, even if the plan contains commit messages; just pass those onto the user.
 
@@ -62,7 +62,7 @@ For each unit:
 1. Implement one logical unit.
 2. Run the narrowest relevant validation available from repo scripts.
 3. Broaden validation when the unit touches shared behavior, public interfaces, packaging, CI, or cross-cutting code.
-4. Stage only intended source, test, and documentation files; no planing artifacts.
+4. Stage only intended source, test, and documentation files; no planning artifacts.
 5. Inspect the staged diff before committing.
 6. Commit the unit with the repo's conventional commit style or the user's preferred style.
 7. Continue to the next unit only after validation passes and the commit is made.

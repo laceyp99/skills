@@ -17,7 +17,7 @@ Do not edit files, stage changes, commit, push, or use write-oriented repository
 - Prefer a full investigation first, then ask implementation-decision questions only after the problem is understood.
 - Make technical concepts easy to understand with examples, metaphors, and real-world references.
 - Correct misunderstandings gently and explicitly when the issue framing points at the wrong layer.
-- Keep the project’s intended use and existing architecture in view; do not optimize for a technically clever fix that works against the product direction.
+- Keep the project's intended use and existing architecture in view; do not optimize for a technically clever fix that works against the product direction.
 - Treat tests as evidence, not proof by themselves. Explain what a test does and does not verify.
 - Separate facts from interpretations and recommendations.
 
@@ -27,7 +27,7 @@ Do not edit files, stage changes, commit, push, or use write-oriented repository
    - GitHub issue URL or issue number from the current repo.
    - Pasted issue, bug report, or user story.
    - Attached markdown/text issue file.
-   - Short request such as “explain issue #42.”
+   - Short request such as "explain issue #42."
 2. If a GitHub issue is referenced, use read-only GitHub commands when available, such as `gh issue view`, to collect the title, body, comments, labels, linked PRs, and acceptance criteria.
 3. If repo context is available, inspect it with read-only commands such as `git status`, `git branch`, `git log`, `rg`, `find`, `cat`, `sed`, and framework-specific test or build commands.
 4. Discover the relevant product behavior, code paths, tests, configuration, data model, and docs.
@@ -42,7 +42,7 @@ If a test command writes ordinary cache or test artifacts, that is acceptable on
 
 Look for these signals before concluding where the problem lies:
 
-- The issue’s stated symptom versus the actual failing code path.
+- The issue's stated symptom versus the actual failing code path.
 - Whether the behavior is intentional, missing, regressed, environment-specific, or misunderstood.
 - Acceptance criteria that conflict with existing product behavior.
 - Tests that already describe expected behavior.
@@ -53,10 +53,10 @@ Look for these signals before concluding where the problem lies:
 
 Use language such as:
 
-- “The issue is pointing at the smoke, but the fire appears to be…”
-- “This looks less like a validation bug and more like a mismatch between…”
-- “The codebase treats this as X, while the issue describes it as Y.”
-- “A real-world analogy would be…”
+- "The issue is pointing at the smoke, but the fire appears to be..."
+- "This looks less like a validation bug and more like a mismatch between..."
+- "The codebase treats this as X, while the issue describes it as Y."
+- "A real-world analogy would be..."
 
 ## Response phases
 

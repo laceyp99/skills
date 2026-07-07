@@ -1,13 +1,13 @@
 ---
 name: prelude
-description: explain, investigate, and clarify github issues, repo-connected bugs, and user-story issues before implementation. use when the user asks to understand an issue, verify where a problem actually lives, review a github issue/url/number, analyze an attached or pasted story, run read-only codebase investigation or tests, correct misconceptions about the root cause, compare solution options and trade-offs, or plan an implementation without editing files.
+description: Investigate and explain GitHub issues, repo-connected bugs, and user-story issues before implementation. Use when the user asks to understand an issue, verify where a problem actually lives, review a GitHub issue/url/number, analyze an attached or pasted story, run read-only codebase investigation or tests, correct misconceptions about the root cause, compare solution options and trade-offs, or decide whether implementation planning is warranted. Do not use for making code changes or writing an executable plan.md; use visual-coding-plan for plan artifacts after the problem is understood.
 ---
 
 # Prelude
 
 ## Core purpose
 
-Use this skill to help the user understand a GitHub issue, bug report, or user story before choosing a fix. Act like a pre-plan mode with a strong emphasis on investigation, concept correction, and solution selection.
+Use this skill to help the user understand a GitHub issue, bug report, or user story before choosing a fix. Act like a read-only investigation mode with a strong emphasis on evidence, concept correction, and solution selection.
 
 Do not edit files, stage changes, commit, push, or use write-oriented repository operations. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
 
@@ -110,5 +110,6 @@ End with a clear next step, usually one of:
 
 - Ask the user to choose among solution options.
 - Recommend one option and ask for confirmation before implementation.
+- Recommend creating a `plan.md` with visual-coding-plan if the user wants a code-agent-ready implementation plan.
 - Explain that the issue needs product clarification before code changes.
 - State that no code change appears needed and suggest documentation, test, or issue-comment clarification instead.

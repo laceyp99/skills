@@ -4,11 +4,11 @@ Use this template after investigating the issue and repo evidence. Adapt heading
 
 ## What the issue seems to be saying
 
-Summarize the reported problem in plain language. Preserve the user’s framing without accepting it as proven.
+Summarize the reported problem in plain language. Preserve the user's framing without accepting it as proven.
 
 Example phrasing:
 
-> The issue is saying: “When a user does X, the app should do Y, but instead it does Z.”
+> The issue is saying: "When a user does X, the app should do Y, but instead it does Z."
 
 ## What the codebase suggests is actually happening
 
@@ -20,7 +20,7 @@ Prefer simple cause-and-effect wording:
 
 ## Where the misunderstanding may be
 
-Use this section only when useful. Clarify mismatch between the issue’s assumption and the codebase/product model.
+Use this section only when useful. Clarify mismatch between the issue's assumption and the codebase/product model.
 
 Common patterns:
 
@@ -35,7 +35,7 @@ Explain the concept with a metaphor. Keep it connected to the actual issue.
 
 Example:
 
-> Think of this like a restaurant ticket system. The waiter can write “rush order” on the ticket, but the kitchen still decides whether the dish can be made faster. In this codebase, the form is the waiter and the validation layer is the kitchen.
+> Think of this like a restaurant ticket system. The waiter can write "rush order" on the ticket, but the kitchen still decides whether the dish can be made faster. In this codebase, the form is the waiter and the validation layer is the kitchen.
 
 ## Evidence gathered
 
@@ -43,9 +43,9 @@ List concrete evidence. Include file paths, line ranges, commands, test results,
 
 Suggested format:
 
-- `path/to/file.ext:10-30` — what this shows.
-- `command used` — what result mattered.
-- Existing test or missing test — what confidence it gives or does not give.
+- `path/to/file.ext:10-30` - what this shows.
+- `command used` - what result mattered.
+- Existing test or missing test - what confidence it gives or does not give.
 
 Avoid dumping raw output unless the exact text matters.
 
@@ -55,10 +55,10 @@ State the clearest current understanding of the problem.
 
 Use one of these styles:
 
-- “This appears to be a real bug in…”
-- “This appears to be a feature request disguised as a bug because…”
-- “This appears to be a product-language mismatch rather than a code defect…”
-- “This appears to be under-specified; the code supports multiple reasonable interpretations…”
+- "This appears to be a real bug in..."
+- "This appears to be a feature request disguised as a bug because..."
+- "This appears to be a product-language mismatch rather than a code defect..."
+- "This appears to be under-specified; the code supports multiple reasonable interpretations..."
 
 ## Questions before implementation
 
@@ -66,11 +66,11 @@ Ask only questions that matter for choosing a fix. Keep them narrow.
 
 Good questions:
 
-- “Should this behavior change for all users or only admins?”
-- “Should we preserve the existing API contract and adjust the UI, or change the backend rule?”
-- “Is backward compatibility with existing saved records important here?”
+- "Should this behavior change for all users or only admins?"
+- "Should we preserve the existing API contract and adjust the UI, or change the backend rule?"
+- "Is backward compatibility with existing saved records important here?"
 
 Bad questions:
 
-- “Can you provide more context?”
-- “What do you want me to do?”
+- "Can you provide more context?"
+- "What do you want me to do?"

@@ -41,7 +41,7 @@ Example:
 
 ## Recommended path
 
-Recommend one path clearly. Include the reason it best serves the project’s intended use.
+Recommend one path clearly. Include the reason it best serves the project's intended use.
 
 Suggested phrasing:
 
@@ -53,15 +53,15 @@ Ask narrow questions that unlock implementation.
 
 Examples:
 
-- “Should this behavior apply globally or only when the feature flag is enabled?”
-- “Do we want to treat existing records as legacy exceptions?”
-- “Should the user see a blocking error, a warning, or automatic correction?”
-- “Is preserving the current API response shape required?”
+- "Should this behavior apply globally or only when the feature flag is enabled?"
+- "Do we want to treat existing records as legacy exceptions?"
+- "Should the user see a blocking error, a warning, or automatic correction?"
+- "Is preserving the current API response shape required?"
 
 ## Suggested next step
 
 End with one clear next step:
 
-- “Choose Option A or B and I can turn it into an implementation plan.”
-- “I recommend Option B; confirm the product behavior and then implementation can start.”
-- “This needs product clarification before code changes because both behaviors are defensible.”
+- "Choose Option A or B and I can turn it into an implementation plan."
+- "I recommend Option B; confirm the product behavior and then implementation can start."
+- "This needs product clarification before code changes because both behaviors are defensible."

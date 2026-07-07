@@ -77,11 +77,36 @@ Keep tasks ordered enough to guide execution, but do not turn them into a commit
 
 ## Phase Implementation Plan
 
-Purpose: provide a review-friendly implementation path while preserving room for repo-aware judgment.
+Purpose: provide an implementation path while preserving room for repo-aware judgment. Use tagged element wrapping when a phase needs more detail than a short paragraph can carry.
 
-Format: Markdown phase sections with `Goal`, `Likely work`, `Expected outcome`, and `Flexibility`.
+Keep the phase heading visible, then wrap the detailed phase body in `<details>/<summary>` so the plan stays scannable in GitHub and VS Code. Put the phase goal in the summary. Keep critical tasks visible inside the wrapped block, not hidden elsewhere.
 
-Use `Likely work` for stable-ID tasks that are expected but may adapt after inspection. Use `Flexibility` to say what the executing agent may adjust without asking for review.
+```markdown
+### Phase 1: Inspect and Confirm Direction
+
+<details>
+<summary>Goal: Verify the repo facts that the plan depends on.</summary>
+
+**Likely work:**
+- [ ] `inspect-current-flow` Confirm the relevant files, routes, data flow, or APIs.
+- [ ] `confirm-existing-patterns` Identify existing helpers, conventions, and test commands.
+
+**Expected outcome:**
+The agent knows whether the proposed path still fits the codebase.
+
+**Flexibility:**
+The agent may adjust later tasks if inspection finds a better existing pattern.
+
+**Validation focus:**
+- [ ] `verify-inspection-notes` Confirm the plan still matches the inspected project structure.
+
+**Pause if:**
+- The expected framework, routes, or package tooling are not present.
+
+</details>
+```
+
+For short phases, a plain unwrapped phase is acceptable. Use wrapping when the phase has several tasks, phase-specific validation, pause conditions, or explanatory context that would otherwise make the plan visually dense.
 
 ## File Impact Matrix
 

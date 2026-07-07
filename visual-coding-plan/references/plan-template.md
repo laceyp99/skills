@@ -67,16 +67,26 @@ sequenceDiagram
 
 ### Phase 1: {{phase name}}
 
-Goal: {{phase goal}}
+<details>
+<summary>Goal: {{phase goal}}</summary>
 
-Likely work:
+**Likely work:**
+- [ ] `phase-task-id` {{expected task}}
 - [ ] `phase-task-id` {{expected task}}
 
-Expected outcome:
+**Expected outcome:**
 {{What should be true when this phase is complete.}}
 
-Flexibility:
+**Flexibility:**
 {{What the agent may adapt after inspection without asking for review.}}
+
+**Validation focus:**
+- [ ] `phase-validation-id` {{phase-specific check}}
+
+**Pause if:**
+- {{phase-specific stop condition}}
+
+</details>
 
 ## File Impact Matrix
 
@@ -114,14 +124,4 @@ Stop and ask for review if:
 
 - {{stop condition}}
 
-## Agent Handoff Prompt
-
-Execute this plan phase by phase. Start by resolving unknowns, then complete tasks in order. Do not skip the acceptance criteria or verification plan. If a stop condition is hit, pause and report the finding before continuing.
-
-<details>
-<summary>Additional context</summary>
-
-{{Optional supporting detail that should not clutter the main plan.}}
-
-</details>
 ````

@@ -36,24 +36,30 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
+| `assembly` | Execute a local plan in controlled units. | Use `/assembly` for plan execution. Supports `Hand holding mode` and `autopilot mode`. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
+| `reality-check` | Opinionated PR and branch review. | Use `/reality-check` for review work. Prioritize maintainable code with healthy skepticism toward complexity, AI-generated code, and unnecessary work. |
 | `visual-coding-plan` | Create GitHub-safe and VS Code-safe visual project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 
 ## Repository Layout
 
 ```text
-.
+skills/
+├── assembly/
 ├── grill-me/
 ├── pr-actical/
 ├── prelude/
+├── reality-check/
 └── visual-coding-plan/
 ```
 
 Each skill directory should be copied as a whole. The `SKILL.md` file is the entrypoint; supporting files are referenced relative to that directory.
 
 ## Installing a Skill
+
+The manual copy flow is still useful when you are editing a skill locally. For normal installation from GitHub, prefer the `npx skills@latest add laceyp99/skills` quickstart above.
 
 Copy the skill directory you want into your agent's skills directory.
 
@@ -71,9 +77,11 @@ Copy-Item -Recurse .\visual-coding-plan $HOME\.codex\skills\
 
 Repeat that command for any other skill directory you want to install.
 
-The manual copy flow is still useful when you are editing a skill locally. For normal installation from GitHub, prefer the `npx skills@latest add laceyp99/skills` quickstart above.
-
 ## Workflow Notes
+
+`/assembly` is the execution path for turning a plan into controlled work units. Use it when the repo already has a plan and you want implementation to proceed in small, reviewable steps.
+
+`/reality-check` is the review path for inspecting diffs, branches, or PRs with a skeptical, maintainability-first lens. Use it when you want concrete findings instead of a broad summary.
 
 `prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
 

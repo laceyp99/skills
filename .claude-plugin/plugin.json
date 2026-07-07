@@ -1,9 +1,11 @@
 {
   "name": "laceyp99-skills",
   "skills": [
+    "./assembly",
     "./grill-me",
     "./pr-actical",
     "./prelude",
+    "./reality-check",
     "./visual-coding-plan"
   ]
 }

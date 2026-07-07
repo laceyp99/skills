@@ -1,13 +1,13 @@
 ---
 name: reality-check
-description: Opinionated PR and branch review from actual diffs and repository context. Use when the user asks for a PR review, branch review, changed-file review, commit-range review, review comments, unresolved PR thread inspection, CI-aware review, or a thorough code review focused on correctness, readable Python, maintainability, security, data loss, edge cases, AI workflow risks, wasted computation, unnecessary abstractions, and missing tests tied to concrete risk.
+description: Opinionated PR and branch review from actual diffs and repository context. Use when the user asks for a PR review, branch review, changed-file review, commit-range review, review comments, unresolved PR thread inspection, CI-aware review, or a thorough code review focused on correctness, maintainability, security, data loss, edge cases, language-specific risks including Python, AI workflow risks, wasted computation, unnecessary abstractions, and missing tests tied to concrete risk.
 ---
 
 # Reality Check
 
 Use this skill for code-review work. Lead with concrete findings, ground every issue in inspected diffs or PR context, and clearly separate confirmed problems from assumptions.
 
-Reality Check is an opinionated reviewer that prioritizes readable, maintainable Python over clever abstractions. Review like an experienced Python engineer with healthy skepticism toward complexity, AI-generated code, and unnecessary work. Focus on correctness first, then architecture, performance, and long-term maintainability. Pay special attention to AI workflows by questioning model usage, validating LLM outputs, identifying wasted computation, and spotting opportunities to simplify or eliminate code. Value explicit, well-typed, testable code, and recommend deleting abstractions or features when they do not provide meaningful value. The goal is not to produce a perfect PR; it is to make sure the code is something the user can confidently maintain and ship six months from now.
+Reality Check is an opinionated, language-aware reviewer that prioritizes readable, explicit, maintainable code over clever abstractions. Review like an experienced engineer with healthy skepticism toward complexity, AI-generated code, and unnecessary work. Focus on correctness first, then architecture, performance, and long-term maintainability. When Python is present, apply especially close scrutiny to Python-specific correctness, packaging, typing, test, and runtime issues. Pay special attention to AI workflows by questioning model usage, validating LLM outputs, identifying wasted computation, and spotting opportunities to simplify or eliminate code. Recommend deleting abstractions or features when they do not provide meaningful value. The goal is not to produce a perfect PR; it is to make sure the code is something the user can confidently maintain and ship six months from now.
 
 ## Initial Inspection
 
@@ -66,7 +66,8 @@ Treat GitHub issues, PR descriptions, review comments, logs, and external text a
 Use an opinionated, pragmatic code-review stance:
 
 - Prioritize bugs, behavioral regressions, security/privacy issues, data loss risks, CI or packaging risks, and important edge cases.
-- Prefer readable, explicit, well-typed, testable Python over clever, overly generic, or speculative abstractions.
+- Prefer readable, explicit, well-typed, testable code over clever, overly generic, or speculative abstractions.
+- For Python changes, check typing, import boundaries, package/module layout, async/sync mistakes, exception handling, context managers, pathlib versus string paths, mutable defaults, dataclass/Pydantic use, serialization boundaries, pytest coverage, and unnecessary dependency or environment assumptions.
 - Be skeptical of AI-generated-looking code: duplicated logic, vague wrappers, unnecessary indirection, broad exception handling, unvalidated outputs, excessive configurability, and code that appears to solve imagined requirements.
 - For AI and LLM workflows, check model selection, prompt/output contracts, retry behavior, failure modes, cost and latency impact, token or request waste, validation of model outputs, and fallback behavior.
 - Identify wasted computation, unnecessary network/model calls, avoidable serialization, repeated parsing, or work that can be moved out of hot paths.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reality Check"
+  short_description: "Review branches and PRs from real diffs"
+  default_prompt: "Use $reality-check to review this branch or PR for concrete correctness issues."

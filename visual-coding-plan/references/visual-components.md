@@ -1,36 +1,77 @@
 # Visual Components Reference
 
-This skill uses Markdown patterns, not MDX components. Use these components in this preference order.
+Use this file when a `plan.md` needs richer section guidance than the core skill provides. Keep the final plan in plain Markdown. Do not copy every example blindly; adapt the smallest useful pattern.
+
+## Contents
+
+- Human Summary
+- Visual Overview
+- Decision Log
+- Risk Matrix
+- Agent Task List
+- Phase Implementation Plan
+- File Impact Matrix
+- Test / Verification Plan
+- Acceptance Criteria
+- Assumptions and Unknowns
+- Stop Conditions
+- Restricted HTML Blocks
 
 ## Human Summary
 
-Purpose: keep the reviewer engaged and oriented. Explain the work in normal language before tables and tasks.
+Purpose: orient the reviewer before tables and tasks. Explain the goal, the intended implementation shape, why the order matters, and what to watch for.
 
-Format: paragraphs, optionally followed by a compact snapshot table.
+Format: short paragraphs, optionally followed by a compact snapshot table.
 
 ## Visual Overview
 
-Purpose: make diagrams part of the review path instead of appendix material. Use this section immediately after the Human Summary when visuals help the reviewer understand flow, architecture, or runtime interactions.
+Purpose: make diagrams part of the review path instead of appendix material.
 
-Format: optional subsections for Execution Map, Architecture Sketch, and Sequence Diagram. Keep diagrams compact and summarize the Markdown plan rather than replacing it.
+Use an execution map for sequencing:
+
+```mermaid
+flowchart TD
+  A[Inspect current state] --> B[Confirm path]
+  B --> C[Make focused changes]
+  C --> D[Verify behavior]
+  D --> E[Report results]
+```
+
+Use architecture sketches only when at least three parts interact, such as UI, API, service, worker, data store, or external system. Use sequence diagrams only for request/response, webhook, auth, event, or other time-ordered flows. Keep diagrams compact and let Markdown tasks remain the source of truth.
 
 ## Decision Log
 
-Purpose: expose the choices behind the plan so a junior-ish developer can review the reasoning and a code agent has fewer chances to wander.
+Purpose: expose the choices behind the plan.
 
-Format: Markdown table with `Decision`, `Choice`, `Why`, and `Confidence`.
+```markdown
+| Decision | Choice | Why | Confidence |
+|---|---|---|---|
+| {{decision}} | {{chosen approach}} | {{reason}} | High/Medium/Low |
+```
+
+If no meaningful decisions are known yet, write: `No major implementation decisions are locked yet; resolve the unknowns first.`
 
 ## Risk Matrix
 
-Purpose: prevent reckless execution and help the human reviewer judge the plan before reading implementation tasks. Risks should influence task order, verification, and stop conditions.
+Purpose: let risk shape execution order, stop conditions, and verification.
 
-Format: Markdown table with `Risk`, `Level`, `Why it matters`, and `Mitigation`.
+```markdown
+| Risk | Level | Why it matters | Mitigation |
+|---|---|---|---|
+| {{risk}} | High/Medium/Low | {{impact}} | {{specific mitigation}} |
+```
 
-## Agent Task List with Stable IDs
+## Agent Task List
 
 Purpose: make the plan executable, trackable, resumable, and easy to reference.
 
-Format: Markdown task list. Each task starts with a unique kebab-case ID in backticks.
+Every task starts with a unique kebab-case ID in backticks:
+
+```markdown
+- [ ] `inspect-routing` Identify the current routing structure before editing.
+- [ ] `confirm-auth-patterns` Check for existing auth/session utilities.
+- [ ] `implement-login-ui` Create or update the login UI.
+```
 
 Keep tasks ordered enough to guide execution, but do not turn them into a commit-by-commit script unless the user explicitly asks for strict commit planning.
 
@@ -46,25 +87,76 @@ Use `Likely work` for stable-ID tasks that are expected but may adapt after insp
 
 Purpose: show likely scope and risk. Use confirmed paths only when known. Use areas/inspection targets when uncertain.
 
-Format: Markdown table with `File / Area`, `Action`, `Purpose`, and `Risk`.
+```markdown
+| File / Area | Action | Purpose | Risk |
+|---|---|---|---|
+| `src/example.ts` | Modify | {{purpose}} | Medium |
+| Routing layer | Inspect | Confirm where protected routes are defined | Medium |
+```
+
+Actions should usually be `Inspect`, `Create`, `Modify`, `Delete`, `Move`, or `Unknown`.
 
 ## Test / Verification Plan
 
 Purpose: define practical checks without overbuilding test requirements.
 
-Format: grouped task lists for manual and automated checks. Use existing project test commands only when known.
+```markdown
+### Manual Checks
+
+- [ ] `verify-ui-loads` Visit the affected page and confirm it loads.
+
+### Automated Checks
+
+- [ ] `verify-existing-tests` Run the existing relevant test command if present.
+```
 
 ## Acceptance Criteria
 
-Purpose: define done in observable terms.
+Purpose: define observable done conditions.
 
-Format: Markdown checklist. Each item should be externally verifiable or directly inspectable.
+Good:
+
+```markdown
+- [ ] Unauthenticated users are redirected to `/login` when visiting protected routes.
+```
+
+Avoid:
+
+```markdown
+- [ ] Auth works.
+```
+
+## Assumptions and Unknowns
+
+Purpose: separate accepted working assumptions from facts that must be resolved before implementation.
+
+```markdown
+### Assumptions
+
+- {{assumption}}
+
+### Unknowns to Resolve First
+
+- [ ] `unknown-existing-auth` Check whether an auth provider already exists.
+```
+
+Unknowns that block implementation should become early tasks or stop conditions.
+
+## Stop Conditions
+
+Purpose: tell the executing agent when to pause instead of guessing.
+
+```markdown
+Stop and ask for review if:
+
+- Existing infrastructure conflicts with this plan.
+- The work requires a schema migration not covered here.
+- The expected files or framework are not present.
+```
 
 ## Restricted HTML Blocks
 
-Purpose: hide supporting detail while keeping the main plan readable.
-
-Allowed only:
+Use `<details>` and `<summary>` only for supporting context, such as alternatives considered or lower-priority notes.
 
 ```html
 <details>
@@ -74,29 +166,3 @@ Markdown content here.
 
 </details>
 ```
-
-Use for alternatives considered, extra background, or lower-priority context.
-
-## Execution Map
-
-Purpose: provide a quick visual sequence.
-
-Format: simple Mermaid `flowchart TD`, short node labels, max 10 nodes by default.
-
-## Architecture Sketch
-
-Purpose: show proposed interaction between system parts.
-
-Use when the plan has at least three interacting parts such as UI, API, service, database, middleware, jobs, or external systems.
-
-## Sequence Diagram
-
-Purpose: show runtime interactions over time.
-
-Use only for auth, API, webhook, event, or request/response flows. Keep participant count low.
-
-## Phase Implementation Plan Diagrams
-
-Purpose: optionally summarize the phase breakdown visually.
-
-Markdown phase sections are the source of truth. Mermaid summaries are optional and should stay small. Do not use Gantt charts by default.

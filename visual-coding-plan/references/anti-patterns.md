@@ -1,6 +1,6 @@
 # Anti-Patterns
 
-Avoid these patterns when creating visual coding plans.
+Read this before finalizing large, visual, uncertain, or agent-handoff plans.
 
 ## Do not use MDX or JSX
 
@@ -46,3 +46,19 @@ If repo context is missing, say `Routing layer` or `Auth utilities` instead of i
 ## Do not omit stop conditions
 
 Agent-executable plans need clear pause points when reality diverges from the plan.
+
+## Final quality pass
+
+Before returning a plan, verify:
+
+- The output is a single `plan.md`-style Markdown artifact.
+- No MDX, JSX, imports, custom components, arbitrary HTML, or renderer-only features are present.
+- Every actionable task has a unique stable ID.
+- The Human Summary explains the work and ordering.
+- The Decision Log contains real decisions or explicitly says none are locked.
+- The Risk Matrix appears before execution tasks and has concrete mitigations.
+- The Phase Implementation Plan includes goal, likely work, expected outcome, and flexibility.
+- The File Impact Matrix distinguishes confirmed files from uncertain areas.
+- Verification is proportional to the change and uses known repo tooling when available.
+- Acceptance criteria are observable.
+- Diagrams are optional summaries, not the executable source of truth.

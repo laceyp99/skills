@@ -1,0 +1,4 @@
+interface:
+  display_name: "Assembly"
+  short_description: "Execute local markdown plan units safely"
+  default_prompt: "Use $assembly to read the local markdown plan files and implement it safely."

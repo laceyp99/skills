@@ -1,6 +1,6 @@
 # Understanding phase response template: understanding and correction
 
-Use this template after investigating the issue and repo evidence. Adapt headings as needed, but preserve the intent of each section.
+Use this template only when the user asks for a deep explanation or the decision is genuinely ambiguous. Otherwise, lead with the recommended interpretation and its strongest evidence, and use only the headings needed.
 
 ## What the issue seems to be saying
 
@@ -29,9 +29,9 @@ Common patterns:
 - The reporter expects a role, flag, or status to mean one thing, while the code treats it differently.
 - The issue is really about unclear language or workflow, not broken logic.
 
-## Simple explanation or real-world analogy
+## Simple explanation (optional)
 
-Explain the concept with a metaphor. Keep it connected to the actual issue.
+Explain the concept plainly. Use an analogy only when it materially clarifies the decision.
 
 Example:
 

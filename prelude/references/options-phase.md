@@ -1,6 +1,6 @@
 # Options phase response template: solution options and trade-offs
 
-Use this template after the issue has been investigated and the real problem is reasonably understood.
+Use this template when the user asks for a decision memo, a deep explanation, or when the issue has multiple genuinely viable paths. Otherwise, lead with the recommended path and evidence, and summarize only the material trade-offs.
 
 ## Solution options
 
@@ -31,9 +31,9 @@ Use a compact table when there are two or more viable options.
 | A |  |  |  | low/medium/high | weak/okay/strong |
 | B |  |  |  | low/medium/high | weak/okay/strong |
 
-## Simple explanation or real-world analogy
+## Simple explanation (optional)
 
-Use an analogy that compares the solution choices.
+Use an analogy only when it materially clarifies an ambiguous decision.
 
 Example:
 

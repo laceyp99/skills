@@ -1,7 +1,7 @@
 interface:
   display_name: Prelude
-  short_description: Investigate issues before choosing a fix
-  default_prompt: "Use $prelude to investigate this issue or bug report before choosing an implementation path."
+  short_description: Investigate issues before choosing an action
+  default_prompt: "Use $prelude to find the actual cause and recommend a path before we act."
 
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

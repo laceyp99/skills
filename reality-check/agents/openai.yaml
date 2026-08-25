@@ -1,7 +1,7 @@
 interface:
   display_name: "Reality Check"
-  short_description: "Review branches and PRs from real diffs"
-  default_prompt: "Use $reality-check to review this branch or PR for concrete correctness issues."
+  short_description: "Find concrete code issues in branches and PRs"
+  default_prompt: "Use $reality-check to inspect this diff and report prioritized correctness and maintainability findings."
 
 policy:
   allow_implicit_invocation: true

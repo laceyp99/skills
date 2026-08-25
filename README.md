@@ -36,11 +36,12 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `assembly` | Execute a local plan in controlled units. | Use `/assembly` for plan execution. Supports `Hand holding mode` and `autopilot mode`. |
+| `assembly` | Execute a local plan in controlled units. | Hand holding pauses for user commits; autopilot commits the plan and uses `pr-actical` to deliver a draft PR. |
+| `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Use after or alongside code review when runtime evidence matters; maintains a local `review.md`. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
-| `reality-check` | Opinionated PR and branch review. | Use `/reality-check` for review work. Prioritize maintainable code with healthy skepticism toward complexity, AI-generated code, and unnecessary work. |
+| `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
 | `visual-coding-plan` | Create GitHub-safe and VS Code-safe visual project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 
 ## Repository Layout
@@ -79,9 +80,11 @@ Repeat that command for any other skill directory you want to install.
 
 ## Workflow Notes
 
-`/assembly` is the execution path for turning a plan into controlled work units. Use it when the repo already has a plan and you want implementation to proceed in small, reviewable steps.
+`/assembly` is the execution path for turning a plan into controlled work units. Hand holding mode pauses after each unit for user review and commits. Autopilot mode completes and commits every unit, then follows `pr-actical` to safely push the branch and create or update a draft PR for the user's final pass.
 
-`/reality-check` is the review path for inspecting diffs, branches, or PRs with a skeptical, maintainability-first lens. Use it when you want concrete findings instead of a broad summary.
+`gauntlet` answers **“Does the changed behavior actually work?”** It combines read-only automated checks with risk-based, human-observed testing and keeps the evidence in a local `review.md`.
+
+`/reality-check` answers **“What is wrong or risky in this code?”** It inspects diffs, branches, and PR context with a skeptical, maintainability-first lens and returns prioritized engineering findings.
 
 `prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
 

@@ -1,0 +1,10 @@
+interface:
+  display_name: Gauntlet
+  short_description: Prove patch behavior with guided human testing
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

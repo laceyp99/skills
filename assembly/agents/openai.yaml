@@ -1,7 +1,7 @@
 interface:
   display_name: "Assembly"
-  short_description: "Execute local markdown plan units safely"
-  default_prompt: "Use $assembly to read the local markdown plan files and implement it safely."
+  short_description: "Execute plans by hand or deliver a draft PR"
+  default_prompt: "Use $assembly to execute the local markdown plan safely, choosing hand holding or autopilot delivery based on my request."
 
 policy:
   allow_implicit_invocation: true

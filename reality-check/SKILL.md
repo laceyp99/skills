@@ -1,6 +1,6 @@
 ---
 name: reality-check
-description: Opinionated PR and branch review from actual diffs and repository context. Use when the user asks for a PR review, branch review, changed-file review, commit-range review, review comments, unresolved PR thread inspection, CI-aware review, or a thorough code review focused on correctness, maintainability, security, data loss, edge cases, language-specific risks including Python, AI workflow risks, wasted computation, unnecessary abstractions, and missing tests tied to concrete risk.
+description: Find concrete engineering problems in a PR, branch, or commit range by analyzing the code diff and repository context. Use for static code review, review comments, unresolved PR threads, and CI-aware analysis focused on correctness, maintainability, security, data loss, edge cases, unnecessary complexity, and risk-driven test gaps. Produces prioritized code findings and recommendations; it does not run an interactive human-testing session or maintain a behavioral validation record.
 ---
 
 # Reality Check

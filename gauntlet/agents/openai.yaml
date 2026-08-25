@@ -1,6 +1,6 @@
 interface:
   display_name: Gauntlet
-  short_description: Validate patches with automated checks and guided human testing
+  short_description: Prove patch behavior with guided human testing
 policy:
   products:
   - chatgpt

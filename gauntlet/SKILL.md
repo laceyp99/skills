@@ -1,6 +1,6 @@
 ---
 name: gauntlet
-description: Review a code patch or pull request by inspecting its diff, running read-only automated sanity checks, designing risk-based human validation, and interactively grilling the user through manual testing while maintaining a local review.md record. Use when given a PR number, branch name, or both and asked to validate that changes work beyond lint/tests, especially for UI, device-specific, interactive, environment-sensitive, integration, persistence, or other behavior where human observation adds confidence. Intended for coding-agent environments with shell access.
+description: Establish behavioral confidence in a patch after or alongside code review by running read-only project checks and guiding the user through risk-based manual testing. Use when asked to prove that changed behavior actually works beyond lint and unit tests, especially for UI, devices, interactions, integrations, persistence, or environment-sensitive flows. Maintains a local review.md evidence record and reports observed, unverified, failed, and blocked behavior; it is not a static code-findings review.
 ---
 
 # Gauntlet

@@ -36,7 +36,7 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `assembly` | Execute a local plan in controlled units. | Use `/assembly` for plan execution. Supports `Hand holding mode` and `autopilot mode`. |
+| `assembly` | Execute a local plan in controlled units. | Hand holding pauses for user commits; autopilot commits the plan and uses `pr-actical` to deliver a draft PR. |
 | `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Use after or alongside code review when runtime evidence matters; maintains a local `review.md`. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
@@ -80,7 +80,7 @@ Repeat that command for any other skill directory you want to install.
 
 ## Workflow Notes
 
-`/assembly` is the execution path for turning a plan into controlled work units. Use it when the repo already has a plan and you want implementation to proceed in small, reviewable steps.
+`/assembly` is the execution path for turning a plan into controlled work units. Hand holding mode pauses after each unit for user review and commits. Autopilot mode completes and commits every unit, then follows `pr-actical` to safely push the branch and create or update a draft PR for the user's final pass.
 
 `gauntlet` answers **“Does the changed behavior actually work?”** It combines read-only automated checks with risk-based, human-observed testing and keeps the evidence in a local `review.md`.
 

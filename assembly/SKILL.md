@@ -1,6 +1,6 @@
 ---
 name: assembly
-description: Execute a local plan.md, commit plan, phase plan, or step-by-step implementation plan in controlled units. Use when the user asks to read or implement a local plan, walk through a commit plan one unit at a time, implement changes phase by phase, validate after each unit, make commits from a plan, leave planning artifacts uncommitted, or continue from a previous plan unit.
+description: Execute a local plan.md, commit plan, phase plan, or step-by-step implementation plan in controlled units. Use when the user asks to read or implement a local plan, walk through a commit plan one unit at a time, implement changes phase by phase, validate after each unit, make commits from a plan, leave planning artifacts uncommitted, continue from a previous plan unit, or autonomously deliver completed work as a GitHub draft pull request.
 ---
 
 # Assembly
@@ -28,9 +28,11 @@ If `plan.md` is missing, internally contradictory, or impossible to map into wor
 Use the user's current request to choose the mode.
 
 - **Hand Holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
-- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits or walk the commit plan autonomously. Stop right before pushing the local branch for the user to review, unless the user explicitly asks for it.
+- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits, walk the commit plan autonomously, or run in autopilot. Complete the plan, commit its units, then use the `pr-actical` workflow to push the branch and create or update a GitHub draft pull request for the user's final pass.
 
 Treat plan commit entries as logical work boundaries in both modes. Do not run `git commit` in hand holding mode, even if the plan contains commit messages; just pass those onto the user.
+
+Selecting autopilot authorizes ordinary commits, a normal push of the current non-default branch, and creation or update of a draft pull request. It does not authorize publishing the PR as ready for review, force-pushing, rewriting history, resolving synchronization conflicts, or bypassing `pr-actical` safety checks.
 
 ## Build the Checklist
 
@@ -69,6 +71,18 @@ For each unit:
 
 Never commit `plan.md`, `HANDOFF.md`, `Priority Ladder.md`, or scratch/review markdown files unless the user explicitly asks to include them. Do not commit a unit with failing validation unless the user explicitly overrides.
 
+### Autopilot delivery
+
+After the final plan unit is validated and committed:
+
+1. Confirm there are no intended source, test, or documentation changes left uncommitted.
+2. Load and follow the complete `pr-actical` skill workflow. Do not duplicate or weaken its branch, authentication, synchronization, testing, push, or pull-request safeguards.
+3. Create or update a draft pull request and leave it as a draft for the user's final pass. Never mark it ready for review.
+4. If `pr-actical` refuses because the repository is unsafe or not ready to publish, keep the completed local commits intact and report the exact blocker and safest next action.
+5. If `pr-actical` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that draft-PR delivery requires that skill.
+
+The publication phase is part of autopilot's normal completion target; do not request a second confirmation before an ordinary push or draft-PR operation. Hand holding mode does not inherit this authorization and must only transition to `pr-actical` if the user requested to.
+
 ## Validation
 
 Prefer the repo's documented scripts over ad hoc commands. For Python, prefer direct interpreters such as `.venv\Scripts\python.exe -m pytest`, `py -3.12 -m pytest`, or the repo-documented command.
@@ -95,4 +109,5 @@ End with a concise status report:
 - Files changed.
 - Validation commands run and whether they passed.
 - Planning artifacts or other files intentionally left uncommitted.
+- Draft PR URL and base/head branches, when autopilot delivery succeeds.
 - Remaining risks, blockers, or manual checks.

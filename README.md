@@ -37,6 +37,7 @@ npx skills@latest add laceyp99/skills --list
 | Skill | Purpose | Notes |
 |---|---|---|
 | `assembly` | Execute a local plan in controlled units. | Use `/assembly` for plan execution. Supports `Hand holding mode` and `autopilot mode`. |
+| `gauntlet` | Validate patches with automated checks and guided human testing. | Maintains a local `review.md` while keeping the reviewed patch read-only. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
@@ -80,6 +81,8 @@ Repeat that command for any other skill directory you want to install.
 ## Workflow Notes
 
 `/assembly` is the execution path for turning a plan into controlled work units. Use it when the repo already has a plan and you want implementation to proceed in small, reviewable steps.
+
+`gauntlet` is the behavioral validation path for a branch or pull request. It combines read-only automated checks with risk-based manual testing and keeps the evidence in a local `review.md`.
 
 `/reality-check` is the review path for inspecting diffs, branches, or PRs with a skeptical, maintainability-first lens. Use it when you want concrete findings instead of a broad summary.
 

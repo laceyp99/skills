@@ -1,6 +1,6 @@
 ---
 name: prelude
-description: Investigate and explain GitHub issues, repo-connected bugs, and user-story issues before an action is chosen. Use when the user asks to “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use when the request already chooses an action, including “implement,” “fix,” “make a branch,” “commit,” “push,” or “open a PR”; those tasks should inspect the relevant issue and code without producing Prelude’s full pre-investigation report. Do not use for making code changes or writing an executable plan.md; use visual-coding-plan for plan artifacts after the problem is understood.
+description: Investigate and explain GitHub issues, repo-connected bugs, and user-story issues before an action is chosen. Use when the user asks to “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use when the request already chooses an action, including “implement,” “fix,” “make a branch,” “commit,” “push,” or “open a PR”; those tasks should inspect the relevant issue and code without producing Prelude’s full pre-investigation report. Do not use for making code changes or writing an executable plan.md; use blueprint for plan artifacts after the problem is understood.
 ---
 
 # Prelude
@@ -110,6 +110,6 @@ End with a clear next step, usually one of:
 
 - Ask the user to choose among solution options.
 - Recommend one option and ask for confirmation before implementation.
-- Recommend creating a `plan.md` with visual-coding-plan if the user wants a code-agent-ready implementation plan.
+- Recommend creating a `plan.md` with blueprint if the user wants a code-agent-ready implementation plan.
 - Explain that the issue needs product clarification before code changes.
 - State that no code change appears needed and suggest documentation, test, or issue-comment clarification instead.

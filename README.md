@@ -23,7 +23,7 @@ npx skills@latest add laceyp99/skills -g --skill '*' --agent '*' -y
 To install one skill for Codex:
 
 ```bash
-npx skills@latest add laceyp99/skills -g -a codex --skill visual-coding-plan -y
+npx skills@latest add laceyp99/skills -g -a codex --skill blueprint -y
 ```
 
 To preview what is available without installing:
@@ -42,7 +42,7 @@ npx skills@latest add laceyp99/skills --list
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
 | `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
-| `visual-coding-plan` | Create GitHub-safe and VS Code-safe visual project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
+| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 
 ## Repository Layout
 
@@ -53,7 +53,7 @@ skills/
 ├── pr-actical/
 ├── prelude/
 ├── reality-check/
-└── visual-coding-plan/
+└── blueprint/
 ```
 
 Each skill directory should be copied as a whole. The `SKILL.md` file is the entrypoint; supporting files are referenced relative to that directory.
@@ -67,13 +67,13 @@ Copy the skill directory you want into your agent's skills directory.
 For the Pi agent path I currently use:
 
 ```powershell
-Copy-Item -Recurse .\visual-coding-plan $HOME\.pi\agent\skills\
+Copy-Item -Recurse .\blueprint $HOME\.pi\agent\skills\
 ```
 
 For Codex-style local skills:
 
 ```powershell
-Copy-Item -Recurse .\visual-coding-plan $HOME\.codex\skills\
+Copy-Item -Recurse .\blueprint $HOME\.codex\skills\
 ```
 
 Repeat that command for any other skill directory you want to install.
@@ -88,11 +88,54 @@ Repeat that command for any other skill directory you want to install.
 
 `prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
 
-`visual-coding-plan` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, decision logs, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
+`blueprint` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, decision logs, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
 
 `grill-me` (from Matt Pocock) is for unresolved thinking. It asks one decision-shaping question at a time and gives a recommended answer, which helps turn a fuzzy plan into explicit choices.
 
 `pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
+
+## Skill Lifecycle
+
+The workflow is intentionally flexible. `grill-me` and `blueprint` are optional, while `assembly` is the implementation handoff. Review and validation can happen before or after `pr-actical`, depending on whether the work is being done step by step or autonomously.
+
+```mermaid
+flowchart TD
+    START([Task arrives]) --> PRELUDE[Prelude<br/>Understand and scope task]
+    PRELUDE --> UNDERSTOOD{Is the task<br/>well understood?}
+
+    UNDERSTOOD -- No --> GRILL[Grill Me<br/>Resolve key decisions]
+    GRILL --> PRELUDE
+    UNDERSTOOD -. Optional .-> GRILL
+
+    UNDERSTOOD --> PLAN_DECISION{Does the task need<br/>a written plan?}
+    PLAN_DECISION -- Yes --> BLUEPRINT[Blueprint<br/>Create executable plan]
+    PLAN_DECISION -- No --> ASSEMBLY[Assembly<br/>Implement in controlled units]
+    BLUEPRINT --> ASSEMBLY
+
+    ASSEMBLY --> MODE{Execution mode}
+    MODE -- Hand holding --> HUMAN[Human review point<br/>Check work and choose next step]
+    HUMAN --> HAND_DECISION{Continue implementation?}
+    HAND_DECISION -- Yes --> ASSEMBLY
+    HAND_DECISION -- No --> HAND_REVIEW[Gauntlet or personal checks]
+    HAND_REVIEW --> PRACTICAL[pr-actical<br/>Prepare or update draft PR]
+
+    MODE -- Autopilot --> AUTO_VALIDATION[Automated validation<br/>and review as configured]
+    AUTO_VALIDATION --> PRACTICAL_AUTO[pr-actical<br/>Push and create or update draft PR]
+
+    PRACTICAL --> REALITY[Reality Check<br/>Second engineering review]
+    PRACTICAL_AUTO --> AUTO_REVIEW{Review and validation}
+    AUTO_REVIEW --> REALITY
+    AUTO_REVIEW --> GAUNTLET[Gauntlet<br/>Behavioral confidence and human testing]
+    REALITY --> FINDINGS{Findings or<br/>failed validation?}
+    GAUNTLET --> FINDINGS
+
+    FINDINGS -- No --> DONE([Task lifecycle complete])
+    FINDINGS -- Yes --> DECISION[Human decision point<br/>Interpret findings and choose next action]
+    DECISION -. Re-scope or clarify .-> PRELUDE
+    DECISION -. Revise implementation .-> ASSEMBLY
+    DECISION -. Re-review .-> REALITY
+    DECISION -. Re-test .-> GAUNTLET
+```
 
 
 ## Provenance

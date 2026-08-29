@@ -1,7 +1,7 @@
 interface:
-  display_name: Visual Coding Plan
+  display_name: Blueprint
   short_description: Create GitHub-safe visual plan.md files for human review and
     code-agent execution.
-  default_prompt: "Use $visual-coding-plan to create a GitHub-safe plan.md for this coding task."
+  default_prompt: "Use $blueprint to create a GitHub-safe plan.md for this coding task."
 policy:
   allow_implicit_invocation: true

@@ -1,9 +1,9 @@
 ---
-name: visual-coding-plan
+name: blueprint
 description: Create GitHub-safe and VS Code-safe visual coding project plans in a single plan.md file. Use when asked to plan a coding project, prepare work for a code agent, turn an understood issue or feature request into an executable implementation plan, or make planning notes visually readable without MDX. Do not use for read-only root-cause investigation before the problem is understood; use prelude first. Do not use to execute an existing plan; use assembly.
 ---
 
-# Visual Coding Plan
+# Blueprint
 
 ## Purpose
 

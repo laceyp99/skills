@@ -14,7 +14,7 @@ Use this skill to pressure-test a plan or design until the important decisions a
 - Explain briefly why that answer is your recommendation and what decision it unlocks.
 - Prefer concrete trade-offs over broad brainstorming.
 - Do not edit files, implement changes, create commits, or produce a full implementation plan unless the user explicitly changes the task.
-- When the decision tree is resolved, close with either a handoff for `/visual-coding-plan` or an update to an existing `plan.md` or plan artifact if the user has asked for an artifact update.
+- When the decision tree is resolved, close with either a handoff for `/blueprint` or an update to an existing `plan.md` or plan artifact if the user has asked for an artifact update.
 - If the answer can be discovered from the codebase, inspect the codebase instead of asking the user.
 - If the user has supplied a document, plan, issue, or design notes, use that artifact as the source of truth.
 
@@ -59,7 +59,7 @@ When the plan is clear enough to act on, stop grilling and summarize:
 If no plan artifact exists, write a compact handoff that can be passed to a planning step:
 
 ```markdown
-Use /visual-coding-plan to turn this into a plan.md.
+Use /blueprint to turn this into a plan.md.
 
 Confirmed decisions:
 - {{decision}}

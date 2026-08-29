@@ -94,49 +94,7 @@ Repeat that command for any other skill directory you want to install.
 
 `pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
 
-## Skill Lifecycle
-
-The workflow is intentionally flexible. `grill-me` and `blueprint` are optional, while `assembly` is the implementation handoff. Review and validation can happen before or after `pr-actical`, depending on whether the work is being done step by step or autonomously.
-
-```mermaid
-flowchart TD
-    START([Task arrives]) --> PRELUDE[Prelude<br/>Understand and scope task]
-    PRELUDE --> UNDERSTOOD{Is the task<br/>well understood?}
-
-    UNDERSTOOD -- No --> GRILL[Grill Me<br/>Resolve key decisions]
-    GRILL --> PRELUDE
-    UNDERSTOOD -. Optional .-> GRILL
-
-    UNDERSTOOD --> PLAN_DECISION{Does the task need<br/>a written plan?}
-    PLAN_DECISION -- Yes --> BLUEPRINT[Blueprint<br/>Create executable plan]
-    PLAN_DECISION -- No --> ASSEMBLY[Assembly<br/>Implement in controlled units]
-    BLUEPRINT --> ASSEMBLY
-
-    ASSEMBLY --> MODE{Execution mode}
-    MODE -- Hand holding --> HUMAN[Human review point<br/>Check work and choose next step]
-    HUMAN --> HAND_DECISION{Continue implementation?}
-    HAND_DECISION -- Yes --> ASSEMBLY
-    HAND_DECISION -- No --> HAND_REVIEW[Gauntlet or personal checks]
-    HAND_REVIEW --> PRACTICAL[pr-actical<br/>Prepare or update draft PR]
-
-    MODE -- Autopilot --> AUTO_VALIDATION[Automated validation<br/>and review as configured]
-    AUTO_VALIDATION --> PRACTICAL_AUTO[pr-actical<br/>Push and create or update draft PR]
-
-    PRACTICAL --> REALITY[Reality Check<br/>Second engineering review]
-    PRACTICAL_AUTO --> AUTO_REVIEW{Review and validation}
-    AUTO_REVIEW --> REALITY
-    AUTO_REVIEW --> GAUNTLET[Gauntlet<br/>Behavioral confidence and human testing]
-    REALITY --> FINDINGS{Findings or<br/>failed validation?}
-    GAUNTLET --> FINDINGS
-
-    FINDINGS -- No --> DONE([Task lifecycle complete])
-    FINDINGS -- Yes --> DECISION[Human decision point<br/>Interpret findings and choose next action]
-    DECISION -. Re-scope or clarify .-> PRELUDE
-    DECISION -. Revise implementation .-> ASSEMBLY
-    DECISION -. Re-review .-> REALITY
-    DECISION -. Re-test .-> GAUNTLET
-```
-
+See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 
 ## Provenance
 

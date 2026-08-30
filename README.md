@@ -36,27 +36,17 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
+| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
+| `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
+| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 | `assembly` | Execute a local plan in controlled units. | Hand holding pauses for user commits; autopilot commits the plan and uses `pr-actical` to deliver a draft PR. |
 | `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Use after or alongside code review when runtime evidence matters; maintains a local `review.md`. |
-| `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Useful when a plan needs to be stress-tested before implementation. |
-| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
 | `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
-| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, task IDs, file and risk matrices, verification plans, acceptance criteria, limited Mermaid diagrams, and restricted HTML details blocks. |
 
-## Repository Layout
+See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 
-```text
-skills/
-├── assembly/
-├── grill-me/
-├── pr-actical/
-├── prelude/
-├── reality-check/
-└── blueprint/
-```
-
-Each skill directory should be copied as a whole. The `SKILL.md` file is the entrypoint; supporting files are referenced relative to that directory.
+See [docs/subagents.md](docs/subagents.md) for the shared delegation appch.
 
 ## Installing a Skill
 
@@ -77,27 +67,3 @@ Copy-Item -Recurse .\blueprint $HOME\.codex\skills\
 ```
 
 Repeat that command for any other skill directory you want to install.
-
-## Workflow Notes
-
-`/assembly` is the execution path for turning a plan into controlled work units. Hand holding mode pauses after each unit for user review and commits. Autopilot mode completes and commits every unit, then follows `pr-actical` to safely push the branch and create or update a draft PR for the user's final pass.
-
-`/gauntlet` answers **“Does the changed behavior actually work?”** It combines read-only automated checks with risk-based, human-observed testing and keeps the evidence in a local `review.md`.
-
-`/reality-check` answers **“What is wrong or risky in this code?”** It inspects diffs, branches, and PR context with a skeptical, maintainability-first lens and returns prioritized engineering findings.
-
-`/prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
-
-`/blueprint` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, implementation phases, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
-
-`/grill-me` (adapted from Matt Pocock) is for unresolved thinking. It asks one decision-shaping question at a time and gives a recommended answer, which helps turn a fuzzy plan into explicit choices.
-
-`/pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
-
-See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details. See [docs/subagents.md](docs/subagents.md) for the shared delegation approach.
-
-## Provenance
-
-This is a personal working collection. Some skills are mine, some are adapted from public ideas or community workflows, and some may be forks of prompts I found useful. Where I know the inspiration, I try to call it out in this README or the skill itself.
-
-Before redistributing a skill outside this repo, check the source and licensing expectations for any upstream material it may have been adapted from.

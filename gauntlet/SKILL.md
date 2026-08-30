@@ -30,8 +30,30 @@ Accept a PR number, branch name, or both.
 4. If both are supplied, verify they refer to the same change set.
 5. Record target identity and review start state in `review.md`.
 6. If the current worktree does not match the target required for execution, stop before tests and tell the user exactly what needs to be switched.
+7. When `plan.md` is available, read its acceptance criteria, phase tasks, verification plan, risks, and stop conditions as intent context for the validation map.
 
 Never assume the base branch when it can be determined from PR metadata, remote tracking, or repository conventions.
+
+## Delegated validation discovery
+
+When understanding the patch would otherwise load substantial repository context into the primary conversation, Gauntlet may delegate a focused read-only discovery question to a configured `explorer` role.
+
+Useful questions include:
+- locating project validation commands
+- mapping changed behavior to test surfaces
+- tracing integration boundaries
+- identifying environment-dependent paths that may require human observation
+
+Give the explorer:
+- one concrete question
+- the minimum relevant diff and repository context
+- the expected answer and supporting file or symbol-level evidence
+- a no-mutation boundary
+- a stopping condition
+
+The primary agent must evaluate the result, design the validation map, select and run checks, guide human testing, interpret evidence, and maintain `review.md`. Do not delegate interactive human validation or treat discovered tests as proof that behavior works.
+
+If an appropriate explorer role or delegation mechanism is unavailable, perform the discovery directly and report the limitation when it prevents safe completion.
 
 ## Workflow
 
@@ -136,7 +158,7 @@ Treat `review.md` as the authoritative local record of review progress.
 - Package or publish it only when the user explicitly asks.
 - On a later agent session, read `review.md` before resuming.
 - If the user's remembered progress is ahead of the last documented checkpoint, return to the last documented step and repeat the undocumented validation rather than retroactively marking it complete.
-- If the reviewed diff/HEAD has materially changed since the recorded target, explain that prior behavioral evidence may no longer apply, refresh the validation map, and revalidate affected paths rather than carrying results forward blindly.
+- Validation evidence belongs to the target identified in `Review Target`. If review resumes after another change alters the reviewed scope, refresh the validation map and revalidate the affected paths rather than reusing evidence that no longer covers the current behavior.
 
 Use Markdown structure aggressively for readability: concise headings, tables, checklists where useful, callouts through bold text, and Mermaid code blocks for flows or coverage maps when they make the review easier to interpret or act on. Avoid decorative diagrams.
 
@@ -166,5 +188,12 @@ Ensure `review.md` contains:
 - unresolved or blocked areas
 - a final scoped assessment
 - Mermaid visualization where it materially improves understanding
+
+At completion, include a concise handoff in chat and in the final assessment. Failed validation or unclear intended behavior takes precedence: recommend `/assembly` for implementation changes or `/prelude` for renewed investigation. Otherwise:
+
+- If a PR exists and is marked ready for review, recommend `/reality-check`. If the PR is marked as a draft suggest the user mark it ready for review and lead into `/reality-check` as a next step.
+- If the PR is absent, recommend `/pr-actical`.
+
+Human validation must cover behavior that automated checks cannot establish, such as what a user sees, understands, and experiences; interaction flow, responsive behavior, accessibility perception, real integrations, persistence across reloads, and environment-specific behavior. Do not treat running tests as a substitute for that observation when the patch has a meaningful human-visible or environment-dependent surface.
 
 In chat, summarize the current conclusion and point the user to `review.md`. Do not create PR comments or modify the repository unless the user separately asks for a different workflow.

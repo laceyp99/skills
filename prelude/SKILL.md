@@ -41,6 +41,14 @@ Do not edit files, stage changes, commit, push, or use write-oriented repository
 
 If a test command writes ordinary cache or test artifacts, that is acceptable only when it is standard for the project and does not alter source files or persistent application data.
 
+## Delegated investigation
+
+When a focused codebase question would produce substantial intermediate context, Prelude may delegate that question to a configured read-only `explorer` role. Good delegation targets include dependency tracing, architecture mapping, locating behavioral ownership, and checking whether an assumption holds across callers or tests.
+
+Delegate one concrete question with only the necessary issue and repository context. State the expected answer and evidence, preserve Prelude's read-only boundary, and stop the delegated investigation when the question is answered or the available evidence is exhausted. The primary agent must assess the returned evidence, resolve conflicts, and produce the final understanding and recommendation; do not delegate the entire Prelude workflow or the conversation with the user.
+
+If an appropriate explorer role or delegation mechanism is unavailable, investigate directly and report the limitation when it prevents safe completion.
+
 ## Investigation heuristics
 
 Look for these signals before concluding where the problem lies:
@@ -106,10 +114,31 @@ Good evidence examples:
 
 ## Final handoff expectation
 
-End with a clear next step, usually one of:
+Prelude does not create a planning or handoff artifact. Its output is an understanding report in chat that should make the next skill call possible without repeating the investigation.
+
+Route the work using this decision tree:
+
+1. If the problem, product behavior, or implementation direction is still materially ambiguous, hand off to `/grill-me`.
+2. If the direction is understood and the work benefits from an executable implementation plan, hand off to `/blueprint`.
+3. If the direction is understood, the change is small, and a written plan would add little value, hand off directly to `/assembly`.
+4. If no implementation is warranted, state that clearly and recommend the appropriate non-code next step.
+
+End with a clear next step and include the context that the next skill needs:
+
+- Recommended next skill and why.
+- Problem statement and desired outcome.
+- Confirmed facts and strongest evidence.
+- Scope and non-scope.
+- Decisions already made.
+- Open questions or unknowns, distinguishing blockers from optional follow-up.
+- Risks, constraints, and relevant test or validation clues.
+
+The next step is usually one of:
 
 - Ask the user to choose among solution options.
 - Recommend one option and ask for confirmation before implementation.
-- Recommend creating a `plan.md` with blueprint if the user wants a code-agent-ready implementation plan.
+- Recommend `/grill-me` when key decisions remain unresolved.
+- Recommend `/blueprint` when the direction is ready for an executable `plan.md`.
+- Recommend `/assembly` directly for a small, well-understood change.
 - Explain that the issue needs product clarification before code changes.
 - State that no code change appears needed and suggest documentation, test, or issue-comment clarification instead.

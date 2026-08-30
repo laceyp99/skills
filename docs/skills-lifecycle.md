@@ -23,11 +23,13 @@ flowchart TD
     HUMAN --> HAND_DECISION{Continue implementation?}
     HAND_DECISION -- Yes --> ASSEMBLY
     HAND_DECISION -- No --> HAND_REVIEW["/gauntlet or personal checks"]
-    HAND_REVIEW --> PRACTICAL["/pr-actical<br/>Prepare or update draft PR"]
+    HAND_REVIEW --> POSTED{PR posted and<br/>ready for review?}
+    POSTED -- No --> PRACTICAL["/pr-actical<br/>Prepare or update draft PR"]
+    POSTED -- Yes --> REALITY["/reality-check<br/>Review PR"]
 
-    PRACTICAL --> REALITY["/reality-check<br/>Second engineering review"]
-    PRACTICAL_AUTO --> AUTO_REVIEW{Review and validation}
-    AUTO_REVIEW --> REALITY
+    PRACTICAL --> DRAFT([Draft PR ready for user review])
+    PRACTICAL_AUTO --> DRAFT
+    DRAFT -. User marks PR ready .-> REALITY
     REALITY --> FINDINGS{Findings or<br/>failed validation?}
 
     FINDINGS -- No --> DONE([Task lifecycle complete])

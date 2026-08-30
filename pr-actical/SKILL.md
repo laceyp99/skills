@@ -18,6 +18,7 @@ Use [references/pr-writing.md](references/pr-writing.md) when composing PR title
 - Assume the user intended side effects when this skill is invoked: ordinary `git push -u origin HEAD`, `gh pr create --draft`, `gh pr edit`, and `gh pr comment` do not require a second confirmation.
 - Never use `git push --force` or `git push --force-with-lease` unless the user explicitly requested force-with-lease in the current message. Plain `--force` is never allowed.
 - Never create commits. If this skill makes or would need to make any tracked local file changes, stop and ask the user to review and commit them.
+- Treat `plan.md`, `decisions.md`, `review.md`, `review-findings.md`, and similar planning or review records as local artifacts that remain untracked. Never stage, commit, or publish them. If one appears in the outgoing branch diff, refuse before pushing and ask the user to remove it from the branch history.
 - Do not manage labels, reviewers, assignees, projects, or milestones.
 - Use a temporary file for PR body/comment content. Delete it after successful PR creation, edit, or comment. Preserve it on refusal or failure and report its path.
 - Do not write `PR.md`.
@@ -36,7 +37,7 @@ Refuse before pushing or changing a PR when any of these are true:
 - A push is rejected as non-fast-forward or would require force/force-with-lease not explicitly authorized.
 - Required tests fail and fixing them would require local file changes. Stop with the failing command and key output.
 
-Unstaged or untracked files are not automatically part of the PR. If they are unrelated, ignore them and mention them in the final response. If they appear required for tests or PR correctness, stop and ask the user to review/commit them.
+Unstaged or untracked files are not automatically part of the PR. If they are unrelated, ignore them and mention them in the final response. If they appear required for tests or PR correctness, stop and ask the user to review them. Do not ask the user to commit a local planning or review artifact as a publication prerequisite.
 
 ## Workflow
 
@@ -105,7 +106,14 @@ git diff --name-status <saved-head-sha>..HEAD
 git diff <saved-head-sha>..HEAD
 ```
 
-Read `./plan.md` only when it exists. Use it for intended goals, acceptance criteria, and risk context. Prefer the observed code diff over `./plan.md` when they conflict, and mention meaningful mismatches in the final response or PR text. Do not quote private scratchpad-like plan content verbatim.
+Read `plan.md` only when it exists. Use it for intended goals, acceptance criteria, and risk context. If no plan exists, use `decisions.md` for /grill-me's recorded intention when present for the resolved direction and scope. If present, also inspect `review.md` for /gauntlet's automated and human validation evidence and `review-findings.md` for local /reality-check findings. Reading these local artifacts does not authorize tracking, staging, committing, or publishing them. Prefer the observed code diff over planning or review artifacts when they conflict, and mention meaningful mismatches in the final response or PR text. Do not quote private scratchpad-like plan content verbatim.
+
+The validation input may come from either path:
+
+- `/gauntlet`: consume the recorded `review.md` evidence, including human-observed behavior, failed or blocked checks, unverified areas, and the recommended next step.
+- `/assembly` autopilot: consume the direct validation results and final Assembly report from the current session when no Gauntlet log exists. Treat only commands actually run and results directly observed in that session as evidence.
+
+When writing the PR body or update comment, summarize the available validation state without claiming checks that were not run. Carry forward meaningful manual-validation gaps, blocked checks, plan/diff mismatches, and unresolved review findings in `Notes`.
 
 Find PR templates in:
 

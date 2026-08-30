@@ -19,9 +19,9 @@ git diff --stat
 git diff --cached --stat
 ```
 
-Read `plan.md` fully before making changes. If the user names another plan file, read that file fully instead. Identify planning artifacts that must remain uncommitted by default, including `plan.md`, `HANDOFF.md`, `Priority Ladder.md`, and scratch or review markdown files.
+Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain untracked and uncommitted, including `plan.md`, `decisions.md`, or another scratch or review markdown file. Check whether Git already tracks each artifact before writing it. Leave untracked artifacts untracked; if one is tracked unexpectedly, warn the user and do not change its tracking state or include its modifications in a commit.
 
-If `plan.md` is missing, internally contradictory, or impossible to map into work units, stop and ask for direction.
+If `plan.md` is missing, ensure you have enough conversational context to change intent map into work units, if not, stop and ask clarifying questions for direction.
 
 ## Determine Mode
 
@@ -39,6 +39,21 @@ Selecting autopilot authorizes ordinary commits, a normal push of the current no
 Extract the commit plan, phase list, or ordered task list from the plan into a working checklist. Keep the checklist in the conversation unless editing the plan file is appropriate.
 
 You may update plan markdown files only for checkbox/status tracking and date entries. Do not alter the plan text, scope, task definitions, or acceptance criteria without explicit user direction. Keep any plan markdown changes out of commits by default.
+
+## Delegated implementation
+
+Assembly may delegate a bounded plan unit to a configured `worker` role when the unit has clear ownership and delegation will keep implementation detail out of the primary context.
+
+Give the worker:
+- one concrete responsibility
+- the minimum relevant plan and repository context
+- the expected implementation and validation report
+- explicit file and mutation boundaries
+- a stopping condition for conflicts, blockers, or completion.
+
+Prefer sequential delegation for context management. Use concurrent workers only when their file ownership is disjoint, their work does not depend on the same uncommitted changes, and their results can be integrated without ambiguity. The primary agent retains responsibility for checklist order, shared-worktree safety, integration, final validation, staging, commits, lifecycle handoffs, and communication with the user. Delegation does not expand the plan, authorization, or selected mode, and workers must not commit unless the user-authorized workflow explicitly assigns that responsibility.
+
+If an appropriate worker role or delegation mechanism is unavailable, implement the unit directly and report the limitation when it prevents safe completion. Do not split a tightly coupled unit merely to use delegation.
 
 ## Hand Holding Mode
 
@@ -69,7 +84,7 @@ For each unit:
 6. Commit the unit with the repo's conventional commit style or the user's preferred style.
 7. Continue to the next unit only after validation passes and the commit is made.
 
-Never commit `plan.md`, `HANDOFF.md`, `Priority Ladder.md`, or scratch/review markdown files unless the user explicitly asks to include them. Do not commit a unit with failing validation unless the user explicitly overrides.
+Never stage or commit `plan.md`, `decisions.md`, or another scratch/review markdown file. Do not commit a unit with failing validation unless the user explicitly overrides.
 
 ### Autopilot delivery
 
@@ -82,6 +97,8 @@ After the final plan unit is validated and committed:
 5. If `pr-actical` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that draft-PR delivery requires that skill.
 
 The publication phase is part of autopilot's normal completion target; do not request a second confirmation before an ordinary push or draft-PR operation. Hand holding mode does not inherit this authorization and must only transition to `pr-actical` if the user requested to.
+
+In hand holding mode, the final report after the plan is complete is the implementation handoff. Do not create per-unit report artifacts. If the user wants behavioral validation, they may invoke `/gauntlet`; if they want publication, they may invoke `/pr-actical` in the same session or later from the same branch. The final report should give those next skills the changed files, validation already run, remaining risks, and the intended next action.
 
 ## Validation
 

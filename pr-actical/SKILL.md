@@ -105,7 +105,14 @@ git diff --name-status <saved-head-sha>..HEAD
 git diff <saved-head-sha>..HEAD
 ```
 
-Read `./plan.md` only when it exists. Use it for intended goals, acceptance criteria, and risk context. Prefer the observed code diff over `./plan.md` when they conflict, and mention meaningful mismatches in the final response or PR text. Do not quote private scratchpad-like plan content verbatim.
+Read `plan.md` only when it exists. Use it for intended goals, acceptance criteria, and risk context. If no plan exists, use `decisions.md` for /grill-me's recorded intention when present for the resolved direction and scope. If present, also inspect `review.md` for /gauntlet's automated and human validation evidence and `review-findings.md` for local /reality-check findings. Prefer the observed code diff over planning or review artifacts when they conflict, and mention meaningful mismatches in the final response or PR text. Do not quote private scratchpad-like plan content verbatim.
+
+The validation input may come from either path:
+
+- `/gauntlet`: consume the recorded `review.md` evidence, including human-observed behavior, failed or blocked checks, unverified areas, and the recommended next step.
+- `/assembly` autopilot: consume the direct validation results and final Assembly report from the current session when no Gauntlet log exists. Treat only commands actually run and results directly observed in that session as evidence.
+
+When writing the PR body or update comment, summarize the available validation state without claiming checks that were not run. Carry forward meaningful manual-validation gaps, blocked checks, plan/diff mismatches, and unresolved review findings in `Notes`.
 
 Find PR templates in:
 

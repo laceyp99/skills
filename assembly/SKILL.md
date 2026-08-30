@@ -19,7 +19,7 @@ git diff --stat
 git diff --cached --stat
 ```
 
-Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain uncommitted by default, including `plan.md`, `decisions.md`, or another scratch or review markdown files.
+Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain untracked and uncommitted, including `plan.md`, `decisions.md`, or another scratch or review markdown file. Check whether Git already tracks each artifact before writing it. Leave untracked artifacts untracked; if one is tracked unexpectedly, warn the user and do not change its tracking state or include its modifications in a commit.
 
 If `plan.md` is missing, ensure you have enough conversational context to change intent map into work units, if not, stop and ask clarifying questions for direction.
 
@@ -84,7 +84,7 @@ For each unit:
 6. Commit the unit with the repo's conventional commit style or the user's preferred style.
 7. Continue to the next unit only after validation passes and the commit is made.
 
-Never commit `plan.md`, `decisions.md`, or another scratch/review markdown file unless the user explicitly asks to include them. Do not commit a unit with failing validation unless the user explicitly overrides.
+Never stage or commit `plan.md`, `decisions.md`, or another scratch/review markdown file. Do not commit a unit with failing validation unless the user explicitly overrides.
 
 ### Autopilot delivery
 

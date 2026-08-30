@@ -133,7 +133,7 @@ Recommendation: {{specific next action}}
 Disposition: Open | Fixed | Accepted risk | Rejected with rationale
 ```
 
-When the review is local and findings may need implementation work, write or update `review-findings.md` with the findings, evidence, disposition, and recommended `/assembly` task or `/prelude` question. Keep it untracked and do not commit it automatically. For GitHub reviews, the inline comments remain the primary record; use the local file only when a durable local handoff is useful.
+When the review is local and findings may need implementation work, write or update `review-findings.md` with the findings, evidence, disposition, and recommended `/assembly` task or `/prelude` question. Keep it untracked and never stage or commit it. For GitHub reviews, the inline comments remain the primary record; use the local file only when a durable local handoff is useful.
 
 Then include:
 

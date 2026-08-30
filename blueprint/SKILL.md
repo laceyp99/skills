@@ -18,6 +18,8 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 ## Core Contract
 
 - Produce one plain Markdown plan named or formatted as `plan.md` unless the user asks otherwise.
+- Keep the plan artifact local and untracked by default. Before writing it, check whether Git already tracks the target file. If it is tracked unexpectedly, warn the user and do not change its tracking state.
+- Never stage or commit the plan artifact.
 - Do not create MDX, JSX, custom components, custom classes, inline styles, scripts, iframes, or renderer-specific markup.
 - Preserve usefulness when Mermaid or HTML collapsibles do not render.
 - Inspect repo context when available before naming files, frameworks, routes, commands, or test tools.

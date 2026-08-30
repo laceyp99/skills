@@ -17,6 +17,7 @@ Use this skill to pressure-test a plan or design until the important decisions a
 - When the decision tree is resolved, apply the decisions to the next planning step instead of merely repeating them in chat.
 - If an existing `plan.md` is in scope, identify the sections and tasks that the decisions change. Update the plan every time there is an agreement or a decision confidently made; respect its existing structure, task IDs, and unrelated content.
 - If no `plan.md` exists and the grilling result will be used later, create a local `decisions.md` artifact containing only the resolved decisions, assumptions, open questions, risks, and recommended next step. Keep it untracked by default and do not turn it into an implementation plan.
+- Before writing `plan.md`, `decisions.md`, or another planning artifact, check whether Git already tracks it. Leave untracked artifacts untracked; if one is tracked unexpectedly, warn the user and do not change its tracking state. Never stage or commit these artifacts.
 - If the answer can be discovered from the codebase, inspect the codebase instead of asking the user.
 - If the user has supplied a document, plan, issue, or design notes, use that artifact as the source of truth.
 

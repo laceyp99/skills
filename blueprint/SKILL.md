@@ -13,7 +13,7 @@ Create one `plan.md`-style Markdown artifact that a human can review and a codin
 
 Use this skill when the expected output is a planning artifact. If the user is still trying to understand whether an issue is real, where a bug lives, or which solution path is right, use `prelude` before writing a plan. If the user asks to implement an existing plan, use `assembly`. If the user asks for a code review, use `reality-check`.
 
-If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Assumptions and Unknowns` and make them early tasks or stop conditions.
+If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Unknowns to Resolve` and make them early tasks or stop conditions.
 
 ## Core Contract
 
@@ -45,28 +45,23 @@ Use this order by default. Omit optional diagram subsections only when they do n
 1. `# Plan: {{title}}`
 2. `## Human Summary`
 3. `## Visual Overview`
-4. `### Execution Map`
-5. `### Architecture Sketch`
-6. `### Sequence Diagram`
-7. `## Decision Log`
-8. `## Risk Matrix`
-9. `## Agent Task List`
-10. `## Phase Implementation Plan`
-11. `## File Impact Matrix`
-12. `## Test / Verification Plan`
-13. `## Acceptance Criteria`
-14. `## Assumptions and Unknowns`
-15. `## Stop Conditions`
-16. `## Additional Context`
+4. `### Architecture Sketch`
+5. `### Sequence Diagram`
+6. `## Phase Implementation Plan`
+7. `## File Impact Matrix`
+8. `## Test / Verification Plan`
+9. `## Acceptance Criteria`
+10. `## Unknowns to Resolve`
+11. `## Stop Conditions`
+12. `## Additional Context`
 
 ## Decision Rules and Constraints
 
 - Put a concise human narrative before tables and task lists.
-- Include real decisions only. If no decisions are locked, say so and identify what must be resolved first.
-- Put risks before execution tasks so risk shapes sequencing and verification.
 - Use confirmed file paths only when repo evidence supports them. Otherwise list areas such as `Routing layer` or `Auth utilities`.
-- Use phases to express intent, expected outcome, and flexibility. Do not turn the plan into a rigid commit script unless the user explicitly asks for commit-level planning.
-- Use Mermaid sparingly: one compact `flowchart TD` execution map by default, architecture sketches only for multi-part systems, and sequence diagrams only for runtime interactions.
+- Use phases to express a goal, actionable tasks, observable completion conditions, and concrete pause conditions.
+- Add an optional `Implementation notes` aside only when a phase has useful constraints or context that do not belong in its tasks.
+- Under `Visual Overview`, include an architecture sketch, a sequence diagram, both, or neither. Omit visuals when they would be trivial or misleading; use architecture sketches for meaningful multi-part systems and sequence diagrams for meaningful runtime interactions.
 - Keep Mermaid labels short and free of long paths, backticks, quotes, braces, and punctuation-heavy text.
 - Use `<details>` blocks only for supporting context such as alternatives considered. Do not hide primary tasks, risks, acceptance criteria, or stop conditions in collapsibles.
 - Do not include a separate `Agent Handoff Prompt` section by default. Put execution guidance in the phase plan, stop conditions, and acceptance criteria.

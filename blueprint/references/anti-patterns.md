@@ -55,9 +55,9 @@ Before returning a plan, verify:
 - No MDX, JSX, imports, custom components, arbitrary HTML, or renderer-only features are present.
 - Every actionable task has a unique stable ID.
 - The Human Summary explains the work and ordering.
-- The Decision Log contains real decisions or explicitly says none are locked.
-- The Risk Matrix appears before execution tasks and has concrete mitigations.
-- The Phase Implementation Plan includes goal, likely work, expected outcome, and flexibility.
+- The Visual Overview contains only non-trivial architecture or sequence diagrams that improve understanding.
+- The Phase Implementation Plan includes a goal, tasks, observable `Done when` conditions, and concrete pause conditions.
+- Optional implementation notes add useful context instead of boilerplate.
 - The File Impact Matrix distinguishes confirmed files from uncertain areas.
 - Verification is proportional to the change and uses known repo tooling when available.
 - Acceptance criteria are observable.

@@ -6,15 +6,13 @@ Use this file when a `plan.md` needs richer section guidance than the core skill
 
 - Human Summary
 - Visual Overview
-- Decision Log
-- Risk Matrix
-- Agent Task List
 - Phase Implementation Plan
 - File Impact Matrix
 - Test / Verification Plan
 - Acceptance Criteria
-- Assumptions and Unknowns
+- Unknowns to Resolve
 - Stop Conditions
+- Additional Context
 - Restricted HTML Blocks
 
 ## Human Summary
@@ -25,59 +23,14 @@ Format: short paragraphs, optionally followed by a compact snapshot table.
 
 ## Visual Overview
 
-Purpose: make diagrams part of the review path instead of appendix material.
+Purpose: make useful architecture and runtime relationships part of the review path instead of appendix material. Include an architecture sketch, a sequence diagram, both, or neither. Omit visuals when they would be trivial or misleading.
 
-Use an execution map for sequencing:
-
-```mermaid
-flowchart TD
-  A[Inspect current state] --> B[Confirm path]
-  B --> C[Make focused changes]
-  C --> D[Verify behavior]
-  D --> E[Report results]
-```
-
-Use architecture sketches only when at least three parts interact, such as UI, API, service, worker, data store, or external system. Use sequence diagrams only for request/response, webhook, auth, event, or other time-ordered flows. Keep diagrams compact and let Markdown tasks remain the source of truth.
-
-## Decision Log
-
-Purpose: expose the choices behind the plan.
-
-```markdown
-| Decision | Choice | Why | Confidence |
-|---|---|---|---|
-| {{decision}} | {{chosen approach}} | {{reason}} | High/Medium/Low |
-```
-
-If no meaningful decisions are known yet, write: `No major implementation decisions are locked yet; resolve the unknowns first.`
-
-## Risk Matrix
-
-Purpose: let risk shape execution order, stop conditions, and verification.
-
-```markdown
-| Risk | Level | Why it matters | Mitigation |
-|---|---|---|---|
-| {{risk}} | High/Medium/Low | {{impact}} | {{specific mitigation}} |
-```
-
-## Agent Task List
-
-Purpose: make the plan executable, trackable, resumable, and easy to reference.
-
-Every task starts with a unique kebab-case ID in backticks:
-
-```markdown
-- [ ] `inspect-routing` Identify the current routing structure before editing.
-- [ ] `confirm-auth-patterns` Check for existing auth/session utilities.
-- [ ] `implement-login-ui` Create or update the login UI.
-```
-
-Keep tasks ordered enough to guide execution, but do not turn them into a commit-by-commit script unless the user explicitly asks for strict commit planning.
+Use architecture sketches when multiple meaningful parts interact, such as UI, API, service, worker, data store, or an external system. Use sequence diagrams for request/response, webhook, auth, event, or other time-ordered flows. Keep diagrams compact and let Markdown tasks remain the source of truth.
 
 ## Phase Implementation Plan
 
-Purpose: provide an implementation path while preserving room for repo-aware judgment. Use tagged element wrapping when a phase needs more detail than a short paragraph can carry.
+Purpose: provide an implementation path with a clear goal, concrete work, an observable completion boundary, and conditions that require review.
+
 
 Keep the phase heading visible, then wrap the detailed phase body in `<details>/<summary>` so the plan stays scannable in GitHub and VS Code. Put the phase goal in the summary. Keep critical tasks visible inside the wrapped block, not hidden elsewhere.
 
@@ -85,28 +38,25 @@ Keep the phase heading visible, then wrap the detailed phase body in `<details>/
 ### Phase 1: Inspect and Confirm Direction
 
 <details>
-<summary>Goal: Verify the repo facts that the plan depends on.</summary>
+<summary>Goal: Verify the repo facts that the plan depends on.</summary>.
 
-**Likely work:**
+**Tasks:**
 - [ ] `inspect-current-flow` Confirm the relevant files, routes, data flow, or APIs.
+  - Follow an equivalent existing repository pattern if its location differs from the expected area.
 - [ ] `confirm-existing-patterns` Identify existing helpers, conventions, and test commands.
 
-**Expected outcome:**
-The agent knows whether the proposed path still fits the codebase.
-
-**Flexibility:**
-The agent may adjust later tasks if inspection finds a better existing pattern.
-
-**Validation focus:**
-- [ ] `verify-inspection-notes` Confirm the plan still matches the inspected project structure.
+**Done when:**
+- The relevant implementation path and existing project conventions are confirmed.
 
 **Pause if:**
 - The expected framework, routes, or package tooling are not present.
 
+**Implementation notes:**
+Account for any repository-specific constraint that affects later phases.
 </details>
 ```
 
-For short phases, a plain unwrapped phase is acceptable. Use wrapping when the phase has several tasks, phase-specific validation, pause conditions, or explanatory context that would otherwise make the plan visually dense.
+Put meaningful flexibility beneath the specific task it affects rather than in a separate phase-level section. `Implementation notes` is an optional aside for useful constraints or context that do not belong in the task list; omit it when it adds no value.
 
 ## File Impact Matrix
 
@@ -151,17 +101,11 @@ Avoid:
 - [ ] Auth works.
 ```
 
-## Assumptions and Unknowns
+## Unknowns to Resolve
 
-Purpose: separate accepted working assumptions from facts that must be resolved before implementation.
+Purpose: identify facts that must be resolved before or during implementation.
 
 ```markdown
-### Assumptions
-
-- {{assumption}}
-
-### Unknowns to Resolve First
-
 - [ ] `unknown-existing-auth` Check whether an auth provider already exists.
 ```
 
@@ -178,6 +122,10 @@ Stop and ask for review if:
 - The work requires a schema migration not covered here.
 - The expected files or framework are not present.
 ```
+
+## Additional Context
+
+Purpose: preserve relevant references, history, constraints, or alternatives that support review or execution but do not belong in the primary plan sections. Omit this section when no useful supporting context exists.
 
 ## Restricted HTML Blocks
 

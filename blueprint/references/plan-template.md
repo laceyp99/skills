@@ -11,15 +11,7 @@ Use this template as the default structure for `plan.md`.
 
 ## Visual Overview
 
-### Execution Map
-
-```mermaid
-flowchart TD
-  A[Inspect current state] --> B[Confirm implementation path]
-  B --> C[Make smallest coherent change]
-  C --> D[Verify behavior]
-  D --> E[Handoff results]
-```
+{{Include the architecture sketch, sequence diagram, both, or neither. Omit visuals when they would be trivial or misleading.}}
 
 ### Architecture Sketch
 
@@ -46,47 +38,26 @@ sequenceDiagram
   API-->>UI: Return response
 ```
 
-## Decision Log
-
-| Decision | Choice | Why | Confidence |
-|---|---|---|---|
-| {{decision}} | {{choice}} | {{reason}} | High/Medium/Low |
-
-## Risk Matrix
-
-| Risk | Level | Why it matters | Mitigation |
-|---|---|---|---|
-| {{risk}} | Low/Medium/High | {{impact}} | {{mitigation}} |
-
-## Agent Task List
-
-- [ ] `task-id` {{actionable task}}
-- [ ] `task-id` {{actionable task}}
-
 ## Phase Implementation Plan
 
 ### Phase 1: {{phase name}}
 
-<details>
-<summary>Goal: {{phase goal}}</summary>
+**Goal:**
+{{Why this phase exists and what it should accomplish.}}
 
-**Likely work:**
-- [ ] `phase-task-id` {{expected task}}
-- [ ] `phase-task-id` {{expected task}}
+**Tasks:**
+- [ ] `phase-task-id` {{concrete action}}
+  - {{Optional task-specific implementation latitude.}}
+- [ ] `phase-task-id` {{concrete action}}
 
-**Expected outcome:**
-{{What should be true when this phase is complete.}}
-
-**Flexibility:**
-{{What the agent may adapt after inspection without asking for review.}}
-
-**Validation focus:**
-- [ ] `phase-validation-id` {{phase-specific check}}
+**Done when:**
+- {{Observable phase-level result.}}
 
 **Pause if:**
-- {{phase-specific stop condition}}
+- {{Specific condition requiring review.}}
 
-</details>
+**Implementation notes:**
+{{Optional constraints or context worth accounting for. Omit this aside when it adds no value.}}
 
 ## File Impact Matrix
 
@@ -108,13 +79,7 @@ sequenceDiagram
 
 - [ ] {{observable done condition}}
 
-## Assumptions and Unknowns
-
-### Assumptions
-
-- {{assumption}}
-
-### Unknowns to Resolve First
+## Unknowns to Resolve
 
 - [ ] `unknown-id` {{unknown to resolve}}
 
@@ -123,5 +88,9 @@ sequenceDiagram
 Stop and ask for review if:
 
 - {{stop condition}}
+
+## Additional Context
+
+{{Optional relevant references, history, constraints, or alternatives. Omit when there is no useful supporting context.}}
 
 ````

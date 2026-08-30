@@ -41,6 +41,14 @@ Do not edit files, stage changes, commit, push, or use write-oriented repository
 
 If a test command writes ordinary cache or test artifacts, that is acceptable only when it is standard for the project and does not alter source files or persistent application data.
 
+## Delegated investigation
+
+When a focused codebase question would produce substantial intermediate context, Prelude may delegate that question to a configured read-only `explorer` role. Good delegation targets include dependency tracing, architecture mapping, locating behavioral ownership, and checking whether an assumption holds across callers or tests.
+
+Delegate one concrete question with only the necessary issue and repository context. State the expected answer and evidence, preserve Prelude's read-only boundary, and stop the delegated investigation when the question is answered or the available evidence is exhausted. The primary agent must assess the returned evidence, resolve conflicts, and produce the final understanding and recommendation; do not delegate the entire Prelude workflow or the conversation with the user.
+
+If an appropriate explorer role or delegation mechanism is unavailable, investigate directly and report the limitation when it prevents safe completion.
+
 ## Investigation heuristics
 
 Look for these signals before concluding where the problem lies:

@@ -40,6 +40,21 @@ Extract the commit plan, phase list, or ordered task list from the plan into a w
 
 You may update plan markdown files only for checkbox/status tracking and date entries. Do not alter the plan text, scope, task definitions, or acceptance criteria without explicit user direction. Keep any plan markdown changes out of commits by default.
 
+## Delegated implementation
+
+Assembly may delegate a bounded plan unit to a configured `worker` role when the unit has clear ownership and delegation will keep implementation detail out of the primary context.
+
+Give the worker:
+- one concrete responsibility
+- the minimum relevant plan and repository context
+- the expected implementation and validation report
+- explicit file and mutation boundaries
+- a stopping condition for conflicts, blockers, or completion.
+
+Prefer sequential delegation for context management. Use concurrent workers only when their file ownership is disjoint, their work does not depend on the same uncommitted changes, and their results can be integrated without ambiguity. The primary agent retains responsibility for checklist order, shared-worktree safety, integration, final validation, staging, commits, lifecycle handoffs, and communication with the user. Delegation does not expand the plan, authorization, or selected mode, and workers must not commit unless the user-authorized workflow explicitly assigns that responsibility.
+
+If an appropriate worker role or delegation mechanism is unavailable, implement the unit directly and report the limitation when it prevents safe completion. Do not split a tightly coupled unit merely to use delegation.
+
 ## Hand Holding Mode
 
 In hand holding mode, complete exactly one logical unit, then pause for user review to commit.

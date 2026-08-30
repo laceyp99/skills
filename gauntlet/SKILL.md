@@ -34,6 +34,27 @@ Accept a PR number, branch name, or both.
 
 Never assume the base branch when it can be determined from PR metadata, remote tracking, or repository conventions.
 
+## Delegated validation discovery
+
+When understanding the patch would otherwise load substantial repository context into the primary conversation, Gauntlet may delegate a focused read-only discovery question to a configured `explorer` role.
+
+Useful questions include:
+- locating project validation commands
+- mapping changed behavior to test surfaces
+- tracing integration boundaries
+- identifying environment-dependent paths that may require human observation
+
+Give the explorer:
+- one concrete question
+- the minimum relevant diff and repository context
+- the expected answer and supporting file or symbol-level evidence
+- a no-mutation boundary
+- a stopping condition
+
+The primary agent must evaluate the result, design the validation map, select and run checks, guide human testing, interpret evidence, and maintain `review.md`. Do not delegate interactive human validation or treat discovered tests as proof that behavior works.
+
+If an appropriate explorer role or delegation mechanism is unavailable, perform the discovery directly and report the limitation when it prevents safe completion.
+
 ## Workflow
 
 Follow three phases in order. Apply the review-depth gate after understanding the diff.

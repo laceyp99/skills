@@ -49,6 +49,27 @@ git diff <base>...HEAD
 
 If reviewing staged, unstaged, or named files instead of a branch range, inspect the requested diff directly and state the scope.
 
+## Delegated repository investigation
+
+When validating a suspected finding requires substantial codebase exploration beyond the diff, Reality Check may delegate a focused read-only question to a configured `explorer` role.
+
+Suitable questions include:
+- tracing callers
+- locating established invariants
+- mapping dependency boundaries
+- determining whether existing tests cover a specific regression path
+
+Provide the explorer with:
+- one concrete question
+- the minimum relevant diff and repository context
+- the expected answer and file- or symbol-level evidence
+- a no-mutation boundary
+- a stopping condition
+
+The primary agent must inspect the relevant diff, evaluate the returned evidence, decide whether a concrete finding exists, assign severity, and own the final review. Do not delegate the complete review or treat an explorer's suspicion as a finding without verifying it against the reviewed change.
+
+If an appropriate explorer role or delegation mechanism is unavailable, perform the investigation directly and report the limitation when it prevents safe completion. A missing delegation mechanism does not lower the evidence required for a finding.
+
 ## Gather GitHub PR Context
 
 When a PR number or URL is provided, or PR context is clearly required, verify GitHub CLI access first:

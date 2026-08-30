@@ -94,7 +94,7 @@ Repeat that command for any other skill directory you want to install.
 
 `/pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
 
-See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
+See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details. See [docs/subagents.md](docs/subagents.md) for the shared delegation approach.
 
 ## Provenance
 

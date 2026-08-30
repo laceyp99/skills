@@ -31,14 +31,12 @@ Use architecture sketches when multiple meaningful parts interact, such as UI, A
 
 Purpose: provide an implementation path with a clear goal, concrete work, an observable completion boundary, and conditions that require review.
 
-
-Keep the phase heading visible, then wrap the detailed phase body in `<details>/<summary>` so the plan stays scannable in GitHub and VS Code. Put the phase goal in the summary. Keep critical tasks visible inside the wrapped block, not hidden elsewhere.
+Keep phase headings, goals, task checklists, `Done when`, and `Pause if` sections visible in the normal document flow. Use `<details>/<summary>` only for optional implementation notes so a human or agent can scan the executable path without expanding anything.
 
 ```markdown
 ### Phase 1: Inspect and Confirm Direction
 
-<details>
-<summary>Goal: Verify the repo facts that the plan depends on.</summary>.
+**Goal:** Verify the repo facts that the plan depends on.
 
 **Tasks:**
 - [ ] `inspect-current-flow` Confirm the relevant files, routes, data flow, or APIs.
@@ -51,8 +49,11 @@ Keep the phase heading visible, then wrap the detailed phase body in `<details>/
 **Pause if:**
 - The expected framework, routes, or package tooling are not present.
 
-**Implementation notes:**
+<details>
+<summary>Implementation notes</summary>
+
 Account for any repository-specific constraint that affects later phases.
+
 </details>
 ```
 
@@ -129,7 +130,7 @@ Purpose: preserve relevant references, history, constraints, or alternatives tha
 
 ## Restricted HTML Blocks
 
-Use `<details>` and `<summary>` only for supporting context, such as alternatives considered or lower-priority notes.
+Use `<details>` and `<summary>` only for optional implementation notes or supporting context. Never place goals, primary tasks, acceptance criteria, risks, or stop conditions inside a collapsible block.
 
 ```html
 <details>

@@ -82,17 +82,17 @@ Repeat that command for any other skill directory you want to install.
 
 `/assembly` is the execution path for turning a plan into controlled work units. Hand holding mode pauses after each unit for user review and commits. Autopilot mode completes and commits every unit, then follows `pr-actical` to safely push the branch and create or update a draft PR for the user's final pass.
 
-`gauntlet` answers **“Does the changed behavior actually work?”** It combines read-only automated checks with risk-based, human-observed testing and keeps the evidence in a local `review.md`.
+`/gauntlet` answers **“Does the changed behavior actually work?”** It combines read-only automated checks with risk-based, human-observed testing and keeps the evidence in a local `review.md`.
 
 `/reality-check` answers **“What is wrong or risky in this code?”** It inspects diffs, branches, and PR context with a skeptical, maintainability-first lens and returns prioritized engineering findings.
 
-`prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
+`/prelude` is for investigation before implementation. It is meant to slow the agent down long enough to understand an issue, bug report, or user story before recommending a fix.
 
-`blueprint` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, decision logs, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
+`/blueprint` is the planning direction in this repo. It creates a plain Markdown `plan.md` that is useful to both people and coding agents: stable task IDs, implementation phases, matrices, stop conditions, verification, and optional simple visuals that still render safely in GitHub and VS Code.
 
-`grill-me` (from Matt Pocock) is for unresolved thinking. It asks one decision-shaping question at a time and gives a recommended answer, which helps turn a fuzzy plan into explicit choices.
+`/grill-me` (adapted from Matt Pocock) is for unresolved thinking. It asks one decision-shaping question at a time and gives a recommended answer, which helps turn a fuzzy plan into explicit choices.
 
-`pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
+`/pr-actical` is for the end of a ready branch. It uses local repository state, `gh`, commits, diffs, templates, and tests to create or update a GitHub draft PR without publishing it for review.
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 

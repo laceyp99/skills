@@ -19,9 +19,9 @@ git diff --stat
 git diff --cached --stat
 ```
 
-Read `plan.md` fully before making changes. If the user names another plan file, read that file fully instead. Identify planning artifacts that must remain uncommitted by default, including `plan.md`, `HANDOFF.md`, `Priority Ladder.md`, and scratch or review markdown files.
+Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain uncommitted by default, including `plan.md`, `decisions.md`, or another scratch or review markdown files.
 
-If `plan.md` is missing, internally contradictory, or impossible to map into work units, stop and ask for direction.
+If `plan.md` is missing, ensure you have enough conversational context to change intent map into work units, if not, stop and ask clarifying questions for direction.
 
 ## Determine Mode
 
@@ -69,7 +69,7 @@ For each unit:
 6. Commit the unit with the repo's conventional commit style or the user's preferred style.
 7. Continue to the next unit only after validation passes and the commit is made.
 
-Never commit `plan.md`, `HANDOFF.md`, `Priority Ladder.md`, or scratch/review markdown files unless the user explicitly asks to include them. Do not commit a unit with failing validation unless the user explicitly overrides.
+Never commit `plan.md`, `decisions.md`, or another scratch/review markdown file unless the user explicitly asks to include them. Do not commit a unit with failing validation unless the user explicitly overrides.
 
 ### Autopilot delivery
 
@@ -82,6 +82,8 @@ After the final plan unit is validated and committed:
 5. If `pr-actical` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that draft-PR delivery requires that skill.
 
 The publication phase is part of autopilot's normal completion target; do not request a second confirmation before an ordinary push or draft-PR operation. Hand holding mode does not inherit this authorization and must only transition to `pr-actical` if the user requested to.
+
+In hand holding mode, the final report after the plan is complete is the implementation handoff. Do not create per-unit report artifacts. If the user wants behavioral validation, they may invoke `/gauntlet`; if they want publication, they may invoke `/pr-actical` in the same session or later from the same branch. The final report should give those next skills the changed files, validation already run, remaining risks, and the intended next action.
 
 ## Validation
 

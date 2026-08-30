@@ -13,8 +13,10 @@ Use this skill to pressure-test a plan or design until the important decisions a
 - Include your recommended answer with each question.
 - Explain briefly why that answer is your recommendation and what decision it unlocks.
 - Prefer concrete trade-offs over broad brainstorming.
-- Do not edit files, implement changes, create commits, or produce a full implementation plan unless the user explicitly changes the task.
-- When the decision tree is resolved, close with either a handoff for `/blueprint` or an update to an existing `plan.md` or plan artifact if the user has asked for an artifact update.
+- Do not edit source files, implement changes, create commits, or produce a full implementation plan. A local `decisions.md` artifact is permitted at closeout when the grilling result needs to persist and no `plan.md` exists.
+- When the decision tree is resolved, apply the decisions to the next planning step instead of merely repeating them in chat.
+- If an existing `plan.md` is in scope, identify the sections and tasks that the decisions change. Update the plan every time there is an agreement or a decision confidently made; respect its existing structure, task IDs, and unrelated content.
+- If no `plan.md` exists and the grilling result will be used later, create a local `decisions.md` artifact containing only the resolved decisions, assumptions, open questions, risks, and recommended next step. Keep it untracked by default and do not turn it into an implementation plan.
 - If the answer can be discovered from the codebase, inspect the codebase instead of asking the user.
 - If the user has supplied a document, plan, issue, or design notes, use that artifact as the source of truth.
 
@@ -56,19 +58,34 @@ When the plan is clear enough to act on, stop grilling and summarize:
 - Risks or unknowns that remain.
 - The recommended next step.
 
-If no plan artifact exists, write a compact handoff that can be passed to a planning step:
+If an existing `plan.md` is being updated, state which decisions were applied and which sections or task IDs were affected.
+
+If no plan artifact exists, create `decisions.md` with this compact structure:
 
 ```markdown
-Use /blueprint to turn this into a plan.md.
+# Grilling Decisions
+
+> Status: Resolved | Needs follow-up
+> Updated: YYYY-MM-DD
+
+## Context
+
+{{Short description of the problem or design being pressure-tested.}}
 
 Confirmed decisions:
 - {{decision}}
 
-Open assumptions:
+Assumptions:
 - {{assumption}}
+
+Open questions:
+- {{question}}
 
 Risks and checks:
 - {{risk_or_check}}
+
+Recommended next step:
+- Use `/blueprint`, `/assembly`, or another explicitly named next skill.
 ```
 
-If an existing `plan.md` or plan artifact exists and the user wants it updated, update only the sections affected by the grilling session. Preserve the artifact's existing structure, task IDs, and unrelated content.
+If an existing `plan.md` or plan artifact exists and the user makes a decision that updates it, update only the sections affected by the grilling session. Preserve the artifact's existing structure, task IDs, and unrelated content.

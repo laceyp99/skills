@@ -42,7 +42,7 @@ You may update plan markdown files only for checkbox/status tracking and date en
 
 ## Delegated implementation
 
-Assembly may delegate a bounded plan unit to a configured `worker` role when the unit has clear ownership and delegation will keep implementation detail out of the primary context.
+Delegate a bounded plan unit when it has clear ownership and doing so will isolate substantial implementation context or enable safe, disjoint work.
 
 Give the worker:
 - one concrete responsibility

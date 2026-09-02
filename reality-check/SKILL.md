@@ -51,7 +51,7 @@ If reviewing staged, unstaged, or named files instead of a branch range, inspect
 
 ## Delegated repository investigation
 
-When validating a suspected finding requires substantial codebase exploration beyond the diff, Reality Check may delegate a focused read-only question to a configured `explorer` role.
+Delegate a focused read-only investigation when a suspected high-impact finding requires tracing materially beyond the diff.
 
 Suitable questions include:
 - tracing callers

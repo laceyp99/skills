@@ -36,7 +36,7 @@ Never assume the base branch when it can be determined from PR metadata, remote 
 
 ## Delegated validation discovery
 
-When understanding the patch would otherwise load substantial repository context into the primary conversation, Gauntlet may delegate a focused read-only discovery question to a configured `explorer` role.
+Delegate validation discovery when mapping the patch to tests or environment-sensitive surfaces requires substantial repository exploration.
 
 Useful questions include:
 - locating project validation commands

@@ -13,7 +13,8 @@ Create one `plan.md`-style Markdown artifact that a human can review and a codin
 
 Use this skill when the expected output is a planning artifact. If the user is still trying to understand whether an issue is real, where a bug lives, or which solution path is right, use `prelude` before writing a plan. If the user asks to implement an existing plan, use `assembly`. If the user asks for a code review, use `reality-check`.
 
-If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Unknowns to Resolve` and make them early tasks or stop conditions.
+If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Unknowns to Resolve` and make them early tasks or stop conditions. For a large or unfamiliar repository, delegate one focused read-only explorer task when confirming architecture, ownership boundaries, or validation commands would otherwise consume substantial planning context. The primary agent must write and reconcile the final plan.
+
 
 ## Core Contract
 

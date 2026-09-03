@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML Communication"
+  short_description: "Create readable internal HTML docs"
+  default_prompt: "Create a clear, self-contained HTML communication artifact for this internal material."

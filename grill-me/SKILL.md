@@ -1,6 +1,9 @@
 ---
 name: grill-me
-description: Stress-test a plan, proposal, architecture, or technical design by interviewing the user one decision at a time. Use when the user asks to be grilled, wants a plan challenged, needs hidden assumptions exposed, wants design trade-offs walked branch by branch, or asks for relentless questioning before implementation.
+description: >-
+  Use when the user asks to stress-test a plan, proposal, architecture, or technical design through one decision at a time. 
+  Trigger phrases include "grill me", "narrow down this plan", and "ask me the hard questions before implementation".
+  Do not use for directly creating or executing a plan, investigating a bug, or implementing the decided changes.
 ---
 
 # Grill Me

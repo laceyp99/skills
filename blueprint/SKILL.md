@@ -1,6 +1,12 @@
 ---
 name: blueprint
-description: Create GitHub-safe and VS Code-safe visual coding project plans in a single plan.md file. Use when asked to plan a coding project, prepare work for a code agent, turn an understood issue or feature request into an executable implementation plan, or make planning notes visually readable without MDX. Do not use for read-only root-cause investigation before the problem is understood; use prelude first. Do not use to execute an existing plan; use assembly.
+description: >-
+  Use when the user asks to create an executable coding plan or plan.md from
+  an understood issue, feature request, or design. Trigger phrases include
+  "make an implementation plan", "write plan.md", "prepare this for a code
+  agent", "break this feature into tasks", and "turn these notes into a
+  plan". Do not use for investigating an unchosen problem (prelude), executing
+  an existing plan (assembly), or reviewing a code change (reality-check).
 ---
 
 # Blueprint

@@ -1,6 +1,9 @@
 ---
 name: prelude
-description: Investigate and explain GitHub issues, repo-connected bugs, and user-story issues before an action is chosen. Use when the user asks to “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use when the request already chooses an action, including “implement,” “fix,” “make a branch,” “commit,” “push,” or “open a PR”; those tasks should inspect the relevant issue and code without producing Prelude’s full pre-investigation report. Do not use for making code changes or writing an executable plan.md; use blueprint for plan artifacts after the problem is understood.
+description: >-
+  Use when the user asks to investigate and explain a GitHub issue, repo connected bug, or user story before choosing an action. 
+  Trigger phrases include "understand this issue", "find the issue", "what's happening here", and "compare the tradeoffs". 
+  Do not use when the user already asks to implement, fix, branch, commit, push, or open a PR; use blueprint for an executable plan after the problem is understood.
 ---
 
 # Prelude

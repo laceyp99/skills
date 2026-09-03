@@ -1,6 +1,9 @@
 ---
 name: gauntlet
-description: Establish behavioral confidence in a patch after or alongside code review by running read-only project checks and guiding the user through risk-based manual testing. Use when asked to prove that changed behavior actually works beyond lint and unit tests, especially for UI, devices, interactions, integrations, persistence, or environment-sensitive flows. Maintains a local review.md evidence record and reports observed, unverified, failed, and blocked behavior; it is not a static code-findings review.
+description: >-
+  Use when the user asks to validate that a patch works beyond lint and unit tests through read-only checks and risk-based manual testing. 
+  Trigger phrases include "prove this works", "walk me through manual testing", and "help me check this". 
+  Do not use for static code review findings (reality-check), implementing fixes, or ordinary test execution without behavioral validation.
 ---
 
 # Gauntlet

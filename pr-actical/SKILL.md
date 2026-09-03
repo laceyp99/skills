@@ -1,6 +1,9 @@
 ---
 name: pr-actical
-description: create or update github draft pull requests from the current ready branch using git and the github cli. use when the user wants to push the current non-default branch, create a draft pr, update an existing draft pr, or add an update comment to an already published pr. inspect branch state, commits, diff, ./plan.md, pr templates, tests, and existing prs. assume invocation authorizes normal push and gh pr create/edit/comment operations, but refuse on unsafe states such as default branches, staged changes, closed prs, missing gh auth, unclear base branch, non-fast-forward push needs, or required sync unless explicitly requested.
+description: >-
+  Use when the user asks to push the current ready branch or create, update, or comment on a GitHub draft pull request.
+  Trigger phrases include "draft a PR", "push this branch and make a PR", "update the PR", and "add a comment to this PR". 
+  Do not use for writing or fixing code, executing a plan (assembly), or reviewing a change without a PR publication task (reality-check).
 ---
 
 # pr-actical

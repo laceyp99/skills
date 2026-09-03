@@ -1,6 +1,9 @@
 ---
 name: html-communication
-description: Create readable local HTML communication artifacts when the user asks for internal reports, comparisons, summaries, and insights. Do not use for planning features, patches, or refactors; use /blueprint for that.
+description: >-
+  Use when the user asks for a readable local HTML communication artifact such as an internal report, comparison, summary, or insight brief. 
+  Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report". 
+  Do not use for planning features, patches, or refactors (blueprint), or for ordinary prose that does not need an HTML artifact.
 ---
 
 # HTML Communication

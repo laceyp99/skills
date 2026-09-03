@@ -1,6 +1,9 @@
 ---
 name: reality-check
-description: Find concrete engineering problems in a PR, branch, or commit range by analyzing the code diff and repository context. Use for static code review, review comments, unresolved PR threads, and CI-aware analysis focused on correctness, maintainability, security, data loss, edge cases, unnecessary complexity, and risk-driven test gaps. Produces prioritized code findings and recommendations; it does not run an interactive human-testing session or maintain a behavioral validation record.
+description: >-
+  Use when the user asks for a static code review of a PR, branch, or unresolved review thread. 
+  Trigger phrases include "review this PR", "find any bugs", and "leave review comments". 
+  Do not use for interactive behavioral testing or manual validation (gauntlet), investigating a reported issue (prelude), or implementing fixes.
 ---
 
 # Reality Check

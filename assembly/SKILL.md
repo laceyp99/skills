@@ -1,6 +1,9 @@
 ---
 name: assembly
-description: Execute a local plan.md, commit plan, phase plan, or step-by-step implementation plan in controlled units. Use when the user asks to read or implement a local plan, walk through a commit plan one unit at a time, implement changes phase by phase, validate after each unit, make commits from a plan, leave planning artifacts uncommitted, continue from a previous plan unit, or autonomously deliver completed work as a GitHub draft pull request.
+description: >-
+  Use when the user asks to execute an existing plan.md file, phase plan from somewhere else, or agreed implementation plan within conversational context.
+  Trigger phrases include "implement this", "work through this", "continue from the previous phase", "commit out this plan", and any mention of "hand-holding mode" or "autopilot mode".
+  Do not use for investigating an unchosen issue (prelude) creating a new plan (blueprint), or publishing a draft pull request without plan execution (pr-actical).
 ---
 
 # Assembly

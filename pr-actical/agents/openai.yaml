@@ -1,6 +1,6 @@
 interface:
-  display_name: "pr-actical"
-  short_description: "Push a branch and create or update a GitHub draft PR."
+  display_name: "PR-actical"
+  short_description: "Push a branch and create or update a GitHub draft PR"
   default_prompt: "Use $pr-actical to push this ready branch and create or update a GitHub draft PR safely."
 
 policy:

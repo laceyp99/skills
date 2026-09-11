@@ -2,7 +2,7 @@
 name: assembly
 description: >-
   Use when the user asks to execute an existing plan.md file, phase plan from somewhere else, or agreed implementation plan within conversational context.
-  Trigger phrases include "implement this", "work through this", "continue from the previous phase", "commit out this plan", and any mention of "hand-holding mode" or "autopilot mode".
+  Trigger phrases include "implement this", "work through this", "continue from the previous phase", "commit out this plan", and any mention of "hand holding mode" or "autopilot mode".
   Do not use for investigating an unchosen issue (prelude) creating a new plan (blueprint), or publishing a draft pull request without plan execution (pr-actical).
 ---
 
@@ -30,7 +30,7 @@ If `plan.md` is missing, ensure you have enough conversational context to change
 
 Use the user's current request to choose the mode.
 
-- **Hand Holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
+- **Hand holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
 - **Autopilot mode**: Use only when the user explicitly asks the agent to make commits, walk the commit plan autonomously, or run in autopilot. Complete the plan, commit its units, then use the `pr-actical` workflow to push the branch and create or update a GitHub draft pull request for the user's final pass.
 
 Treat plan commit entries as logical work boundaries in both modes. Do not run `git commit` in hand holding mode, even if the plan contains commit messages; just pass those onto the user.

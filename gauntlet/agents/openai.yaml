@@ -1,10 +1,7 @@
 interface:
-  display_name: Gauntlet
-  short_description: Prove patch behavior with guided human testing
+  display_name: "Gauntlet"
+  short_description: "Prove patch behavior with guided human testing"
+  default_prompt: "Use $gauntlet to establish that the changes works through automated checks and guided human testing."
+
 policy:
-  products:
-  - chatgpt
-  - codex
-  - api
-  - atlas
   allow_implicit_invocation: true

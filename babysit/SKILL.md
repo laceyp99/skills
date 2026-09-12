@@ -34,10 +34,11 @@ force-pushes, rebases, or rewriting pushed history.
 - Stop if the current branch is `main`, `master`, the repository default branch,
   or cannot be determined; if the base branch cannot be determined; if staged
   changes exist; if the PR is closed; or if the base changes unexpectedly.
-- Stop when a failure cannot be confidently fixed because it is suspected to be
-  infrastructure/flakiness, requires secrets or an environment-specific setup,
-  or has an unclear cause. One failed job rerun may be used to confirm suspected
-  flakiness and does not count as a fix attempt.
+- Stop when a failure cannot be confidently fixed because it is caused by
+  infrastructure, a runner or dependency outage, suspected flakiness, required
+  secrets, an environment-specific setup, or an unclear cause. Do not patch
+  unrelated flaky tests or CI infrastructure. One failed job rerun may be used
+  to confirm suspected flakiness and does not count as a fix attempt.
 - Stop after three failed check-watch cycles. A cycle is failure → fix → push →
   re-watch. Do not push blind variations when the same failure returns unchanged.
 - Ignore unrelated unstaged or untracked files, but mention them in the final
@@ -47,6 +48,8 @@ force-pushes, rebases, or rewriting pushed history.
   them. Stop if any is already in the outgoing diff and ask the user to remove it.
 - Do not manage labels, reviewers, assignees, projects, milestones, or other PR
   metadata beyond the title, body, and incremental comments needed here.
+- Before every push, verify the current branch, PR head, intended diff, and
+  working-tree status. Stage files by name; never stage all changes blindly.
 
 ## Workflow
 
@@ -115,21 +118,36 @@ Also inspect:
 gh pr view <number> --json reviews,comments,statusCheckRollup
 ```
 
-Treat blocking automated review findings and comments visible when checks fail
-as additional work after the failed-check diagnosis. When all checks pass, wait
-up to three minutes for new automated comments. Resolve applicable blocking
-automated comments that appear during that window, then re-run the relevant
-checks if needed. Do not wait for human approvals or non-blocking comments.
+Act only on published comments and submitted reviews. Ignore pending or
+unpublished review comments until they are published. Check whether each
+comment applies to the current PR `HEAD`; treat comments tied to an older head
+as stale unless the underlying concern still exists.
+
+Checks are first-order: diagnose and fix failed checks before addressing
+comments. Never fix a comment blindly. Classify each published automated
+comment as valid, invalid, stale, already addressed, or unclear. Fix valid
+findings; explain invalid findings without changing code; verify stale findings
+against the current code; and resolve each handled thread where GitHub permits.
+Stop for unclear findings.
+
+When all checks pass and the PR head remains unchanged, wait up to three minutes
+for newly published automated comments. Resolve applicable blocking automated
+comments that appear during that window, then re-run relevant checks if needed.
+Any push or rerun restarts the checks-first loop and begins a fresh three-minute
+post-green window. Do not wait for human approvals or non-blocking comments.
 
 ### 4. Fix loop
 
 For each failed check or applicable blocking automated finding:
 
 1. Inspect the actual failure and logs, not only the job name.
-2. Diagnose locally and make the smallest correct fix.
-3. Commit with a focused message and push normally.
-4. Add a brief PR comment describing the failure and corrective commit.
-5. Re-watch the same PR. Count each failure → fix → push → re-watch as one
+2. Reproduce the failing check locally when possible, then diagnose the root
+   cause and make the smallest correct fix.
+3. Re-run the failing command locally until it passes, when possible.
+4. Verify the current branch, PR head, working tree, and intended named-file
+   diff; then commit with a focused message and push normally.
+5. Add a brief PR comment describing the failure and corrective commit.
+6. Re-watch the same PR. Count each failure → fix → push → re-watch as one
    failed cycle, up to the three-cycle limit.
 
 ### 5. Green state

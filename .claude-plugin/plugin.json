@@ -2,12 +2,13 @@
   "name": "laceyp99-skills",
   "skills": [
     "./assembly",
+    "./babysit",
+    "./blueprint",
     "./gauntlet",
     "./grill-me",
+    "./html-communication",
     "./pr-actical",
     "./prelude",
-    "./reality-check",
-    "./blueprint",
-    "./html-communication"
+    "./reality-check"
   ]
 }

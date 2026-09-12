@@ -44,6 +44,7 @@ npx skills@latest add laceyp99/skills --list
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
 | `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
 | `html-communication` | Create readable local HTML communication artifacts. | Use for internal reports, comparisons, summaries, and insight briefs; not for planning artifacts or ordinary prose. |
+| `babysit` | Post a PR and watch it until checks are green, pushing fix commits if they fail. | Inspired by Theo Browne's "babysit" skill/prompt style. Caps the fix loop at 3 attempts and never force-pushes. |
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 

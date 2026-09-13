@@ -1,0 +1,7 @@
+interface:
+  display_name: "Babysit"
+  short_description: "Watch PR verification and fix checks to catch immediate feedback."
+  default_prompt: "Use $Babysit to complete this work and report back with a green PR state."
+
+policy:
+  allow_implicit_invocation: true

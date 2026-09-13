@@ -12,7 +12,7 @@ description: >-
 
 Use this skill to help the user understand a GitHub issue, bug report, or user story before choosing an action. Act like a read-only investigation mode with a strong emphasis on evidence, concept correction, and solution selection.
 
-Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action—such as “implement,” “fix,” “make a branch,” “commit,” “push,” or “open a PR.” The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
+Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
 Do not edit files, stage changes, commit, push, or use write-oriented repository operations. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
 

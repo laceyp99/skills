@@ -45,6 +45,7 @@ npx skills@latest add laceyp99/skills --list
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `pr-actical` | Push a ready branch and create or update a GitHub draft PR. | Uses local `git` and `gh`; intentionally keeps PRs as drafts and avoids risky operations by default. |
 | `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
+| `skill-crafter` | Draft or edit a skill for optimal agent instruction. | Use for prompt engineering a skill with the focus of concise detail and effectiveness. |
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 

@@ -1,3 +1,7 @@
 interface:
   display_name: "Skill Crafter"
   short_description: "Create well-communicated agent skills"
+  default_prompt: "Use $skill-crafter to draft or edit a skill prioritized on concise communication."
+
+policy:
+  allow_implicit_invocation: true

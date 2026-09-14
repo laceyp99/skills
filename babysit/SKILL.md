@@ -5,8 +5,8 @@ description: >-
   verify, or babysit a pull request. Publish new PRs ready for review by
   default, watch CI and clearly identified automated review agents, and make
   bounded focused fixes when needed. Trigger phrases include "create a PR",
-  "post the PR", "get the checks green", and "babysit this PR". Use explicit
-  draft-only or watch-only behavior when the user requests it. Do not use for
+  "post the PR", "get the checks green", and "babysit this PR". Use watch-only
+  behavior when the user requests it. Do not use for
   static code review without a PR workflow (reality-check), behavioral
   validation without publication (gauntlet), or plan execution (assembly).
 ---
@@ -24,14 +24,12 @@ Choose the narrowest mode that satisfies the request:
 
 - **Publish and babysit (default):** create or update the PR, mark it ready for
   review, watch verification, and repair valid blocking automated findings.
-- **Draft-only:** create or update a draft PR and stop before ready-for-review
-  and watch/fix behavior. Use only when the user explicitly asks for a draft.
 - **Watch-only:** inspect an existing PR and report checks and automated
   findings without publishing, committing, pushing, or resolving threads.
-- **Adoption:** continue an existing PR's watch/fix loop when the user asks to
-  get it green or fix its automated findings.
 
-Do not silently turn a draft-only or watch-only request into a broader mode.
+The default publication target is ready-for-review. Honor an explicit request
+to leave a PR as a draft, but do not make draft status a separate operating
+mode. Do not silently turn a watch-only request into a broader mode.
 
 ## Stop conditions and safety
 
@@ -46,8 +44,9 @@ Stop and report the exact state instead of guessing when:
   repository or writable push target is ambiguous.
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
-- Three local repair attempts or three corrective pushes have been exhausted,
-  or a failure repeats without new evidence.
+- Three post-push repair cycles have been exhausted: a cycle is a corrective
+  push followed by its CI and automated-review results. Local diagnostics and
+  local check reruns do not count toward this limit.
 - A planning or review artifact (`plan.md`, `decisions.md`, `review.md`,
   `review-findings.md`, or similar) would enter the outgoing diff. Never stage,
   commit, or publish these artifacts.
@@ -97,27 +96,28 @@ templates, and incremental comments.
 Run the repository's documented or clearly inferable local checks before
 publication and after each repair. Report commands actually run; do not claim
 tests, approvals, screenshots, or CI results that were not observed. A local
-failure may be repaired only when its cause is clear, focused, and within the
-three-attempt repair budget.
+failure may be repaired whenever its cause is clear and the fix is focused.
+Local diagnostics are deliberately not limited by the post-push repair cycle
+cap.
 
-### 3. Publish or adopt the PR
+### 3. Publish or update the PR
 
 Use a temporary file for PR bodies and comments. Delete it after success;
 preserve and report its path on failure.
 
 - **No PR:** push the verified branch, create the PR ready for review, and
-  verify `isDraft=false` unless draft-only was explicitly requested.
+  verify `isDraft=false`, unless the user explicitly requested draft status.
 - **Existing draft:** push verified local commits, update the title/body to
   describe the full branch, then mark it ready with `gh pr ready` unless
-  draft-only was explicitly requested. Verify the resulting draft state.
+  the user explicitly requested that it remain a draft. Verify the resulting
+  draft state.
 - **Existing ready PR:** save its current head SHA, push only intended commits,
   and add an incremental comment when new commits were pushed.
 - **Watch-only:** do not publish or push; bind the supplied existing PR and
   continue to verification.
 
-The default publication target is ready-for-review. Do not require a second
-confirmation for ordinary push, PR creation/update, ready transition, or
-watching when this skill was explicitly invoked.
+Do not require a second confirmation for ordinary push, PR creation/update,
+ready transition, or watching when this skill was explicitly invoked.
 
 ### 4. Watch checks and automated findings
 
@@ -155,14 +155,16 @@ repair:
 1. Inspect the actual logs or finding and reproduce locally when possible.
 2. Make the smallest root-cause fix; do not bypass gates or patch unrelated
    infrastructure.
-3. Re-run relevant checks within the repair budget.
+3. Re-run relevant local checks as often as needed to diagnose the cause; these
+   reruns do not count toward the post-push repair-cycle limit.
 4. Recheck the branch, PR head, base, working tree, and staged diff.
 5. Create one focused commit, push it explicitly, verify the remote and PR
    heads, and comment briefly with the corrective commit.
 6. Restart watching at the new head.
 
-Each corrective push counts toward the three-push limit. Watch the third push,
-but never make a fourth. Watch-only and draft-only modes stop before repair.
+Each corrective push followed by its CI and automated-review results counts
+toward the three-cycle limit. Watch the third cycle, but never make a fourth.
+Watch-only stops before repair.
 
 ## Completion and handoff
 

@@ -95,7 +95,7 @@ After the final plan unit is validated and committed:
 
 1. Confirm there are no intended source, test, or documentation changes left uncommitted.
 2. Load and follow the complete `babysit` skill workflow. Do not duplicate or weaken its branch, authentication, synchronization, testing, push, pull-request, or verification safeguards.
-3. Publish the pull request ready for review and complete the bounded verification/watch loop. Use draft-only behavior only when the user explicitly requests it.
+3. Publish the pull request ready for review and complete the bounded verification/watch loop. Leave it as a draft only when the user explicitly requests that status.
 4. If `babysit` refuses because the repository is unsafe or not ready to publish, keep the completed local commits intact and report the exact blocker and safest next action.
 5. If `babysit` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that PR delivery requires that skill.
 

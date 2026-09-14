@@ -195,7 +195,7 @@ Ensure `review.md` contains:
 At completion, include a concise handoff in chat and in the final assessment. Failed validation or unclear intended behavior takes precedence: recommend `/assembly` for implementation changes or `/prelude` for renewed investigation. Otherwise:
 
 - If a PR exists and is marked ready for review, recommend `/reality-check`. If the PR is marked as a draft suggest the user mark it ready for review and lead into `/reality-check` as a next step.
-- If the PR is absent, recommend `/pr-actical`.
+  - If the PR is absent, recommend `/babysit`.
 
 Human validation must cover behavior that automated checks cannot establish, such as what a user sees, understands, and experiences; interaction flow, responsive behavior, accessibility perception, real integrations, persistence across reloads, and environment-specific behavior. Do not treat running tests as a substitute for that observation when the patch has a meaningful human-visible or environment-dependent surface.
 

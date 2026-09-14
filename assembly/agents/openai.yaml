@@ -1,6 +1,6 @@
 interface:
   display_name: "Assembly"
-  short_description: "Execute plans by hand or deliver a draft PR"
+  short_description: "Execute plans by hand or publish and verify a PR"
   default_prompt: "Use $assembly to execute the plan safely, choosing hand holding or autopilot delivery based on my request."
 
 policy:

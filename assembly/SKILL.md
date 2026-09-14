@@ -3,7 +3,7 @@ name: assembly
 description: >-
   Use when the user asks to execute an existing plan.md file, phase plan from somewhere else, or agreed implementation plan within conversational context.
   Trigger phrases include "implement this", "work through this", "continue from the previous phase", "commit out this plan", and any mention of "hand holding mode" or "autopilot mode".
-  Do not use for investigating an unchosen issue (prelude) creating a new plan (blueprint), or publishing a draft pull request without plan execution (pr-actical).
+  Do not use for investigating an unchosen issue (prelude), creating a new plan (blueprint), or publishing or babysitting a pull request without plan execution.
 ---
 
 # Assembly
@@ -31,11 +31,11 @@ If `plan.md` is missing, ensure you have enough conversational context to change
 Use the user's current request to choose the mode.
 
 - **Hand holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
-- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits, walk the commit plan autonomously, or run in autopilot. Complete the plan, commit its units, then use the `pr-actical` workflow to push the branch and create or update a GitHub draft pull request for the user's final pass.
+- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits, walk the commit plan autonomously, or run in autopilot. Complete the plan, commit its units, then use the `babysit` workflow to push the branch, publish the PR ready for review, and verify it.
 
 Treat plan commit entries as logical work boundaries in both modes. Do not run `git commit` in hand holding mode, even if the plan contains commit messages; just pass those onto the user.
 
-Selecting autopilot authorizes ordinary commits, a normal push of the current non-default branch, and creation or update of a draft pull request. It does not authorize publishing the PR as ready for review, force-pushing, rewriting history, resolving synchronization conflicts, or bypassing `pr-actical` safety checks.
+Selecting autopilot authorizes ordinary commits, a normal push of the current non-default branch, publication of a ready-for-review pull request, and verification through `babysit`. It does not authorize force-pushing, rewriting history, or resolving synchronization conflicts.
 
 ## Build the Checklist
 
@@ -94,14 +94,14 @@ Never stage or commit `plan.md`, `decisions.md`, or another scratch/review markd
 After the final plan unit is validated and committed:
 
 1. Confirm there are no intended source, test, or documentation changes left uncommitted.
-2. Load and follow the complete `pr-actical` skill workflow. Do not duplicate or weaken its branch, authentication, synchronization, testing, push, or pull-request safeguards.
-3. Create or update a draft pull request and leave it as a draft for the user's final pass. Never mark it ready for review.
-4. If `pr-actical` refuses because the repository is unsafe or not ready to publish, keep the completed local commits intact and report the exact blocker and safest next action.
-5. If `pr-actical` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that draft-PR delivery requires that skill.
+2. Load and follow the complete `babysit` skill workflow. Do not duplicate or weaken its branch, authentication, synchronization, testing, push, pull-request, or verification safeguards.
+3. Publish the pull request ready for review and complete the bounded verification/watch loop. Use draft-only behavior only when the user explicitly requests it.
+4. If `babysit` refuses because the repository is unsafe or not ready to publish, keep the completed local commits intact and report the exact blocker and safest next action.
+5. If `babysit` is unavailable, finish the local implementation and commits, stop before pushing, and tell the user that PR delivery requires that skill.
 
-The publication phase is part of autopilot's normal completion target; do not request a second confirmation before an ordinary push or draft-PR operation. Hand holding mode does not inherit this authorization and must only transition to `pr-actical` if the user requested to.
+The publication and verification phase is part of autopilot's normal completion target; do not request a second confirmation before an ordinary push, ready transition, or watch operation. Hand holding mode does not inherit this authorization and must only transition to `babysit` if the user requested publication.
 
-In hand holding mode, the final report after the plan is complete is the implementation handoff. Do not create per-unit report artifacts. If the user wants behavioral validation, they may invoke `/gauntlet`; if they want publication, they may invoke `/pr-actical` in the same session or later from the same branch. The final report should give those next skills the changed files, validation already run, remaining risks, and the intended next action.
+In hand holding mode, the final report after the plan is complete is the implementation handoff. Do not create per-unit report artifacts. If the user wants behavioral validation, they may invoke `/gauntlet`; if they want publication, they may invoke `/babysit` in the same session or later from the same branch. The final report should give those next skills the changed files, validation already run, remaining risks, and the intended next action.
 
 ## Validation
 

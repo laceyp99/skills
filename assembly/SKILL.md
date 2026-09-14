@@ -129,5 +129,5 @@ End with a concise status report:
 - Files changed.
 - Validation commands run and whether they passed.
 - Planning artifacts or other files intentionally left uncommitted.
-- Draft PR URL and base/head branches, when autopilot delivery succeeds.
+- PR URL and base/head branches, when autopilot delivery succeeds.
 - Remaining risks, blockers, or manual checks.

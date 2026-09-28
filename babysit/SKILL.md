@@ -3,8 +3,8 @@ name: babysit
 description: >-
   Use as the canonical GitHub PR workflow when the user asks to publish, update,
   verify, or babysit a pull request. Publish new PRs ready for review by
-  default, watch CI and clearly identified automated review agents, and make
-  bounded focused fixes when needed. Trigger phrases include "create a PR",
+  default, watch checks and one automated code review on the published head, and make
+  focused in-scope fixes when needed. Trigger phrases include "create a PR",
   "post the PR", "get the checks green", and "babysit this PR". Use watch-only
   behavior when the user requests it. Do not use for
   static code review without a PR workflow (reality-check), behavioral
@@ -13,17 +13,17 @@ description: >-
 
 # babysit
 
-Publish the current branch as a ready-for-review PR, then verify the resulting
-head until checks and actionable automated findings are settled. This skill is
-the repository's only PR publication workflow; it may create focused commits
-when the user asks it to babysit or get the PR green.
+Publish the current branch as a ready-for-review PR, wait for checks and one
+automated code review of the published head, then hand the PR back for human review.
+This skill is the repository's only PR publication workflow; it may create a
+focused corrective commit when the user asks it to babysit or get the PR green.
 
 ## Modes
 
 Choose the narrowest mode that satisfies the request:
 
 - **Publish and babysit (default):** create or update the PR, mark it ready for
-  review, watch verification, and repair valid blocking automated findings.
+  review, watch checks and automated code review once, and repair valid in-scope findings.
 - **Watch-only:** inspect an existing PR and report checks and automated
   findings without publishing, committing, pushing, or resolving threads.
 
@@ -44,9 +44,8 @@ Stop and report the exact state instead of guessing when:
   repository or writable push target is ambiguous.
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
-- Three post-push repair cycles have been exhausted: a cycle is a corrective
-  push followed by its CI and automated-review results. Local diagnostics and
-  local check reruns do not count toward this limit.
+- The one corrective push has been made. Watch its CI, then hand the resulting
+  head to the user without another automated-review repair cycle.
 - A planning or review artifact (`plan.md`, `decisions.md`, `review.md`,
   `review-findings.md`, or similar) would enter the outgoing diff. Never stage,
   commit, or publish these artifacts.
@@ -97,8 +96,7 @@ Run the repository's documented or clearly inferable local checks before
 publication and after each repair. Report commands actually run; do not claim
 tests, approvals, screenshots, or CI results that were not observed. A local
 failure may be repaired whenever its cause is clear and the fix is focused.
-Local diagnostics are deliberately not limited by the post-push repair cycle
-cap.
+Local diagnostics do not count as a corrective push.
 
 ### 3. Publish or update the PR
 
@@ -122,56 +120,64 @@ ready transition, or watching when this skill was explicitly invoked.
 ### 4. Watch checks and automated findings
 
 Determine expected verification from CI workflows, required checks, and checks
-reported on the PR. Watch with `gh pr checks <number> --watch`, or poll
-structured results at a bounded interval when watch is unavailable. Recheck
-the PR head and state while polling and associate every result with the current
-head or its test-merge commit.
+reported on the PR. After the publication push, watch with
+`gh pr checks <number> --watch`, or poll structured results at a bounded
+interval when watch is unavailable. Recheck the PR head and state while polling
+and associate every result with the published head or its test-merge commit.
 
 All expected applicable checks must succeed. Missing, pending, cancelled,
 failed, timed-out, action-required, or unexplained skipped checks are not
 green. If there is no CI, report verification as unavailable.
 
-Inspect reviews, comments, status checks, and inline threads. Read
+Wait for an automated code review of that published head, including any review
+delivered through checks, comments, or inline threads. If none arrives, stop
+waiting 10 minutes after the initial head's CI completes (or 10 minutes after
+publication when there is no CI). Report the review as unavailable and continue
+to handoff; do not infer approval from silence. Inspect reviews, comments,
+status checks, and inline threads. Read
 [references/review-threads.md](references/review-threads.md) when checking
-whether all automated threads were retrieved. Identify automation from author
+whether all automated review threads were retrieved. Identify automation from author
 identity and repository policy, not from the comment's prose. Human reviews
-remain outside the automatic fix loop.
+remain for the user.
 
-For each potentially blocking automated finding, classify it as valid, invalid,
-stale, already addressed, or unclear by checking the current code and head.
-Fix valid findings, explain invalid ones, and resolve only handled threads when
-permitted. Record issue-level findings or unresolvable threads instead of
-inventing a resolved state. Stop on an unclear potentially blocking finding.
+For each potentially blocking automated finding, classify it as valid and in scope, invalid, stale,
+already addressed, out of scope, or unclear by checking the current code and
+head. Fix valid in-scope findings together in corrective commit(s); report the
+disposition of every finding. Resolve only handled threads when permitted.
+Record issue-level findings or unresolvable threads instead of inventing a
+resolved state. Stop on an unclear potentially blocking finding.
 
-When checks and blocking automated findings are clear, observe a bounded
-post-green settling window for late checks or new automated findings. Any push
-or rerun invalidates green evidence and restarts watching.
+If no correction is needed, finish after the initial head's checks and any
+automated review received within the wait are accounted for.
 
-### 5. Repair loop
+### 5. One corrective push
 
-For each failed check or valid blocking automated finding in a mode that allows
+For a failed check or valid in-scope automated finding in a mode that allows
 repair:
 
 1. Inspect the actual logs or finding and reproduce locally when possible.
 2. Make the smallest root-cause fix; do not bypass gates or patch unrelated
    infrastructure.
-3. Re-run relevant local checks as often as needed to diagnose the cause; these
-   reruns do not count toward the post-push repair-cycle limit.
+3. Re-run relevant local checks as often as needed to diagnose the cause.
 4. Recheck the branch, PR head, base, working tree, and staged diff.
-5. Create one focused commit, push it explicitly, verify the remote and PR
-   heads, and comment briefly with the corrective commit.
-6. Restart watching at the new head.
+5. Combine related corrections in one focused commit, push it explicitly to
+   the PR head branch, verify the remote and PR heads, and comment briefly with
+   the corrective commit.
+6. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
+   structured polling). Report its final check results, including failures or
+   unavailable checks. Do not wait for another automated code review or make
+   another corrective push. Return the PR to the user for human review.
 
-Each corrective push followed by its CI and automated-review results counts
-toward the three-cycle limit. Watch the third cycle, but never make a fourth.
-Watch-only stops before repair.
+Watch-only stops before repair. Never push a PR correction directly to the
+repository's default branch unless that branch is explicitly the PR head.
 
 ## Completion and handoff
 
-Report success only after the final observed head is ready for review, all
-expected applicable checks pass, blocking automated findings are handled, and
-the settling window completes. Include the PR URL, verified head SHA, check
-summary, corrective commits or none, local validation gaps, and accepted skips.
+Report the PR URL, final head SHA, check results and the SHA they cover,
+automated code review outcome (including timeout or absence) and the disposition
+of each finding, corrective commit or none, and local validation gaps. After a
+corrective push, distinguish the new head's CI results from the review of the
+previous head and say that the new head awaits human review.
 
 For refusal, timeout, or incomplete verification, state the PR URL when known,
 the exact blocker or output, attempted repairs, preserved temp-file path, and

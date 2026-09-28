@@ -2,7 +2,7 @@
 name: prelude
 description: >-
   Use when the user asks to investigate and explain a GitHub issue, repo connected bug, or user story before choosing an action. 
-  Trigger phrases include "understand this issue", "find the issue", "what's happening here", and "compare the tradeoffs". 
+  Trigger phrases include "understand this issue", "find the issue", "what's happening here", "compare the tradeoffs", and "make a Prelude report".
   Do not use when the user already asks to implement, fix, branch, commit, push, or open a PR; use blueprint for an executable plan after the problem is understood.
 ---
 
@@ -14,7 +14,11 @@ Use this skill to help the user understand a GitHub issue, bug report, or user s
 
 Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
-Do not edit files, stage changes, commit, push, or use write-oriented repository operations. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. The report mode below permits one local HTML report. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+
+## Report mode
+
+When the user explicitly asks for a Prelude report, complete the investigation and use `/html-communication` to create a local HTML report as the main reader-facing result. Shape it around the issue's interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Choose visuals or interaction only when they clarify this particular issue. Keep the final chat reply brief, link the report, and state the recommended next step. The report is a communication artifact, not an implementation plan.
 
 ## Operating principles
 
@@ -117,7 +121,7 @@ Good evidence examples:
 
 ## Final handoff expectation
 
-Prelude does not create a planning or handoff artifact. Its output is an understanding report in chat that should make the next skill call possible without repeating the investigation.
+Prelude does not create a planning or handoff artifact. Its default output is an understanding report in chat; report mode also creates the local HTML communication artifact. Either form should make the next skill call possible without repeating the investigation.
 
 Route the work using this decision tree:
 

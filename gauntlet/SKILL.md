@@ -2,7 +2,7 @@
 name: gauntlet
 description: >-
   Use when the user asks to validate that a patch works beyond lint and unit tests through read-only checks and risk-based manual testing. 
-  Trigger phrases include "prove this works", "walk me through manual testing", and "help me check this". 
+  Trigger phrases include "prove this works", "walk me through manual testing", "help me check this", and "make a Gauntlet report".
   Do not use for static code review findings (reality-check), implementing fixes, or ordinary test execution without behavioral validation.
 ---
 
@@ -12,10 +12,14 @@ Validate patches without becoming the patch author. Treat automated checks as th
 
 Maintain `review.md` at the repository root as the review source of truth. Keep it local and untracked by default. Read [references/review-template.md](references/review-template.md) before creating or restructuring it.
 
+## Report mode
+
+When the user explicitly asks for a Gauntlet report, complete the applicable validation path and use `/html-communication` to create a local HTML report as the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. In chat, link the report and briefly state the conclusion.
+
 ## Non-negotiable boundaries
 
 - Remain read-only with respect to the patch and committed project files. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
-- Permit writing only to `review.md` for this workflow. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
+- Permit writing only to `review.md`, plus the local HTML report when report mode is explicitly requested. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
 - Never run auto-fix or write-mode formatting commands. Prefer check-only forms.
 - Never install, upgrade, or change dependencies, lockfiles, migrations, generated code, or environment configuration without explicit user intent outside this review workflow.
 - Never change branches automatically. If the current worktree does not represent the requested branch/PR, explain the mismatch and ask the user to switch to the intended target.
@@ -199,4 +203,4 @@ At completion, include a concise handoff in chat and in the final assessment. Fa
 
 Human validation must cover behavior that automated checks cannot establish, such as what a user sees, understands, and experiences; interaction flow, responsive behavior, accessibility perception, real integrations, persistence across reloads, and environment-specific behavior. Do not treat running tests as a substitute for that observation when the patch has a meaningful human-visible or environment-dependent surface.
 
-In chat, summarize the current conclusion and point the user to `review.md`. Do not create PR comments or modify the repository unless the user separately asks for a different workflow.
+In chat, summarize the current conclusion and point the user to `review.md`, or to the HTML report in report mode. Do not create PR comments or modify the repository unless the user separately asks for a different workflow.

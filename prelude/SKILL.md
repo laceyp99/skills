@@ -99,6 +99,12 @@ The options phase should include:
 - A recommended path.
 - Questions for the user before implementation.
 
+## Checkpoint Interview
+
+After presenting the evidence and viable options and before the user commits to a path, invoke `checkpoint-quiz` with both question types: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context. Waive the interview on one explicit request.
+
+In report mode, the interview is delivered as the report's baked quiz through `/checkpoint-quiz` report mode instead of chat questions.
+
 ## Interaction style
 
 - Default to a concise response: recommendation first, then the strongest evidence, followed by only the open questions or trade-offs that matter.

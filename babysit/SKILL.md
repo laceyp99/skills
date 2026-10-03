@@ -129,8 +129,7 @@ automated review received within the wait are accounted for.
 
 ### 5. One corrective push
 
-For a failed check or valid in-scope automated finding in a mode that allows
-repair:
+For a failed check or valid in-scope automated finding:
 
 1. Inspect the actual logs or finding and reproduce locally when possible.
 2. Make the smallest root-cause fix; do not bypass gates or patch unrelated

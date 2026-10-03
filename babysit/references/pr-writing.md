@@ -113,5 +113,8 @@ body so its Merge danger section stays current.
 Preserve applicable template headings and leave checklist items unchecked unless
 directly verified. Remove placeholder instructions when replacing them with
 real content; do not invent issue links, screenshots, reviewers, approvals, or
-deployment notes. If `plan.md` exists, use it as intent context, not proof;
-the observed diff and command output win when they conflict.
+deployment notes. Unless the template already has an equivalent, add the
+Review weight line near the top, a diagram when the Mermaid diagram rules
+apply, and `## Merge danger` as the last section. If `plan.md` exists, use it
+as intent context, not proof; the observed diff and command output win when
+they conflict.

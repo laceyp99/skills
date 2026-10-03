@@ -1,8 +1,8 @@
 ---
 name: babysit
 description: >-
-  Use as the canonical GitHub PR workflow when the user asks to publish, update,
-  verify, or babysit a pull request. Trigger phrases include "create a PR",
+  Use as the canonical GitHub PR workflow when the user asks to publish,
+  update, or babysit a pull request. Trigger phrases include "create a PR",
   "post the PR", "get the checks green", and "babysit this PR".
 ---
 
@@ -22,7 +22,7 @@ Stop and report the exact state instead of guessing when:
 - The branch is default, detached, behind its base, diverged from its remote,
   conflicted, or the push is non-fast-forward. Never force-push, rebase, reset,
   amend pushed commits, or rewrite outgoing history.
-- The PR is closed or merged, its head changed unexpectedly, or the
+- The PR is closed or merged, its base or head changed unexpectedly, or the
   repository or writable push target is ambiguous.
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
@@ -51,12 +51,13 @@ gh auth status
 gh repo view --json defaultBranchRef,nameWithOwner,url
 ```
 
-Prefer a supplied PR number, if available/existing. Otherwise, select the unique open PR whose head matches the current branch. Record its repository, number, base/head
-branches, base/head SHAs, draft state, and push remote. Use explicit `--repo`
-and explicit Git refs; do not assume `origin` is both the base and writable
-head. For a new PR, choose the base from the user, clear tracking intent,
-repository configuration, or the GitHub default branch, in that order. Reject
-base=head.
+Prefer a supplied PR number, if available/existing. Otherwise, select the
+unique open PR whose head matches the current branch. Record its repository,
+number, base/head branches, base/head SHAs, draft state, and push remote. Use
+explicit `--repo` and explicit Git refs; do not assume `origin` is both the
+base and writable head. For a new PR, choose the base from the user, clear
+tracking intent, repository configuration, or the GitHub default branch, in
+that order. Reject base=head.
 
 Fetch the base and remote head into explicit tracking refs and verify that the
 local head is not behind the base and that the fetched remote head is an
@@ -138,7 +139,7 @@ For a failed check or valid in-scope automated finding:
 4. Recheck the branch, PR head, base, working tree, and staged diff.
 5. Implement related corrections in focused commit(s), push them explicitly to
    the PR head branch, verify the remote and PR heads, and comment briefly with
-   the corrective commit.
+   the corrective commit(s).
 6. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
    structured polling). Report its final check results, including failures or
    unavailable checks. Do not wait for another automated code review or make

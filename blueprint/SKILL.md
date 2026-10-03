@@ -45,6 +45,11 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 4. Draft the plan using the required section order.
 5. Add visuals only when they clarify execution or review.
 6. Run a final quality pass against the core contract and anti-patterns before returning the plan.
+7. Before the final quality pass, run the understanding checkpoint below. Waive it on one explicit request.
+
+## Understanding Checkpoint
+
+After drafting the plan and before the final quality pass, invoke `checkpoint-quiz` once with a comprehension gate over the plan. Source questions from the plan's riskiest decisions, phase stop conditions, and acceptance criteria: the 2-5 facts whose misunderstanding would most change execution behavior, such as which phase may touch a shared boundary or which tradeoff was accepted and why. Never quiz trivia such as file names, line numbers, or terminology. Comprehension answers are ephemeral; the gate produces no recording.
 
 ## Required Section Order
 

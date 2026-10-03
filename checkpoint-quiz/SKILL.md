@@ -1,9 +1,8 @@
 ---
 name: checkpoint-quiz
 description: >-
-  Use when blueprint, prelude, or reality-check reaches a verification checkpoint and the user's
-  understanding should be confirmed or a decision captured as short multiple-choice questions.
-  Trigger phrases include "quiz me", "check my understanding", and report-mode quiz sections.
+  Use when a verification checkpoint is reached and the user's understanding should be confirmed or a decision captured as short multiple-choice questions.
+  Trigger phrases include "quiz me", "test my understanding", and report-mode quiz sections.
   Do not use for open-ended decision exploration (grill-me).
 ---
 
@@ -16,13 +15,13 @@ Host skills own placement and question sourcing. This skill owns the mechanics.
 ## Question Types
 
 - **Comprehension questions** test understanding of facts whose misunderstanding would change downstream behavior. They have correct answers.
-- **Decision-capture questions** present real tradeoffs where the user's choice is what matters. They have no correct answer; never mark one.
+- **Decision-capture questions** present real tradeoffs where the user's choice is what matters. They have no correct answer; never mark one. Try giving multiple choice options, if possible.
 
 ## Delivery
 
 1. Ask 2-5 questions, one topic each, in a single group.
 2. Use the harness's ask-question tool with multiple-choice options when available.
-3. If that tool is unavailable, ask inline with lettered options (A/B/C/D) in plain text. Keep the format identical to the tool version.
+3. If that tool is unavailable, ask inline with lettered options (A/B/C/D) in markdown text. Keep the format identical to the tool version.
 4. Keep options short enough to read at a glance, and questions answerable from what was just presented without scrolling back through long prose.
 
 ## Comprehension Failure Path

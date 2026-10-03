@@ -111,6 +111,12 @@ Use an opinionated, pragmatic code-review stance:
 
 Check whether the changed code matches surrounding patterns, error handling, platform assumptions, validation boundaries, and test strategy. For user-facing behavior, inspect both implementation and tests.
 
+## Checkpoint Interview
+
+After findings are gathered and dispositions are proposed, and before finalizing the review record, invoke `checkpoint-quiz` with both question types: comprehension questions sourced from the highest-severity confirmed findings and their proposed dispositions, and decision-capture questions for dispositions the user must choose. Record confirmed decision-capture selections as dispositions in `review-findings.md`, or fold them into the final report and inline comments when no local file is used. Waive the interview on one explicit request.
+
+In report mode, the interview is delivered as the report's baked quiz through `/checkpoint-quiz` report mode instead of chat questions.
+
 ## Optional PR Commenting
 
 Only add GitHub PR comments when the user explicitly asks to comment on the PR.

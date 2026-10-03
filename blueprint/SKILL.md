@@ -49,7 +49,7 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 
 ## Understanding Checkpoint
 
-After drafting the plan and before the final quality pass, write a comprehension quiz section into the plan via `checkpoint-quiz`. Source questions from the plan's riskiest decisions, phase stop conditions, and acceptance criteria: the 2-5 facts whose misunderstanding would most change execution behavior, such as which phase may touch a shared boundary or which tradeoff was accepted and why. Never quiz trivia such as file names, line numbers, or terminology. Answers stay hidden inside reveal blocks; the user self-grades and nothing is recorded.
+After drafting the plan and before the final quality pass, write a comprehension quiz section into the plan via `checkpoint-quiz`. Place it at the very bottom of the plan, after every other section, so the user can skim the full plan and then test what they retained. Source questions from the plan's riskiest decisions, phase stop conditions, and acceptance criteria: the 2-5 facts whose misunderstanding would most change execution behavior, such as which phase may touch a shared boundary or which tradeoff was accepted and why. Never quiz trivia such as file names, line numbers, or terminology. Answers stay hidden inside reveal blocks; the user self-grades and nothing is recorded.
 
 ## Required Section Order
 

@@ -45,11 +45,11 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 4. Draft the plan using the required section order.
 5. Add visuals only when they clarify execution or review.
 6. Run a final quality pass against the core contract and anti-patterns before returning the plan.
-7. Before the final quality pass, run the understanding checkpoint below. Waive it on one explicit request.
+7. Before the final quality pass, write the understanding checkpoint quiz section into the plan as described below.
 
 ## Understanding Checkpoint
 
-After drafting the plan and before the final quality pass, invoke `checkpoint-quiz` once with a comprehension gate over the plan. Source questions from the plan's riskiest decisions, phase stop conditions, and acceptance criteria: the 2-5 facts whose misunderstanding would most change execution behavior, such as which phase may touch a shared boundary or which tradeoff was accepted and why. Never quiz trivia such as file names, line numbers, or terminology. Comprehension answers are ephemeral; the gate produces no recording.
+After drafting the plan and before the final quality pass, write a comprehension quiz section into the plan via `checkpoint-quiz`. Source questions from the plan's riskiest decisions, phase stop conditions, and acceptance criteria: the 2-5 facts whose misunderstanding would most change execution behavior, such as which phase may touch a shared boundary or which tradeoff was accepted and why. Never quiz trivia such as file names, line numbers, or terminology. Answers stay hidden inside reveal blocks; the user self-grades and nothing is recorded.
 
 ## Required Section Order
 
@@ -76,7 +76,7 @@ Use this order by default. Omit optional diagram subsections only when they do n
 - Add an optional `Implementation notes` aside only when a phase has useful constraints or context that do not belong in its tasks.
 - Under `Visual Overview`, include an architecture sketch, a sequence diagram, both, or neither. Omit visuals when they would be trivial or misleading; use architecture sketches for meaningful multi-part systems and sequence diagrams for meaningful runtime interactions.
 - Keep Mermaid labels short and free of long paths, backticks, quotes, braces, and punctuation-heavy text.
-- Use `<details>` blocks only for supporting context such as alternatives considered. Do not hide primary tasks, risks, acceptance criteria, or stop conditions in collapsibles.
+- Use `<details>` blocks only for supporting context such as alternatives considered, or for checkpoint quiz answers and explanations. Do not hide primary tasks, risks, acceptance criteria, or stop conditions in collapsibles.
 - Do not include a separate `Agent Handoff Prompt` section by default. Put execution guidance in the phase plan, stop conditions, and acceptance criteria.
 
 ## Reference Routing

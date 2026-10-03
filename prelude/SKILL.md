@@ -1,9 +1,9 @@
 ---
 name: prelude
 description: >-
-  Use when the user asks to investigate and explain a GitHub issue, repo connected bug, or user story before choosing an action. 
+  Use when the user asks to investigate and explain a GitHub issue, repo connected bug, or user story before choosing an action.
   Trigger phrases include "understand this issue", "find the issue", "what's happening here", "compare the tradeoffs", and "make a Prelude report".
-  Do not use when the user already asks to implement, fix, branch, commit, push, or open a PR; use blueprint for an executable plan after the problem is understood.
+  Do not use once the user has chosen an action; use blueprint to plan after the problem is understood.
 ---
 
 # Prelude

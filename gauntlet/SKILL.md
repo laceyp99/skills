@@ -1,9 +1,9 @@
 ---
 name: gauntlet
 description: >-
-  Use when the user asks to validate that a patch works beyond lint and unit tests through read-only checks and risk-based manual testing. 
-  Trigger phrases include "prove this works", "walk me through manual testing", "help me check this", and "make a Gauntlet report".
-  Do not use for static code review findings (reality-check), implementing fixes, or ordinary test execution without behavioral validation.
+  Use when the user asks to validate that a patch works beyond lint and unit tests through read-only checks and risk-based manual testing.
+  Trigger phrases include "prove this works", "walk me through manual testing", and "make a Gauntlet report".
+  Do not use for static code review findings (reality-check).
 ---
 
 # Gauntlet

@@ -1,9 +1,9 @@
 ---
 name: reality-check
 description: >-
-  Use when the user asks for a static code review of a PR, branch, or unresolved review thread. 
+  Use when the user asks for a static code review of a PR, branch, or unresolved review thread.
   Trigger phrases include "review this PR", "find any bugs", "leave review comments", and "make a Reality Check report".
-  Do not use for interactive behavioral testing or manual validation (gauntlet), investigating a reported issue (prelude), or implementing fixes.
+  Do not use for interactive behavioral testing or manual validation (gauntlet).
 ---
 
 # Reality Check

@@ -1,9 +1,9 @@
 ---
 name: grill-me
 description: >-
-  Use when the user asks to solidify a plan, architecture, or technical design through interactive decision making. 
+  Use when the user asks to solidify a plan, architecture, or technical design through interactive decision making.
   Trigger phrases include "grill me", "narrow this down", and "help me think this through".
-  Do not use for directly creating or executing a plan, investigating a bug, or implementing the decided changes.
+  Do not use for writing the resulting plan (blueprint).
 ---
 
 # Grill Me

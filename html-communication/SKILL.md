@@ -2,8 +2,8 @@
 name: html-communication
 description: >-
   Use when the user asks for a readable local HTML communication artifact, or another skill explicitly invokes an HTML report mode.
-  Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report". 
-  Do not use for executable plans (blueprint) or ordinary prose that does not need an HTML artifact.
+  Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report".
+  Do not use for ordinary prose that does not need an HTML artifact.
 ---
 
 # HTML Communication

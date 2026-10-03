@@ -1,35 +1,17 @@
 ---
 name: babysit
 description: >-
-  Use as the canonical GitHub PR workflow when the user asks to publish, update,
-  verify, or babysit a pull request. Publish new PRs ready for review by
-  default, watch checks and one automated code review on the published head, and make
-  focused in-scope fixes when needed. Trigger phrases include "create a PR",
-  "post the PR", "get the checks green", and "babysit this PR". Use watch-only
-  behavior when the user requests it. Do not use for
-  static code review without a PR workflow (reality-check), behavioral
-  validation without publication (gauntlet), or plan execution (assembly).
+  Use as the canonical GitHub PR workflow when the user asks to publish,
+  update, or babysit a pull request. Trigger phrases include "create a PR",
+  "post the PR", "get the checks green", and "babysit this PR".
 ---
 
 # babysit
 
 Publish the current branch as a ready-for-review PR, wait for checks and one
 automated code review of the published head, then hand the PR back for human review.
-This skill is the repository's only PR publication workflow; it may create a
-focused corrective commit when the user asks it to babysit or get the PR green.
-
-## Modes
-
-Choose the narrowest mode that satisfies the request:
-
-- **Publish and babysit (default):** create or update the PR, mark it ready for
-  review, watch checks and automated code review once, and repair valid in-scope findings.
-- **Watch-only:** inspect an existing PR and report checks and automated
-  findings without publishing, committing, pushing, or resolving threads.
-
-The default publication target is ready-for-review. Honor an explicit request
-to leave a PR as a draft, but do not make draft status a separate operating
-mode. Do not silently turn a watch-only request into a broader mode.
+This skill is the repository's only PR publication workflow; it may create
+focused corrective commit(s) when the user asks it to babysit or get the PR green.
 
 ## Stop conditions and safety
 
@@ -40,7 +22,7 @@ Stop and report the exact state instead of guessing when:
 - The branch is default, detached, behind its base, diverged from its remote,
   conflicted, or the push is non-fast-forward. Never force-push, rebase, reset,
   amend pushed commits, or rewrite outgoing history.
-- The PR is closed or merged, its base/head changed unexpectedly, or the
+- The PR is closed or merged, its base or head changed unexpectedly, or the
   repository or writable push target is ambiguous.
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
@@ -69,19 +51,17 @@ gh auth status
 gh repo view --json defaultBranchRef,nameWithOwner,url
 ```
 
-Prefer a supplied PR URL/number. Otherwise select the unique open PR whose
-head matches the current branch. Record its repository, number, base/head
-branches, base/head SHAs, draft state, and push remote. Use explicit `--repo`
-and explicit Git refs; do not assume `origin` is both the base and writable
-head. For a new PR, choose the base from the user, clear tracking intent,
-repository configuration, or the GitHub default branch, in that order. Reject
-base=head.
+Prefer a supplied PR number, if available/existing. Otherwise, select the
+unique open PR whose head matches the current branch. Record its repository,
+number, base/head branches, base/head SHAs, draft state, and push remote. Use
+explicit `--repo` and explicit Git refs; do not assume `origin` is both the
+base and writable head. For a new PR, choose the base from the user, clear
+tracking intent, repository configuration, or the GitHub default branch, in
+that order. Reject base=head.
 
 Fetch the base and remote head into explicit tracking refs and verify that the
 local head is not behind the base and that the fetched remote head is an
 ancestor of local HEAD. For an existing PR it must match the observed PR head.
-Watch-only needs a valid PR identity and remote state but not a clean local
-checkout.
 
 ### 2. Gather context and validate locally
 
@@ -111,11 +91,9 @@ preserve and report its path on failure.
   draft state.
 - **Existing ready PR:** save its current head SHA, push only intended commits,
   and add an incremental comment when new commits were pushed.
-- **Watch-only:** do not publish or push; bind the supplied existing PR and
-  continue to verification.
 
-Do not require a second confirmation for ordinary push, PR creation/update,
-ready transition, or watching when this skill was explicitly invoked.
+Do not require a second confirmation for ordinary push, PR creation/update, or
+ready transition when this skill was explicitly invoked.
 
 ### 4. Watch checks and automated findings
 
@@ -152,30 +130,29 @@ automated review received within the wait are accounted for.
 
 ### 5. One corrective push
 
-For a failed check or valid in-scope automated finding in a mode that allows
-repair:
+For a failed check or valid in-scope automated finding:
 
 1. Inspect the actual logs or finding and reproduce locally when possible.
 2. Make the smallest root-cause fix; do not bypass gates or patch unrelated
    infrastructure.
 3. Re-run relevant local checks as often as needed to diagnose the cause.
 4. Recheck the branch, PR head, base, working tree, and staged diff.
-5. Combine related corrections in one focused commit, push it explicitly to
+5. Implement related corrections in focused commit(s), push them explicitly to
    the PR head branch, verify the remote and PR heads, and comment briefly with
-   the corrective commit.
+   the corrective commit(s).
 6. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
    structured polling). Report its final check results, including failures or
    unavailable checks. Do not wait for another automated code review or make
    another corrective push. Return the PR to the user for human review.
 
-Watch-only stops before repair. Never push a PR correction directly to the
-repository's default branch unless that branch is explicitly the PR head.
+Never push a PR correction directly to the repository's default branch unless
+that branch is explicitly the PR head.
 
 ## Completion and handoff
 
 Report the PR URL, final head SHA, check results and the SHA they cover,
 automated code review outcome (including timeout or absence) and the disposition
-of each finding, corrective commit or none, and local validation gaps. After a
+of each finding, corrective commit(s) or none, and local validation gaps. After a
 corrective push, distinguish the new head's CI results from the review of the
 previous head and say that the new head awaits human review.
 

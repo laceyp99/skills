@@ -5,8 +5,7 @@ description: >-
   an understood issue, feature request, or design. Trigger phrases include
   "make an implementation plan", "write plan.md", "prepare this for a code
   agent", "break this feature into tasks", and "turn these notes into a
-  plan". Do not use for investigating an unchosen problem (prelude), executing
-  an existing plan (assembly), or reviewing a code change (reality-check).
+  plan". Do not use for executing an existing plan (assembly).
 ---
 
 # Blueprint

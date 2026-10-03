@@ -3,7 +3,7 @@ name: assembly
 description: >-
   Use when the user asks to execute an existing plan.md file, phase plan from somewhere else, or agreed implementation plan within conversational context.
   Trigger phrases include "implement this", "work through this", "continue from the previous phase", "commit out this plan", and any mention of "hand holding mode" or "autopilot mode".
-  Do not use for investigating an unchosen issue (prelude), creating a new plan (blueprint), or publishing or babysitting a pull request without plan execution.
+  Do not use for creating a new plan (blueprint).
 ---
 
 # Assembly

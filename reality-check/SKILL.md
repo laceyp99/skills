@@ -111,6 +111,12 @@ Use an opinionated, pragmatic code-review stance:
 
 Check whether the changed code matches surrounding patterns, error handling, platform assumptions, validation boundaries, and test strategy. For user-facing behavior, inspect both implementation and tests.
 
+## Checkpoint Quiz Section
+
+After findings are gathered and dispositions are proposed, and before finalizing the review record, write a quiz section into the very bottom of `review-findings.md`, after all findings and evidence, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings and their proposed dispositions, and decision-capture questions for dispositions the user must choose. Confirm the user's decision-capture selections with them and record them as dispositions in `review-findings.md`, or fold them into the final report and inline comments when no local file is used.
+
+In report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
+
 ## Optional PR Commenting
 
 Only add GitHub PR comments when the user explicitly asks to comment on the PR.

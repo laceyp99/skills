@@ -1,0 +1,7 @@
+interface:
+  display_name: "Checkpoint Quiz"
+  short_description: "Short multiple-choice verification checkpoints and report quizzes"
+  default_prompt: "Use $checkpoint-quiz at a host skill checkpoint to verify understanding or capture decisions."
+
+policy:
+  allow_implicit_invocation: true

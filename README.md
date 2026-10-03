@@ -38,6 +38,7 @@ npx skills@latest add laceyp99/skills --list
 |---|---|---|
 | `assembly` | Execute a local plan in controlled units. | **Hand holding mode** pauses for user commits; **autopilot mode** commits the plan and uses `babysit` to publish and verify the PR. |
 | `babysit` | Canonical PR workflow: publish ready-for-review, watch verification, and fix bounded automated findings. | Inspired by Theo Browne's "babysit" skill/prompt style. Writes reviewer-friendly PR bodies. Caps post-push repair cycles at 1. Never force-pushes. |
+| `checkpoint-quiz` | Run short multiple-choice verification checkpoints and baked report quizzes. | Invoked by `blueprint`, `prelude`, and `reality-check` to confirm understanding and capture decisions; report mode delivers a reflective quiz through `html-communication`. |
 | `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks to better visualize proposed plans. |
 | `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Use after or alongside code review when runtime evidence matters; maintains a local `review.md`. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |

@@ -20,7 +20,12 @@ def validate_skill(skill_path):
     if not skill_md.exists():
         return False, "SKILL.md not found"
 
-    content = skill_md.read_text()
+    try:
+        content = skill_md.read_text(encoding="utf-8")
+    except UnicodeDecodeError as exc:
+        return False, f"SKILL.md is not valid UTF-8; save it as UTF-8: {exc}"
+    except OSError as exc:
+        return False, f"Could not read SKILL.md; check the path and permissions: {exc}"
     if not content.startswith("---"):
         return False, "No YAML frontmatter found"
 

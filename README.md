@@ -70,3 +70,16 @@ Copy-Item -Recurse .\blueprint $HOME\.codex\skills\
 ```
 
 Repeat that command for any other skill directory you want to install.
+
+## Contributing Skills
+
+Create and edit skills in this repository following [AGENTS.md](AGENTS.md). Every skill must be listed in both the Included Skills table above and [.claude-plugin/plugin.json](.claude-plugin/plugin.json); add, rename, or remove those entries in the same change as the skill. Keep descriptions current when behavior changes.
+
+Before finishing, validate each changed skill and check the complete catalog:
+
+```bash
+python skill-crafter/scripts/quick_validate.py <skill-directory>
+python scripts/check_skill_catalog.py
+```
+
+The catalog check also runs on pushes and pull requests in GitHub Actions.

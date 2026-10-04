@@ -58,7 +58,7 @@ Create only resources the workflow actually needs:
 - `references/` — documentation needed only in particular contexts (schemas, policies, format-specific procedures, substantial examples). Link each from the body with a trigger.
 - `assets/` — files copied into output (templates, images, fonts). Never loaded as instructions.
 
-Do not add a README, changelog, or duplicated quick reference.
+Do not add a README, changelog, or duplicated quick reference inside the skill directory. Update repository-level catalogs when repository instructions require them.
 
 ## UI Metadata
 
@@ -74,7 +74,7 @@ The generator replaces the entire file on each run. If an existing `openai.yaml`
 
 ## Creating a Skill
 
-Respect a user-specified location; otherwise use `$CODEX_HOME/skills` (`~/.codex/skills` when unset). Scaffold with:
+Respect the repository instructions and a user-specified location. In a skills repository, create and validate skills in that repository; use `$CODEX_HOME/skills` (`~/.codex/skills` when unset) only outside repository work when no location is specified. Scaffold with:
 
 ```bash
 scripts/init_skill.py <skill-name> --path <output-directory> [--resources scripts,references,assets] [--examples]
@@ -83,6 +83,8 @@ scripts/init_skill.py <skill-name> --path <output-directory> [--resources script
 Request only the resource directories the skill needs; never re-initialize an existing skill. Replace all scaffold TODOs before finishing.
 
 Then write the sections: engineer the description for routing, draft the body organized by decisions, add stop conditions if the skill mutates anything or runs autonomously, and calibrate length against the ladder above.
+
+Before finishing, complete the repository's catalog updates and checks from its `AGENTS.md` or equivalent instructions. A skill is complete only when its content and required repository registration are validated; report unresolved failures instead of claiming completion.
 
 ## Self-Review
 

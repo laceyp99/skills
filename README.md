@@ -45,7 +45,7 @@ npx skills@latest add laceyp99/skills --list
 | `html-communication` | Create readable local HTML communication artifacts. | Use for internal reports, comparisons, summaries, and insight briefs; not for planning artifacts or ordinary prose. |
 | `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Useful for understanding what is actually happening before writing code or committing to a solution path. |
 | `reality-check` | Find concrete correctness and maintainability problems in a diff. | Use for static code review and prioritized engineering findings, not interactive behavioral testing. |
-| `rigging` | Review recent agent sessions to propose evidence-backed harness improvements. | Traces corrections, recoveries, and outcomes across accessible sources; proposes targeted changes and uses existing reporting, planning, and authoring skills for requested follow-up. |
+| `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed and presents four visual report variations in one local HTML file; chat closeout links to the report for user review, with existing planning and authoring skills available for requested follow-up. |
 | `skill-crafter` | Draft or edit a skill for optimal agent instruction. | Use for prompt engineering a skill with the focus of concise detail and effectiveness. |
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.

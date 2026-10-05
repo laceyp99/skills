@@ -1,4 +1,4 @@
 interface:
   display_name: "Rigging"
-  short_description: "Review agent sessions to improve harness guidance"
-  default_prompt: "Use $rigging to review my recent agent sessions and propose evidence-backed harness improvements."
+  short_description: "Find useful insights across agent sessions"
+  default_prompt: "Use $rigging to clarify my retrospective goals, review recent agent sessions, and present evidence-backed insights in one HTML report with four visual variations."

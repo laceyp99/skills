@@ -11,6 +11,7 @@
     "./prelude",
     "./reality-check",
     "./rigging",
-    "./skill-crafter"
+    "./skill-crafter",
+    "./video-communication"
   ]
 }

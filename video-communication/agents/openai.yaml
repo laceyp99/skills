@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Communication"
+  short_description: "Explain engineering work with narrated animations"
+  default_prompt: "Use $video-communication to explain the key ideas and outcomes of this session with a narrated video."

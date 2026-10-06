@@ -14,6 +14,12 @@ description: >-
 
 Create one `plan.md`-style Markdown artifact that a human can review and a coding agent can execute. Keep Markdown as the source of truth. Use Mermaid diagrams and `<details>/<summary>` only as optional review aids.
 
+## Optional report mode
+
+Create a companion report only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue the plan without generating a report. Do not default to HTML or video. For requested HTML, use `/html-communication` for a companion explanation; `plan.md` remains canonical. Create multiple formats only when requested.
+
+When the user requests a narrated walkthrough, invoke `/video-communication` after drafting the plan. Supply the audience, `plan.md`, inspected revision, proposed mechanism, risks, and requested destination. Label proposed behavior as proposed. Keep the video package outside the worktree by default; the plan and its checkpoint quiz remain canonical, local, and untracked. Video creation does not authorize implementation, a branch, or publication.
+
 ## Discovery Boundary
 
 Use this skill when the expected output is a planning artifact. If the user is still trying to understand whether an issue is real, where a bug lives, or which solution path is right, use `prelude` before writing a plan. If the user asks to implement an existing plan, use `assembly`. If the user asks for a code review, use `reality-check`.
@@ -23,10 +29,10 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 
 ## Core Contract
 
-- Produce one plain Markdown plan named or formatted as `plan.md` unless the user asks otherwise.
+- Produce one plain Markdown plan named or formatted as `plan.md` unless the user asks otherwise. A requested companion report does not replace it.
 - Keep the plan artifact local and untracked by default. Before writing it, check whether Git already tracks the target file. If it is tracked unexpectedly, warn the user and do not change its tracking state.
 - Never stage or commit the plan artifact.
-- Do not create MDX, JSX, custom components, custom classes, inline styles, scripts, iframes, or renderer-specific markup.
+- Do not put MDX, JSX, custom components, custom classes, inline styles, scripts, iframes, or renderer-specific markup in the plan. A requested companion report uses its communication skill's format.
 - Preserve usefulness when Mermaid or HTML collapsibles do not render.
 - Inspect repo context when available before naming files, frameworks, routes, commands, or test tools.
 - Mark uncertain details as unknowns instead of guessing.

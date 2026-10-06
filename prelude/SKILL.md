@@ -14,11 +14,15 @@ Use this skill to help the user understand a GitHub issue, bug report, or user s
 
 Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
-Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. The report mode below permits one local HTML report. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the requested local communication artifact, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
 
 ## Report mode
 
-When the user explicitly asks for a Prelude report, complete the investigation and use `/html-communication` to create a local HTML report as the main reader-facing result. Shape it around the issue's interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Choose visuals or interaction only when they clarify this particular issue. Keep the final chat reply brief, link the report, and state the recommended next step. The report is a communication artifact, not an implementation plan.
+Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+
+For video, invoke `/video-communication` after the investigation. Pass the audience, inspected revision, evidence, root-cause interpretation, options, recommendation, unresolved decisions, and destination. Distinguish observed behavior from hypothetical animation. Keep video artifacts outside the worktree and the checkpoint quiz in local untracked `quiz.md` for video-only delivery. Link both in chat; video creation does not authorize a branch or publication.
+
+For an HTML Prelude report, complete the investigation and use `/html-communication` to create a local HTML report as the main reader-facing result. Shape it around the issue's interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Choose visuals or interaction only when they clarify this particular issue. Keep the final chat reply brief, link the report, and state the recommended next step. The report is a communication artifact, not an implementation plan.
 
 ## Operating principles
 
@@ -103,7 +107,7 @@ The options phase should include:
 
 After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Keep `quiz.md` untracked and never stage or commit it. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
 
-In report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
+In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
 
 ## Interaction style
 
@@ -127,7 +131,7 @@ Good evidence examples:
 
 ## Final handoff expectation
 
-Prelude does not create a planning or handoff artifact. Its default output is an understanding report in chat; report mode also creates the local HTML communication artifact. Either form should make the next skill call possible without repeating the investigation.
+Prelude does not create a planning or handoff artifact. Its default output is an understanding report in chat; report mode adds the requested HTML or video communication artifact. Either form should make the next skill call possible without repeating the investigation.
 
 Route the work using this decision tree:
 

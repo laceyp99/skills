@@ -14,7 +14,11 @@ For GitHub PRs, use inline review comments when the user asks for comments or wh
 
 ## Report mode
 
-When the user explicitly asks for a Reality Check report, perform the review and use `/html-communication` to create a local HTML report as the main reader-facing result. Make findings, severity, code evidence, dispositions, review scope and limits, and the next action easy to inspect. Choose visuals or interaction to suit the reviewed change; do not impose a fixed layout. Keep GitHub comments or `review-findings.md` as the actionable record where applicable. In chat, link the report and briefly state the review conclusion and next action.
+Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+
+For video, invoke `/video-communication` after the review. Pass the audience, inspected revision, confirmed findings and dispositions, source evidence, review limits, and destination. Keep actionable findings in `review-findings.md` or the authorized GitHub review. The video package stays outside the worktree by default; it does not authorize code changes or additional publication. For a video-only report, keep the actionable findings and checkpoint quiz in local untracked `review-findings.md` and link it beside the MP4; use the ordinary chat closeout format with the video link.
+
+For an HTML Reality Check report, perform the review and use `/html-communication` to create a local HTML report as the main reader-facing result. Make findings, severity, code evidence, dispositions, review scope and limits, and the next action easy to inspect. Choose visuals or interaction to suit the reviewed change; do not impose a fixed layout. Keep GitHub comments or `review-findings.md` as the actionable record where applicable. In chat, link the report and briefly state the review conclusion and next action.
 
 Reality Check is an opinionated, language-aware reviewer that prioritizes readable, explicit, maintainable code over clever abstractions. Review like an experienced engineer with healthy skepticism toward complexity, AI-generated code, and unnecessary work. Focus on correctness first, then architecture, performance, and long-term maintainability. When Python is present, apply especially close scrutiny to Python-specific correctness, packaging, typing, test, and runtime issues. Pay special attention to AI workflows by questioning model usage, validating LLM outputs, identifying wasted computation, and spotting opportunities to simplify or eliminate code. Recommend deleting abstractions or features when they do not provide meaningful value. The goal is not to produce a perfect PR; it is to make sure the code is something the user can confidently maintain and ship six months from now.
 
@@ -115,7 +119,7 @@ Check whether the changed code matches surrounding patterns, error handling, pla
 
 After findings are gathered and dispositions are proposed, and before finalizing the review record, write a quiz section into the very bottom of `review-findings.md`, after all findings and evidence, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings and their proposed dispositions, and decision-capture questions for dispositions the user must choose. Confirm the user's decision-capture selections with them and record them as dispositions in `review-findings.md`, or fold them into the final report and inline comments when no local file is used.
 
-In report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
+In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
 
 ## Optional PR Commenting
 
@@ -133,7 +137,7 @@ If line-specific commenting is not possible with available tools, report the blo
 
 ## Final Response
 
-In report mode, put the detailed findings and evidence in the HTML report; use the final chat reply to link it and summarize the conclusion and next action. Otherwise, follow the format below in chat.
+In HTML report mode, put the detailed findings and evidence in the HTML report; use the final chat reply to link it and summarize the conclusion and next action. Otherwise, follow the format below in chat.
 
 Lead with findings, ordered by severity. For each finding, include the affected file/line when possible, the concrete risk, and the reasoning.
 

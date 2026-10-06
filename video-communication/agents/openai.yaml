@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Communication"
+  short_description: "Explain engineering work with narrated animations"
+  default_prompt: "Use $video-communication to explain this PR with a narrated Manim video."

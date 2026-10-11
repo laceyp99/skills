@@ -36,16 +36,15 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
+| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; requested reports use the chosen medium through `_shared/report-and-delegation.md`; checkpoint quizzes load from `utils/` on demand. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Local artifacts follow `_shared/report-and-delegation.md`. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |
-| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks; requested companion reports use `_shared/report-and-delegation.md` while preserving the canonical plan. |
+| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks; requested companion reports use `_shared/report-and-delegation.md` while preserving the canonical plan; checkpoint quizzes load from `utils/` on demand. |
 | `assembly` | Execute a local plan in controlled units. | Shared artifact and delegation rules live in `_shared/report-and-delegation.md`. **Hand holding mode** pauses for user commits; **autopilot mode** commits the plan and uses `babysit` to publish and verify the PR. |
 | `babysit` | Canonical PR workflow: publish ready-for-review, watch verification, and fix bounded automated findings. | Inspired by Theo Browne's "babysit" skill/prompt style. Writes reviewer-friendly PR bodies. Caps post-push repair cycles at 1. Never force-pushes. |
 | `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Maintains local `review.md`; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
-| `reality-check` | Find concrete correctness and maintainability problems in a diff. | Static code review with actionable findings; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
+| `reality-check` | Find concrete correctness and maintainability problems in a diff. | Static code review with actionable findings; requested reports use the chosen medium through `_shared/report-and-delegation.md`; checkpoint quizzes load from `utils/` on demand. |
 | `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed and presents four visual report variations in one local HTML file; chat closeout links to the report for user review, with existing planning and authoring skills available for requested follow-up. |
-| `checkpoint-quiz` | Define short artifact-based quiz contracts for verification checkpoints and reflective reports. | Host skills own placement and question sources; HTML mechanics use `html-communication`. No scoring or required chat answers. |
-| `html-communication` | Create portable local HTML reports, with T3 inline delivery when available. | Choose layouts and requested variations to suit the evidence; preview before T3 rendering and distinguish parsing, syntax, layout, and interaction checks. Not for planning artifacts or ordinary prose. |
+| `html-communication` | Create portable local HTML reports, with T3 inline delivery when available. | Choose layouts and requested variations to suit the evidence; preview before T3 rendering and distinguish parsing, syntax, layout, and interaction checks. Loads checkpoint quiz guidance from `utils/` when needed. Not for planning artifacts or ordinary prose. |
 | `video-communication` | Create narrated technical explanations on Windows with Manim and ElevenLabs. | Invoked directly or by planning, investigation, and review skills when video is requested. Uses Eric narration, cached audio, and a shared renderer outside worktrees. Checks prerequisites and requests missing setup. The MP4 is primary, with working files accessible. |
 | `skill-crafter` | Draft or edit a skill for optimal agent instruction. | Use for prompt engineering a skill with the focus of concise detail and effectiveness. |
 
@@ -67,6 +66,13 @@ Copy-Item ./_shared/report-and-delegation.md "$HOME/.agents/skills/_shared/repor
 ```
 
 Use the corresponding skill root for other agents, such as `$HOME/.codex/skills` or `$HOME/.pi/agent/skills`. Keep the relative layout `<skill-root>/<skill>/SKILL.md` and `<skill-root>/_shared/report-and-delegation.md`. Repository edits do not update installed copies automatically.
+
+Checkpoint quizzes are loaded on demand from [utils/checkpoint-quiz.md](utils/checkpoint-quiz.md) by `blueprint`, `prelude`, `reality-check`, and `html-communication`. Copy this utility beside installed skill folders too. It has no skill frontmatter or UI registration, so it adds no standalone quiz entry to the skill catalog. When updating an existing installation, remove its old `checkpoint-quiz` skill directory to stop advertising that installed entry.
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME/.agents/skills/utils" | Out-Null
+Copy-Item ./utils/checkpoint-quiz.md "$HOME/.agents/skills/utils/checkpoint-quiz.md"
+```
 
 For the Pi agent path I currently use:
 

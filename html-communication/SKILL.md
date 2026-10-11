@@ -18,7 +18,7 @@ This is a communication artifact, not a coding plan artifact. If the user wants 
 
 ## Quiz Report Mode
 
-When invoked by `/checkpoint-quiz`, add an interactive section using its supplied quiz contract and the host's placement and question sources. [Checkpoint Quiz](../checkpoint-quiz/SKILL.md) owns question count, types, answer semantics, and reflective behavior; read it only if that contract is not already in context.
+When the host requests a checkpoint quiz, add an interactive section using its supplied quiz contract and the host's placement and question sources. [checkpoint quiz utility](../utils/checkpoint-quiz.md) owns question count, types, answer semantics, and reflective behavior; read it only if that contract is not already in context.
 
 Reveal the contract's feedback after selection, using accessible controls and a readable feedback region. Keep selections ephemeral within the page, with no persistence or transmission.
 

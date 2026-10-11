@@ -102,9 +102,9 @@ Check whether the changed code matches surrounding patterns, error handling, pla
 
 ## Checkpoint Quiz Section
 
-After findings are gathered and dispositions are proposed, and before finalizing the review record, write a quiz section into the very bottom of `review-findings.md`, after all findings and evidence, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings and their proposed dispositions, and decision-capture questions for dispositions the user must choose. Confirm the user's decision-capture selections with them and record them as dispositions in `review-findings.md`, or fold them into the final report and inline comments when no local file is used.
+After findings are gathered and dispositions are proposed, and before finalizing the review record, read the [checkpoint quiz utility](../utils/checkpoint-quiz.md) and write a quiz section into the very bottom of `review-findings.md`, after all findings and evidence, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings and their proposed dispositions, and decision-capture questions for dispositions the user must choose. Confirm the user's decision-capture selections with them and record them as dispositions in `review-findings.md`, or fold them into the final report and inline comments when no local file is used.
 
-In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
+In HTML report mode, deliver the quiz as the report's baked section using the utility's HTML report mode instead.
 
 ## Optional PR Commenting
 

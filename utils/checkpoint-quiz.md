@@ -1,14 +1,8 @@
----
-name: checkpoint-quiz
-description: >-
-  Use when a verification checkpoint is reached and the user's understanding should be confirmed or a decision captured as short multiple-choice questions.
-  Trigger phrases include "quiz me", "test my understanding", and report-mode quiz sections.
-  Do not use for open-ended decision exploration (grill-me).
----
-
 # Checkpoint Quiz
 
-Provide a short, focused quiz at a host skill's checkpoint so the user can self-grade their understanding of what happened, what was decided, and how it affects the system, and capture decisions at moments where one must be made. The quiz lives in the host's artifact, not in chat. Host skills own placement, question sourcing, and the artifact the quiz section is written into; this skill owns the mechanics.
+Read when a host skill reaches its quiz checkpoint. This is an on-demand reference, not an invokable skill. Use `grill-me` for open-ended decision exploration.
+
+Provide a short, focused quiz at a host skill's checkpoint so the user can self-grade their understanding of what happened, what was decided, and how it affects the system, and capture decisions at moments where one must be made. The quiz lives in the host's artifact, not in chat. Host skills own placement, question sourcing, and the artifact the quiz section is written into; this utility owns the mechanics.
 
 ## Quiz Contract
 

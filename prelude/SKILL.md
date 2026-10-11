@@ -95,9 +95,9 @@ The options phase should include:
 
 ## Checkpoint Quiz
 
-After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
+After presenting the evidence and viable options and before the user commits to a path, read the [checkpoint quiz utility](../utils/checkpoint-quiz.md) and write a quiz section into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
 
-In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
+In HTML report mode, deliver the quiz as the report's baked section using the utility's HTML report mode instead.
 
 ## Interaction style
 

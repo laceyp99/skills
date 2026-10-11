@@ -8,17 +8,11 @@ description: >-
 
 # Gauntlet
 
+Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+
 Validate patches without becoming the patch author. Treat automated checks as the mechanical baseline, then use the human to establish behavioral confidence where direct observation is more valuable.
 
 Maintain `review.md` at the repository root as the review source of truth. Keep it local and untracked by default. Read [references/review-template.md](references/review-template.md) before creating or restructuring it.
-
-## Report mode
-
-Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
-
-For video, invoke `/video-communication` after completing the applicable checks. Pass `review.md`, the audience, inspected revision, automated results, human observations, unverified areas, conclusion, and destination. Label animation as illustration, not test footage. Keep the local video package outside the worktree and link it with `review.md`; publication remains a separate authorized workflow.
-
-For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` to create a local HTML report as the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. In chat, link the report and briefly state the conclusion.
 
 ## Non-negotiable boundaries
 
@@ -56,16 +50,7 @@ Useful questions include:
 - tracing integration boundaries
 - identifying environment-dependent paths that may require human observation
 
-Give the explorer:
-- one concrete question
-- the minimum relevant diff and repository context
-- the expected answer and supporting file or symbol-level evidence
-- a no-mutation boundary
-- a stopping condition
-
 The primary agent must evaluate the result, design the validation map, select and run checks, guide human testing, interpret evidence, and maintain `review.md`. Do not delegate interactive human validation or treat discovered tests as proof that behavior works.
-
-If an appropriate explorer role or delegation mechanism is unavailable, perform the discovery directly and report the limitation when it prevents safe completion.
 
 ## Workflow
 
@@ -165,9 +150,6 @@ Use `Pending`, `Passed`, `Failed`, or `Blocked` consistently for manual test sta
 Treat `review.md` as the authoritative local record of review progress.
 
 - Create it only after Phase 2 has produced a concrete testing path, unless a light review needs a short record.
-- Keep it untracked by default. Check whether Git already tracks it before writing. If it is tracked unexpectedly, warn the user and do not alter repository tracking state.
-- Never add `review.md` to `.gitignore`, stage it, commit it, or publish it automatically.
-- Package or publish it only when the user explicitly asks.
 - On a later agent session, read `review.md` before resuming.
 - If the user's remembered progress is ahead of the last documented checkpoint, return to the last documented step and repeat the undocumented validation rather than retroactively marking it complete.
 - Validation evidence belongs to the target identified in `Review Target`. If review resumes after another change alters the reviewed scope, refresh the validation map and revalidate the affected paths rather than reusing evidence that no longer covers the current behavior.

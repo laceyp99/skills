@@ -8,6 +8,8 @@ description: >-
 
 # Prelude
 
+Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+
 ## Core purpose
 
 Use this skill to help the user understand a GitHub issue, bug report, or user story before choosing an action. Act like a read-only investigation mode with a strong emphasis on evidence, concept correction, and solution selection.
@@ -15,14 +17,6 @@ Use this skill to help the user understand a GitHub issue, bug report, or user s
 Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
 Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the requested local communication artifact, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
-
-## Report mode
-
-Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
-
-For video, invoke `/video-communication` after the investigation. Pass the audience, inspected revision, evidence, root-cause interpretation, options, recommendation, unresolved decisions, and destination. Distinguish observed behavior from hypothetical animation. Keep video artifacts outside the worktree and the checkpoint quiz in local untracked `quiz.md` for video-only delivery. Link both in chat; video creation does not authorize a branch or publication.
-
-For an HTML Prelude report, complete the investigation and use `/html-communication` to create a local HTML report as the main reader-facing result. Shape it around the issue's interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Choose visuals or interaction only when they clarify this particular issue. Keep the final chat reply brief, link the report, and state the recommended next step. The report is a communication artifact, not an implementation plan.
 
 ## Operating principles
 
@@ -55,10 +49,6 @@ If a test command writes ordinary cache or test artifacts, that is acceptable on
 ## Delegated investigation
 
 Delegate focused repository investigation when answering it directly would require substantial dependency tracing or architecture mapping.
-
-Delegate a concrete single question with only the necessary issue and repository context. State the expected answer and evidence, preserve Prelude's read-only boundary, and stop the delegated investigation when the question is answered or the available evidence is exhausted. The primary agent must assess the returned evidence, resolve conflicts, and produce the final understanding and recommendation; do not delegate the entire Prelude workflow or the conversation with the user.
-
-If an appropriate explorer role or delegation mechanism is unavailable, investigate directly and report the limitation when it prevents safe completion.
 
 ## Investigation heuristics
 
@@ -105,7 +95,7 @@ The options phase should include:
 
 ## Checkpoint Quiz
 
-After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Keep `quiz.md` untracked and never stage or commit it. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
+After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
 
 In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
 

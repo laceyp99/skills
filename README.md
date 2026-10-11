@@ -2,7 +2,7 @@
 
 This repo is a shared collection of AI agent skills I use in my own workflow. Some are original, some are adapted from patterns or prompts I found useful elsewhere, and some are experiments that are still being tuned.
 
-The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files.
+The intent is practical sharing: each skill folder has a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files.
 
 ## Quickstart
 
@@ -36,13 +36,13 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; requested reports use the user-specified communication style. |
-| `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |
-| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks; requested companion reports use the user's chosen medium while preserving the canonical plan. |
-| `assembly` | Execute a local plan in controlled units. | **Hand holding mode** pauses for user commits; **autopilot mode** commits the plan and uses `babysit` to publish and verify the PR. |
+| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
+| `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. Local artifacts follow `_shared/report-and-delegation.md`. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |
+| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks; requested companion reports use `_shared/report-and-delegation.md` while preserving the canonical plan. |
+| `assembly` | Execute a local plan in controlled units. | Shared artifact and delegation rules live in `_shared/report-and-delegation.md`. **Hand holding mode** pauses for user commits; **autopilot mode** commits the plan and uses `babysit` to publish and verify the PR. |
 | `babysit` | Canonical PR workflow: publish ready-for-review, watch verification, and fix bounded automated findings. | Inspired by Theo Browne's "babysit" skill/prompt style. Writes reviewer-friendly PR bodies. Caps post-push repair cycles at 1. Never force-pushes. |
-| `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Maintains local `review.md`; requested reports use the user-specified communication style. |
-| `reality-check` | Find concrete correctness and maintainability problems in a diff. | Static code review with actionable findings; requested reports use the user-specified communication style. |
+| `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Maintains local `review.md`; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
+| `reality-check` | Find concrete correctness and maintainability problems in a diff. | Static code review with actionable findings; requested reports use the chosen medium through `_shared/report-and-delegation.md`. |
 | `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed and presents four visual report variations in one local HTML file; chat closeout links to the report for user review, with existing planning and authoring skills available for requested follow-up. |
 | `checkpoint-quiz` | Define short artifact-based quiz contracts for verification checkpoints and reflective reports. | Host skills own placement and question sources; HTML mechanics use `html-communication`. No scoring or required chat answers. |
 | `html-communication` | Create portable local HTML reports, with T3 inline delivery when available. | Choose layouts and requested variations to suit the evidence; preview before T3 rendering and distinguish parsing, syntax, layout, and interaction checks. Not for planning artifacts or ordinary prose. |
@@ -57,7 +57,16 @@ See [docs/subagents.md](docs/subagents.md) for the shared delegation approach.
 
 The manual copy flow is still useful when you are editing a skill locally. For normal installation from GitHub, prefer the `npx skills@latest add laceyp99/skills` quickstart above.
 
-Copy the skill directory you want into your agent's skills directory.
+Copy the skill directory you want into your agent's skills directory. `assembly`, `blueprint`, `gauntlet`, `grill-me`, `prelude`, and `reality-check` also require the sibling `_shared` directory. It contains reference guidance, has no `SKILL.md`, and is not an invokable skill.
+
+After a CLI install or manual copy, copy `_shared` from this checkout into the same skill root. Do not assume a skill-only installer includes sibling references. For the requested Agents layout:
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME/.agents/skills/_shared" | Out-Null
+Copy-Item ./_shared/report-and-delegation.md "$HOME/.agents/skills/_shared/report-and-delegation.md"
+```
+
+Use the corresponding skill root for other agents, such as `$HOME/.codex/skills` or `$HOME/.pi/agent/skills`. Keep the relative layout `<skill-root>/<skill>/SKILL.md` and `<skill-root>/_shared/report-and-delegation.md`. Repository edits do not update installed copies automatically.
 
 For the Pi agent path I currently use:
 

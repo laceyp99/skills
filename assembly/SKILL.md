@@ -8,6 +8,8 @@ description: >-
 
 # Assembly
 
+Before writing local artifacts or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+
 Use this skill to turn a local implementation plan into small, inspectable work units. Work from facts first, preserve the user's worktree, and keep planning artifacts out of commits unless the user explicitly says otherwise.
 
 ## Initial Inspection
@@ -22,7 +24,7 @@ git diff --stat
 git diff --cached --stat
 ```
 
-Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain untracked and uncommitted, including `plan.md`, `decisions.md`, or another scratch or review markdown file. Check whether Git already tracks each artifact before writing it. Leave untracked artifacts untracked; if one is tracked unexpectedly, warn the user and do not change its tracking state or include its modifications in a commit.
+Read `plan.md` or `decisions.md` files fully before making changes, if they exist.
 
 If `plan.md` is missing, ensure you have enough conversational context to change intent map into work units, if not, stop and ask clarifying questions for direction.
 
@@ -47,16 +49,7 @@ You may update plan markdown files only for checkbox/status tracking and date en
 
 Delegate a bounded plan unit when it has clear ownership and doing so will isolate substantial implementation context or enable safe, disjoint work.
 
-Give the worker:
-- one concrete responsibility
-- the minimum relevant plan and repository context
-- the expected implementation and validation report
-- explicit file and mutation boundaries
-- a stopping condition for conflicts, blockers, or completion.
-
-Prefer sequential delegation for context management. Use concurrent workers only when their file ownership is disjoint, their work does not depend on the same uncommitted changes, and their results can be integrated without ambiguity. The primary agent retains responsibility for checklist order, shared-worktree safety, integration, final validation, staging, commits, lifecycle handoffs, and communication with the user. Delegation does not expand the plan, authorization, or selected mode, and workers must not commit unless the user-authorized workflow explicitly assigns that responsibility.
-
-If an appropriate worker role or delegation mechanism is unavailable, implement the unit directly and report the limitation when it prevents safe completion. Do not split a tightly coupled unit merely to use delegation.
+The primary agent retains responsibility for checklist order, shared-worktree safety, integration, final validation, staging, commits, and lifecycle handoffs.
 
 ## Hand Holding Mode
 

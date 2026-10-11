@@ -10,26 +10,24 @@ description: >-
 
 Provide a short, focused quiz at a host skill's checkpoint so the user can self-grade their understanding of what happened, what was decided, and how it affects the system, and capture decisions at moments where one must be made. The quiz lives in the host's artifact, not in chat. Host skills own placement, question sourcing, and the artifact the quiz section is written into; this skill owns the mechanics.
 
-## Question Types
+## Quiz Contract
+
+Ask 2-5 questions, one topic each, with short options. Keep them answerable from the surrounding artifact without scrolling back through long prose. The user self-grades; never score or enforce retakes. Quiz completion does not require answers in chat.
 
 - **Comprehension questions** test understanding of facts whose misunderstanding would change downstream behavior. They have correct answers.
 - **Decision-capture questions** present real tradeoffs where the user's choice is what matters. They have no correct answer; never mark one. Try giving multiple choice options, if possible.
+
+Keep comprehension answers hidden until the user reveals them or selects an option; then show the correct answer and a one-to-two sentence explanation grounded in the host's source material. For decision-capture questions, show what each selection implies. Report quizzes are reflective; report conclusions never depend on quiz results.
 
 ## Markdown Quiz Sections
 
 Write the quiz as a section in the host's markdown artifact:
 
-1. Ask 2-5 questions, one topic each.
-2. Write each question with short lettered options (A/B/C/D) readable at a glance.
-3. For comprehension questions, hide the correct answer and a one-to-two sentence explanation grounded in the host's source material inside a `<details><summary>Reveal answer</summary>` block.
-4. For decision-capture questions, state what each selection implies instead of revealing an answer.
-5. Keep questions answerable from the surrounding artifact without scrolling back through long prose.
-
-The user self-grades: they answer first, then reveal. Never write answers inline, never score, and never enforce retakes.
+Use short lettered options (A/B/C/D). Put comprehension feedback inside a `<details><summary>Reveal answer</summary>` block so the user can answer first, then reveal.
 
 ## HTML Report Mode
 
-When the host's deliverable is an HTML report, deliver the quiz as an interactive baked section via `/html-communication`'s quiz-report mode instead of a markdown section. The baked quiz is reflective only: it writes nothing, so confirm any meaningful selection with the user afterward and record it in the host's normal artifact. Report conclusions never depend on quiz results; the report is the assessment and the quiz verifies reader understanding.
+When the host's deliverable is an HTML report, pass this contract and the host's placement and question sources to [HTML Communication](../html-communication/SKILL.md) for an interactive baked section. Reuse skill guidance already in context. HTML selections are ephemeral and write nothing; any later decision recording follows the host's normal workflow and the Recording rules below, independently of quiz completion.
 
 ## Recording
 

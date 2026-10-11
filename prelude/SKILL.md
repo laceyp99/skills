@@ -8,7 +8,7 @@ description: >-
 
 # Prelude
 
-Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 ## Core purpose
 
@@ -17,6 +17,12 @@ Use this skill to help the user understand a GitHub issue, bug report, or user s
 Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
 Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the requested local communication artifact, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+
+## Requested reports
+
+When a report is requested, read only the shared [requested report rules](../_shared/report-and-delegation.md#requested-reports).
+
+For requested HTML, make the report the main reader-facing result, presenting the issue interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Keep it a communication artifact rather than an implementation plan. For video, pass the evidence, root-cause interpretation, options, recommendation, and unresolved decisions; keep the checkpoint quiz in local `quiz.md` for video-only delivery and link it beside the MP4.
 
 ## Operating principles
 
@@ -47,6 +53,8 @@ Do not edit project files, stage changes, commit, push, or use write-oriented re
 If a test command writes ordinary cache or test artifacts, that is acceptable only when it is standard for the project and does not alter source files or persistent application data.
 
 ## Delegated investigation
+
+Before delegating, read only the shared [delegated task rules](../_shared/report-and-delegation.md#delegated-tasks).
 
 Delegate focused repository investigation when answering it directly would require substantial dependency tracing or architecture mapping.
 

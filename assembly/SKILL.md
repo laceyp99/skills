@@ -8,7 +8,7 @@ description: >-
 
 # Assembly
 
-Before writing local artifacts or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 Use this skill to turn a local implementation plan into small, inspectable work units. Work from facts first, preserve the user's worktree, and keep planning artifacts out of commits unless the user explicitly says otherwise.
 
@@ -46,6 +46,8 @@ Extract the commit plan, phase list, or ordered task list from the plan into a w
 You may update plan markdown files only for checkbox/status tracking and date entries. Do not alter the plan text, scope, task definitions, or acceptance criteria without explicit user direction. Keep any plan markdown changes out of commits by default.
 
 ## Delegated implementation
+
+Before delegating, read only the shared [delegated task rules](../_shared/report-and-delegation.md#delegated-tasks).
 
 Delegate a bounded plan unit when it has clear ownership and doing so will isolate substantial implementation context or enable safe, disjoint work.
 

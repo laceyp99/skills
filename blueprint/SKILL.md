@@ -10,17 +10,23 @@ description: >-
 
 # Blueprint
 
-Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 ## Purpose
 
 Create one `plan.md`-style Markdown artifact that a human can review and a coding agent can execute. Keep Markdown as the source of truth. Use Mermaid diagrams and `<details>/<summary>` only as optional review aids.
 
+## Requested reports
+
+When a report is requested, read only the shared [requested report rules](../_shared/report-and-delegation.md#requested-reports).
+
+Create a requested companion explanation; `plan.md` and its checkpoint quiz remain canonical. For video, pass `plan.md`, the proposed mechanism, and risks; label proposed behavior as proposed. For HTML, explain the plan without replacing it.
+
 ## Discovery Boundary
 
 Use this skill when the expected output is a planning artifact. If the user is still trying to understand whether an issue is real, where a bug lives, or which solution path is right, use `prelude` before writing a plan. If the user asks to implement an existing plan, use `assembly`. If the user asks for a code review, use `reality-check`.
 
-If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Unknowns to Resolve` and make them early tasks or stop conditions. For a large or unfamiliar repository, delegate one focused read-only explorer task when confirming architecture, ownership boundaries, or validation commands would otherwise consume substantial planning context. The primary agent must write and reconcile the final plan.
+If the user asks for both investigation and a plan, investigate enough to avoid inventing facts, then produce the plan only after the problem and direction are reasonably understood. Put unresolved facts in `Unknowns to Resolve` and make them early tasks or stop conditions. Before delegating, read only the shared [delegated task rules](../_shared/report-and-delegation.md#delegated-tasks). For a large or unfamiliar repository, delegate one focused read-only explorer task when confirming architecture, ownership boundaries, or validation commands would otherwise consume substantial planning context. The primary agent must write and reconcile the final plan.
 
 ## Core Contract
 

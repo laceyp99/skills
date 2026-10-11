@@ -8,15 +8,21 @@ description: >-
 
 # Gauntlet
 
-Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 Validate patches without becoming the patch author. Treat automated checks as the mechanical baseline, then use the human to establish behavioral confidence where direct observation is more valuable.
 
 Maintain `review.md` at the repository root as the review source of truth. Keep it local and untracked by default. Read [references/review-template.md](references/review-template.md) before creating or restructuring it.
 
+## Requested reports
+
+When a report is requested, read only the shared [requested report rules](../_shared/report-and-delegation.md#requested-reports).
+
+For requested HTML, make the report the main reader-facing assessment. Derive it from `review.md`, mapping changed behaviors to automated results, human observations, and unverified areas; state the scoped conclusion and next action. For video, pass `review.md`, automated results, human observations, unverified areas, and the scoped conclusion.
+
 ## Non-negotiable boundaries
 
-- Remain read-only with respect to the patch and committed project files. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
+- Remain read-only with respect to the patch and committed project files, except a review artifact the user explicitly asks you to maintain. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
 - Permit writing only to `review.md`, plus the requested local communication artifact, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
 - Never run auto-fix or write-mode formatting commands. Prefer check-only forms.
 - Never install, upgrade, or change dependencies, lockfiles, migrations, generated code, or environment configuration without explicit user intent outside this review workflow.
@@ -41,6 +47,8 @@ Accept a PR number, branch name, or both.
 Never assume the base branch when it can be determined from PR metadata, remote tracking, or repository conventions.
 
 ## Delegated validation discovery
+
+Before delegating, read only the shared [delegated task rules](../_shared/report-and-delegation.md#delegated-tasks).
 
 Delegate validation discovery when mapping the patch to tests or environment-sensitive surfaces requires substantial repository exploration.
 

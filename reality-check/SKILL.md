@@ -8,13 +8,19 @@ description: >-
 
 # Reality Check
 
-Before writing local artifacts, producing a requested report, or delegating, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 Use this skill for code-review work. Lead with concrete findings, ground every issue in inspected diffs or PR context, and clearly separate confirmed problems from assumptions.
 
 For GitHub PRs, use inline review comments when the user asks for comments or when the review is being conducted as part of the PR workflow. For a local review artifact to route back into `/assembly` or `/prelude`, maintain `review-findings.md` at the repository root as an untracked-by-default record of actionable findings and their disposition. Do not modify the patch to address findings.
 
 Reality Check is an opinionated, language-aware reviewer that prioritizes readable, explicit, maintainable code over clever abstractions. Review like an experienced engineer with healthy skepticism toward complexity, AI-generated code, and unnecessary work. Focus on correctness first, then architecture, performance, and long-term maintainability. When Python is present, apply especially close scrutiny to Python-specific correctness, packaging, typing, test, and runtime issues. Pay special attention to AI workflows by questioning model usage, validating LLM outputs, identifying wasted computation, and spotting opportunities to simplify or eliminate code. Recommend deleting abstractions or features when they do not provide meaningful value. The goal is not to produce a perfect PR; it is to make sure the code is something the user can confidently maintain and ship six months from now.
+
+## Requested reports
+
+When a report is requested, read only the shared [requested report rules](../_shared/report-and-delegation.md#requested-reports).
+
+For requested HTML, make the report the main reader-facing result, with findings, severity, evidence, dispositions, scope, limits, and the next action easy to inspect. Keep GitHub comments or `review-findings.md` as the actionable record. For video, pass confirmed findings and dispositions, source evidence, and review limits. For video-only delivery, keep actionable findings and the checkpoint quiz in local `review-findings.md` and link it beside the MP4.
 
 ## Initial Inspection
 
@@ -55,6 +61,8 @@ git diff <base>...HEAD
 If reviewing staged, unstaged, or named files instead of a branch range, inspect the requested diff directly and state the scope.
 
 ## Delegated repository investigation
+
+Before delegating, read only the shared [delegated task rules](../_shared/report-and-delegation.md#delegated-tasks).
 
 Delegate a focused read-only investigation when a suspected high-impact finding requires tracing materially beyond the diff.
 

@@ -1,34 +1,18 @@
 # Report and delegation guidance
 
-Read the relevant sections when the invoking skill requests a report, writes a local planning or review artifact, or delegates work. The invoking skill retains its workflow, scope, and stop conditions.
+Read only the section linked by the invoking skill when its trigger applies; load another section only when its own trigger applies. The invoking skill retains its workflow, scope, and stop conditions.
 
 ## Local artifacts
 
-Before writing `plan.md`, `decisions.md`, `quiz.md`, `review.md`, `review-findings.md`, or another local planning or review artifact, check whether Git already tracks it. Keep these artifacts local and untracked by default. If one is tracked unexpectedly, warn the user, do not change its tracking state, and keep its modifications out of commits. Never add them to `.gitignore`, stage, commit, or publish them automatically. Package or publish only when explicitly requested, subject to the invoking workflow's boundaries.
+Follow the user's explicitly requested artifact destination and tracking policy. Otherwise keep `plan.md`, `decisions.md`, `quiz.md`, `review.md`, `review-findings.md`, and other local planning or review artifacts local and untracked by default. Before writing, check whether Git already tracks the target. If tracking is unexpected, warn the user, preserve its tracking state, and keep its modifications out of commits. Intentional tracking permits maintaining the tracked artifact; it does not by itself authorize staging, committing, or publishing it. Without explicit authorization, do not change ignore rules or tracking state, or stage, commit, package, or publish artifacts. Respect the invoking workflow's scope and stop conditions.
 
 ## Requested reports
 
 Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
 
-For HTML, invoke `/html-communication` after completing the invoking skill's work. For Gauntlet, Prelude, and Reality Check, the HTML report is the main reader-facing result. Use visuals or interaction only where they clarify the evidence; choose the layout to suit the work. Link the report in chat and briefly state the conclusion and next action.
+For HTML, invoke `/html-communication` after completing the invoking skill's work. Use visuals or interaction only where they clarify the evidence; choose the layout to suit the work. Link the report in chat and briefly state the conclusion and next action.
 
-For video, invoke `/video-communication` after completing the invoking skill's work. Supply the audience, inspected revision, destination, and the skill-specific context below. Keep the video package outside the worktree by default. Video creation does not authorize implementation, a branch, or additional publication. Distinguish observed behavior from proposed or hypothetical animation; label animation as illustration rather than test footage. Link the MP4 and any canonical local artifact in chat, using the invoking skill's ordinary closeout.
-
-### Gauntlet
-
-Use `review.md` as the persistent source of truth. For video, pass `review.md`, automated results, human observations, unverified areas, and the scoped conclusion. For HTML, show how changed behaviors map to those results and observations, state the scoped conclusion and next action, and derive the assessment from `review.md`.
-
-### Prelude
-
-For video, pass the evidence, root-cause interpretation, options, recommendation, and unresolved decisions. Keep the checkpoint quiz in local `quiz.md` for video-only delivery and link it beside the MP4. For HTML, present the issue interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. The report remains a communication artifact rather than an implementation plan.
-
-### Reality Check
-
-For video, pass confirmed findings and dispositions, source evidence, and review limits. Keep actionable findings in `review-findings.md` or the authorized GitHub review. For video-only delivery, keep actionable findings and the checkpoint quiz in local `review-findings.md` and link it beside the MP4. For HTML, make findings, severity, evidence, dispositions, scope, limits, and the next action easy to inspect; keep GitHub comments or `review-findings.md` as the actionable record.
-
-### Blueprint
-
-Create a companion explanation; `plan.md` and its checkpoint quiz remain canonical. For video, pass `plan.md`, the proposed mechanism, and risks; label proposed behavior as proposed. For HTML, explain the plan without replacing it.
+For video, invoke `/video-communication` after completing the invoking skill's work. Supply the audience, inspected revision, destination, and the report payload supplied by the invoking skill. Keep the video package outside the worktree by default. Video creation does not authorize implementation, a branch, or additional publication. Distinguish observed behavior from proposed or hypothetical animation; label animation as illustration rather than test footage. Link the MP4 and any canonical local artifact in chat, using the invoking skill's ordinary closeout.
 
 ## Delegated tasks
 

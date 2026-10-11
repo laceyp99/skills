@@ -8,7 +8,7 @@ description: >-
 
 # Grill Me
 
-Before writing local artifacts, read the applicable sections of [shared report and delegation guidance](../_shared/report-and-delegation.md).
+Before writing local artifacts, read only the shared [local artifact rules](../_shared/report-and-delegation.md#local-artifacts).
 
 Use this skill to pressure-test a plan or design until the important decisions are explicit. Keep the interaction simple: ask one high-leverage question, give the recommended answer, wait for the user's response, then continue from the new state.
 

@@ -8,8 +8,9 @@ description: >-
 
 # babysit
 
-Publish the current branch as a ready-for-review PR, wait for checks and one
-automated code review of the published head, then hand the PR back for human review.
+Publish the current branch as a ready-for-review PR, review the published head
+with a delegated reviewer alongside checks and any automated review, then hand
+the PR back for human review.
 This skill is the repository's only PR publication workflow; it may create
 focused corrective commit(s) when the user asks it to babysit or get the PR green.
 
@@ -27,7 +28,7 @@ Stop and report the exact state instead of guessing when:
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
 - The one corrective push has been made. Watch its CI, then hand the resulting
-  head to the user without another automated-review repair cycle.
+  head to the user without another review or repair cycle.
 - A planning or review artifact (`plan.md`, `decisions.md`, `review.md`,
   `review-findings.md`, or similar) would enter the outgoing diff. Never stage,
   commit, or publish these artifacts.
@@ -95,7 +96,7 @@ preserve and report its path on failure.
 Do not require a second confirmation for ordinary push, PR creation/update, or
 ready transition when this skill was explicitly invoked.
 
-### 4. Watch checks and automated findings
+### 4. Watch checks and review
 
 Determine expected verification from CI workflows, required checks, and checks
 reported on the PR. After the publication push, watch with
@@ -107,30 +108,38 @@ All expected applicable checks must succeed. Missing, pending, cancelled,
 failed, timed-out, action-required, or unexplained skipped checks are not
 green. If there is no CI, report verification as unavailable.
 
-Wait for an automated code review of that published head, including any review
-delivered through checks, comments, or inline threads. If none arrives, stop
-waiting 10 minutes after the initial head's CI completes (or 10 minutes after
-publication when there is no CI). Report the review as unavailable and continue
-to handoff; do not infer approval from silence. Inspect reviews, comments,
-status checks, and inline threads. Read
+Right after the publication push, start the delegated reviewer described in
+[references/delegated-review.md](references/delegated-review.md).
+
+Also collect automated reviews of the published head delivered through checks,
+comments, or inline threads. Triage those that arrive by the time the checks
+and delegated review finish; if an automated review check is still pending
+then, wait for it up to 10 minutes. Do not infer approval from silence. Read
 [references/review-threads.md](references/review-threads.md) when checking
-whether all automated review threads were retrieved. Identify automation from author
-identity and repository policy, not from the comment's prose. Human reviews
-remain for the user.
+whether all automated review threads were retrieved. Identify automation from
+author identity and repository policy, not from the comment's prose. Human
+reviews remain for the user.
 
-For each potentially blocking automated finding, classify it as valid and in scope, invalid, stale,
-already addressed, out of scope, or unclear by checking the current code and
-head. Fix valid in-scope findings together in corrective commit(s); report the
-disposition of every finding. Resolve only handled threads when permitted.
-Record issue-level findings or unresolvable threads instead of inventing a
-resolved state. Stop on an unclear potentially blocking finding.
+Triage every finding against the current code and head and the intent
+established in the conversation, plan, and codebase direction:
 
-If no correction is needed, finish after the initial head's checks and any
-automated review received within the wait are accounted for.
+- **Fix:** valid and in scope. Fix together in corrective commit(s).
+- **Reject:** invalid, stale, already addressed, or out of scope. Give the
+  reason, citing the code or the earlier decision it conflicts with.
+- **Needs user decision:** depends on intent, scope, or acceptable risk that
+  the work so far does not settle. Do not block on it; carry it to the handoff
+  with a recommendation.
+
+Resolve only handled threads when permitted. Record issue-level findings or
+unresolvable threads instead of inventing a resolved state. When no corrective
+push follows, report the triage in the handoff only; do not post a PR comment.
+
+If no correction is needed, finish after the initial head's checks and reviews
+are accounted for.
 
 ### 5. One corrective push
 
-For a failed check or valid in-scope automated finding:
+For a failed check or a finding triaged as Fix:
 
 1. Inspect the actual logs or finding and reproduce locally when possible.
 2. Make the smallest root-cause fix; do not bypass gates or patch unrelated
@@ -138,11 +147,11 @@ For a failed check or valid in-scope automated finding:
 3. Re-run relevant local checks as often as needed to diagnose the cause.
 4. Recheck the branch, PR head, base, working tree, and staged diff.
 5. Implement related corrections in focused commit(s), push them explicitly to
-   the PR head branch, verify the remote and PR heads, and comment briefly with
-   the corrective commit(s).
+   the PR head branch, verify the remote and PR heads, and post the review
+   summary comment from [references/pr-writing.md](references/pr-writing.md).
 6. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
    structured polling). Report its final check results, including failures or
-   unavailable checks. Do not wait for another automated code review or make
+   unavailable checks. Do not run or wait for another review or make
    another corrective push. Return the PR to the user for human review.
 
 Never push a PR correction directly to the repository's default branch unless
@@ -151,8 +160,10 @@ that branch is explicitly the PR head.
 ## Completion and handoff
 
 Report the PR URL, final head SHA, check results and the SHA they cover,
-automated code review outcome (including timeout or absence) and the disposition
-of each finding, corrective commit(s) or none, and local validation gaps. After a
+delegated and automated review outcomes (including unavailable or timed out),
+each finding with its verdict and reason, Needs user decision items with a
+recommendation, the review summary comment URL when posted, corrective commit(s) or none,
+and local validation gaps. After a
 corrective push, distinguish the new head's CI results from the review of the
 previous head and say that the new head awaits human review.
 

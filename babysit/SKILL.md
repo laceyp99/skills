@@ -8,9 +8,9 @@ description: >-
 
 # babysit
 
-Publish the current branch as a ready-for-review PR, review the published head
-with a delegated reviewer alongside checks and any automated review, then hand
-the PR back for human review.
+Publish the current branch as a ready-for-review PR, get its checks green,
+review it with a delegated reviewer and any automated review, then hand the PR
+back for human review.
 This skill is the repository's only PR publication workflow; it may create
 focused corrective commit(s) when the user asks it to babysit or get the PR green.
 
@@ -28,7 +28,8 @@ Stop and report the exact state instead of guessing when:
 - A failure is unclear, unrelated to the change, or would require changing CI,
   environment policy, or an unrelated test.
 - The one corrective push has been made. Watch its CI, then hand the resulting
-  head to the user without another review or repair cycle.
+  head to the user without another review or repair cycle; offer the delegated
+  review for that head instead.
 - A planning or review artifact (`plan.md`, `decisions.md`, `review.md`,
   `review-findings.md`, or similar) would enter the outgoing diff. Never stage,
   commit, or publish these artifacts.
@@ -71,13 +72,13 @@ CI workflows, and PR templates. Read `plan.md`, `decisions.md`, `review.md`,
 or `review-findings.md` when present for intent and validation context, but
 never treat them as proof or publish their private scratch content. Use
 [references/pr-writing.md](references/pr-writing.md) for titles, bodies,
-templates, and incremental comments.
+templates, incremental comments, and the review summary comment.
 
 Run the repository's documented or clearly inferable local checks before
 publication and after each repair. Report commands actually run; do not claim
 tests, approvals, screenshots, or CI results that were not observed. A local
-failure may be repaired whenever its cause is clear and the fix is focused.
-Local diagnostics do not count as a corrective push.
+failure found before publication may be repaired when its cause is clear and
+the fix is focused. Local diagnostics do not count as a corrective push.
 
 ### 3. Publish or update the PR
 
@@ -96,7 +97,7 @@ preserve and report its path on failure.
 Do not require a second confirmation for ordinary push, PR creation/update, or
 ready transition when this skill was explicitly invoked.
 
-### 4. Watch checks and review
+### 4. Watch checks
 
 Determine expected verification from CI workflows, required checks, and checks
 reported on the PR. After the publication push, watch with
@@ -108,13 +109,26 @@ All expected applicable checks must succeed. Missing, pending, cancelled,
 failed, timed-out, action-required, or unexplained skipped checks are not
 green. If there is no CI, report verification as unavailable.
 
-Right after the publication push, start the delegated reviewer described in
-[references/delegated-review.md](references/delegated-review.md).
+When a check fails with a clear cause, inspect its logs, reproduce locally when
+possible, and commit the smallest root-cause repair locally. Do not push it;
+the corrective push in step 6 carries it. Do not bypass gates or patch
+unrelated infrastructure.
+
+### 5. Delegated review
+
+Run the delegated review once per run, and only when step 3 pushed new commits.
+When step 3 pushed nothing, skip it and offer it in the handoff.
+
+Start the reviewer only after every expected check has passed, been repaired
+in a local commit, or been reported unavailable. Follow
+[references/delegated-review.md](references/delegated-review.md). Until the
+reviewer returns, do not edit, stage, commit, check out, or push anything in
+the worktree; it is reading the same checkout.
 
 Also collect automated reviews of the published head delivered through checks,
-comments, or inline threads. Triage those that arrive by the time the checks
-and delegated review finish; if an automated review check is still pending
-then, wait for it up to 10 minutes. Do not infer approval from silence. Read
+comments, or inline threads. Triage those that arrive by the time the delegated
+review returns; if an automated review check is still pending then, wait for it
+up to 10 minutes. Do not infer approval from silence. Read
 [references/review-threads.md](references/review-threads.md) when checking
 whether all automated review threads were retrieved. Identify automation from
 author identity and repository policy, not from the comment's prose. Human
@@ -123,7 +137,9 @@ reviews remain for the user.
 Triage every finding against the current code and head and the intent
 established in the conversation, plan, and codebase direction:
 
-- **Fix:** valid and in scope. Fix together in corrective commit(s).
+- **Fix:** confirmed, needs no user decision (Decision needed is None, or a
+  Technical choice where you take the recommendation), and the fix keeps the
+  change's intent. Fix without asking.
 - **Reject:** invalid, stale, already addressed, or out of scope. Give the
   reason, citing the code or the earlier decision it conflicts with.
 - **Needs user decision:** depends on intent, scope, or acceptable risk that
@@ -134,25 +150,24 @@ Resolve only handled threads when permitted. Record issue-level findings or
 unresolvable threads instead of inventing a resolved state. When no corrective
 push follows, report the triage in the handoff only; do not post a PR comment.
 
-If no correction is needed, finish after the initial head's checks and reviews
-are accounted for.
+If no correction is needed, finish once the checks and reviews are accounted
+for.
 
-### 5. One corrective push
+### 6. One corrective push
 
-For a failed check or a finding triaged as Fix:
+For local check repairs and findings triaged as Fix:
 
-1. Inspect the actual logs or finding and reproduce locally when possible.
-2. Make the smallest root-cause fix; do not bypass gates or patch unrelated
-   infrastructure.
-3. Re-run relevant local checks as often as needed to diagnose the cause.
-4. Recheck the branch, PR head, base, working tree, and staged diff.
-5. Implement related corrections in focused commit(s), push them explicitly to
-   the PR head branch, verify the remote and PR heads, and post the review
-   summary comment from [references/pr-writing.md](references/pr-writing.md).
-6. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
+1. Make the smallest root-cause fix for each finding.
+2. Re-run relevant local checks as often as needed to diagnose the cause.
+3. Recheck the branch, PR head, base, working tree, and staged diff.
+4. Commit related corrections in focused commit(s), push them with any check
+   repairs explicitly to the PR head branch, verify the remote and PR heads,
+   and post the review summary comment from
+   [references/pr-writing.md](references/pr-writing.md).
+5. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
    structured polling). Report its final check results, including failures or
-   unavailable checks. Do not run or wait for another review or make
-   another corrective push. Return the PR to the user for human review.
+   unavailable checks. Do not run another review or make another corrective
+   push. Return the PR to the user for human review.
 
 Never push a PR correction directly to the repository's default branch unless
 that branch is explicitly the PR head.
@@ -160,12 +175,18 @@ that branch is explicitly the PR head.
 ## Completion and handoff
 
 Report the PR URL, final head SHA, check results and the SHA they cover,
-delegated and automated review outcomes (including unavailable or timed out),
+delegated and automated review outcomes (including unavailable, failed, or
+timed out),
 each finding with its verdict and reason, Needs user decision items with a
-recommendation, the review summary comment URL when posted, corrective commit(s) or none,
-and local validation gaps. After a
-corrective push, distinguish the new head's CI results from the review of the
-previous head and say that the new head awaits human review.
+recommendation, the review summary comment URL when posted, corrective
+commit(s) or none, and local validation gaps. After a corrective push,
+distinguish the new head's CI results from the review of the previous head and
+say that the new head awaits human review.
+
+When the head changed after the review, or step 3 pushed nothing, offer to run
+the delegated reviewer on the current head once its checks pass. When the user
+settles a Needs user decision item, make the fix yourself or through worker
+subagents, then publish it as an update to the existing PR.
 
 For refusal, timeout, or incomplete verification, state the PR URL when known,
 the exact blocker or output, attempted repairs, preserved temp-file path, and

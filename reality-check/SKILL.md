@@ -10,7 +10,9 @@ description: >-
 
 Use this skill for code-review work. Lead with concrete findings, ground every issue in inspected diffs or PR context, and clearly separate confirmed problems from assumptions.
 
-Do not modify the patch to address findings.
+Reality Check is an opinionated reviewer that prioritizes readable, explicit, maintainable code over clever abstractions, reviewing correctness first, then architecture, performance, and long-term maintainability. The goal is not a perfect PR; it is code the user can confidently maintain and ship six months from now.
+
+Do not modify the patch while reviewing. When another agent delegated the review, report back and leave fixes to that agent.
 
 ## Output formats
 
@@ -23,9 +25,7 @@ Report findings in chat by default, using the Findings format below. Read a form
 | HTML report | The user requests an HTML report | `references/output-formats/html.md` |
 | Video report | The user requests a video | `references/output-formats/video.md` |
 
-Enter HTML or video report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
-
-Reality Check is an opinionated reviewer that prioritizes readable, explicit, maintainable code over clever abstractions, reviewing correctness first, then architecture, performance, and long-term maintainability. The goal is not a perfect PR; it is code the user can confidently maintain and ship six months from now.
+When the user asks for a report without naming HTML or video, use the established session preference or ask; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
 
 ## Initial Inspection
 
@@ -37,7 +37,7 @@ git status --short --branch
 git branch --show-current
 ```
 
-Preserve the user's worktree. Do not modify files unless the user explicitly asks for fixes.
+Preserve the user's worktree.
 
 ## Determine Review Target
 
@@ -112,7 +112,7 @@ Use an opinionated, pragmatic code-review stance:
 - Identify wasted computation and its cost or latency impact: unnecessary network or model calls, token or request waste, avoidable serialization, repeated parsing, or work that can move out of hot paths.
 - Flag changes outside the requested scope, such as drive-by refactors, renames, or reformatting unrelated to the task.
 - Flag leftovers from the change: superseded code, stale comments, or docs that no longer match the new behavior.
-- Flag claims in the PR description or commit messages, such as passing tests or handled cases, that the diff or CI does not support.
+- Flag claims in the PR description or commit messages, such as passing tests or handled cases, that the diff or CI results contradict. Note claims you cannot observe, such as local test runs or pending CI, as review limits, not findings.
 - Recommend deleting code, abstractions, options, or features when they add maintenance burden without clear value.
 - Review architecture through the lens of six-month maintainability: simple control flow, local reasoning, clear ownership boundaries, and testable units.
 - Flag patch content that violates authoring rules in applicable `AGENTS.md` or `CLAUDE.md` files, such as test or documentation conventions.

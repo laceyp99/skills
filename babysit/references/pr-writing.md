@@ -26,7 +26,8 @@ One to three plain-language sentences: what changes, why, and who notices.
 **Review weight:** Low | Medium | High - one-line reason
 
 ## Visual evidence
-One useful diagram or attached image, its takeaway, and the evidence commit.
+At least one useful visual, its takeaway, and the evidence commit. Add more
+when each answers a different review question.
 For an exempt change: one sentence explaining why a visual adds no value.
 
 ## Changes
@@ -69,11 +70,14 @@ that were not observed.
 
 ## Visual evidence
 
-Include one visual that explains the changed behavior or demonstrates the
-result. Prefer image attachments for before/after screenshots, comparison
-plots, and custom visualizations; use native Mermaid when a small diagram is
-clearer. Do not require both. For copy-only edits, routine dependency bumps,
-or other changes where a visual adds no information, state the reason briefly.
+Include at least one useful visual in every PR. Actively look for a visual
+that explains the change or demonstrates its result. Add further visuals when
+each helps answer a different review question, such as how the flow changed,
+what it looks like before and after, or how performance compares. Choose the
+formats that fit; there is no fixed maximum. Prefer image attachments for
+before/after screenshots, comparison plots, and custom visualizations; use
+native Mermaid when a small diagram is clearer. If no useful visual can be
+produced, briefly explain why in the Visual evidence section.
 Choose by what the reviewer needs to understand:
 
 - **Behavior or architecture:** Mermaid flow, sequence, or state diagram.

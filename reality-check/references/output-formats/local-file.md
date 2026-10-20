@@ -6,6 +6,6 @@ Write or update `review-findings.md` at the repository root using the Findings f
 
 ## Checkpoint quiz
 
-After findings are gathered, and before finalizing the record, write a quiz section into the very bottom of `review-findings.md`, after all findings, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings. Use decision-capture questions for unresolved User decision items; do not require user selection for None or Technical choice items unless they also depend on user intent. Confirm the user's selections with them and update the relevant Decision needed and Recommendation fields in `review-findings.md`.
+After findings are gathered, and before finalizing the record, use `/checkpoint-quiz` to write a markdown quiz section into the very bottom of `review-findings.md`, after all findings, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings. Use decision-capture questions for unresolved User decision items; do not require user selection for None or Technical choice items unless they also depend on user intent. Confirm the user's selections with them and update the relevant Decision needed and Recommendation fields in `review-findings.md`.
 
 In HTML report mode, deliver the quiz through `html.md` instead.

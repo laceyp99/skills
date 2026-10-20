@@ -14,16 +14,16 @@ Maintain `review.md` at the repository root as the review source of truth. Keep 
 
 ## Report mode
 
-Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+For substantive reports and visual explanations, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Honor the user's specified medium; keep short summaries in chat and create multiple formats only when requested. Do not ask for a medium when the default resolves it.
 
 For video, invoke `/video-communication` after completing the applicable checks. Pass `review.md`, the audience, inspected revision, automated results, human observations, unverified areas, conclusion, and destination. Label animation as illustration, not test footage. Keep the local video package outside the worktree and link it with `review.md`; publication remains a separate authorized workflow.
 
-For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` to create a local HTML report as the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. In chat, link the report and briefly state the conclusion.
+For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` for the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. Link the saved report in chat without repeating inline findings.
 
 ## Non-negotiable boundaries
 
 - Remain read-only with respect to the patch and committed project files. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
-- Permit writing only to `review.md`, plus the requested local communication artifact, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
+- Permit writing only to `review.md`, plus the local communication artifact selected above, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
 - Never run auto-fix or write-mode formatting commands. Prefer check-only forms.
 - Never install, upgrade, or change dependencies, lockfiles, migrations, generated code, or environment configuration without explicit user intent outside this review workflow.
 - An explicitly requested video permits isolated renderer setup outside the worktree under `/video-communication`; it does not permit changing the application's environment or dependencies.
@@ -208,4 +208,4 @@ At completion, include a concise handoff in chat and in the final assessment. Fa
 
 Human validation must cover behavior that automated checks cannot establish, such as what a user sees, understands, and experiences; interaction flow, responsive behavior, accessibility perception, real integrations, persistence across reloads, and environment-specific behavior. Do not treat running tests as a substitute for that observation when the patch has a meaningful human-visible or environment-dependent surface.
 
-In chat, summarize the current conclusion and point the user to `review.md`, or to the requested HTML/video report. Do not create PR comments or modify the repository unless the user separately asks for a different workflow.
+In chat, point the user to `review.md` or the saved report. Summarize the current conclusion only when it was not already delivered inline. Do not create PR comments or modify the repository unless the user separately asks for a different workflow.

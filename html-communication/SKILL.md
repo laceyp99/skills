@@ -1,18 +1,22 @@
 ---
 name: html-communication
 description: >-
-  Use when the user asks for a readable local HTML communication artifact, or another skill explicitly invokes an HTML report mode.
+  Prefer T3 inline HTML for substantive reports and visual explanations, or use when the user requests a local HTML artifact or another skill invokes HTML report mode.
   Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report".
-  Do not use for ordinary prose that does not need an HTML artifact.
+  Do not use for short answers, progress updates, or simple handoffs that read clearly in chat.
 ---
 
 # HTML Communication
 
-Use this skill when the requested deliverable is a visual, readable HTML document for internal communication, including a report mode invoked by another skill. The invoking skill defines the report's purpose and source of truth.
+Produce a readable HTML explanation or report. The invoking skill defines its purpose and source of truth; preserve canonical plans and review records.
 
 Keep the document clear, self-contained, and appropriate to the material. Choose the structure and visual treatment that best communicates the content; do not force every request into a fixed template.
 
-Produce one portable, self-contained UTF-8 HTML file with inline CSS and only necessary vanilla JavaScript. The whole report must work without external runtime dependencies or network access. Add controls only when they help the reader; preserve the host's requested variations and their count.
+Prefer T3 inline delivery when `html_preview` and `html_render` are available. Honor explicit output requests. Without inline delivery, use plain chat unless a local HTML artifact is requested or required by the host. Video remains opt-in.
+
+Use one self-contained document with inline CSS and only necessary vanilla JavaScript, without external runtime dependencies or network access. Choose one presentation by default; add variations only when requested. Share content between requested views instead of copying report bodies. Add controls only when they help the reader.
+
+Save a portable UTF-8 file for substantive reports, explicit file requests, or host requirements. A brief inline visual explanation need not create a second artifact. Keep one HTML content value for the file, when needed, and tool calls; regenerate it only to fix a problem. Keep file styling portable while honoring T3's inline layout guidance.
 
 This is a communication artifact, not a coding plan artifact. If the user wants an executable project plan, implementation plan, or engineering handoff, use the `/blueprint` skill instead.
 
@@ -22,11 +26,18 @@ When invoked by `/checkpoint-quiz`, add an interactive section using its supplie
 
 Reveal the contract's feedback after selection, using accessible controls and a readable feedback region. Keep selections ephemeral within the page, with no persistence or transmission.
 
-## Checks and Delivery
+## Checks and delivery
 
-- Use existing repository checks where applicable. Otherwise use an explicit available interpreter and read the file as UTF-8. `HTMLParser.feed()` is only a parsing check; it does not establish valid markup, usable layout, or working JavaScript. Check JavaScript syntax separately when scripts are present.
-- Inspect the rendered layout and console output, and exercise meaningful controls, including quiz feedback. Check a narrow layout when wrapping, navigation, or controls could affect usability. Keep parsing, JavaScript syntax, visual inspection, and interaction results distinct.
-- When T3's `html_preview` and `html_render` are available, follow their current tool guidance. Keep one HTML content value for the local file and both calls; do not regenerate it or print it between calls. Preview before rendering, inspect the screenshot and console output, and verify controls with available browser tools or in-page checks. Fix observed problems and recheck affected behavior before `html_render`. Keep local-file styling portable while honoring T3's inline layout guidance.
-- Without T3 inline delivery, deliver the local file and use an available browser for visual and interaction checks. Do not add a framework, dependency, app server, or general-purpose validation system for this workflow.
+- Use existing repository checks where applicable. Check a saved file's UTF-8 encoding and check JavaScript syntax once when scripts are present. A separate `HTMLParser.feed()` pass is optional and establishes parsing only, not valid markup, usable layout, or working controls.
+- Default to one `html_preview` before `html_render`, following current tool guidance. Choose a width that covers the main layout risk, including narrow wrapping or navigation when relevant. Inspect its screenshot and console output. Exercise meaningful controls, including quiz feedback, through available browser tools or small in-page assertions that emit compact console results in that preview. Keep syntax, visual, and interaction evidence distinct.
+- Add a preview only to check an observed fix or a named coverage gap, such as a materially different layout, hidden view, keyboard behavior, or control state. Recheck behavior affected by an edit before delivery. One preview is a default, not permission to skip a needed check. Stop when applicable checks pass; do not repeat successful checks for cosmetic reassurance.
+- Pass the same current HTML value to preview and render without printing the document between calls. Both tools require the full HTML input; reuse does not remove that transmission. Forward screenshots as images and summarize dimensions, console diagnostics, and check results. Do not stringify whole results containing encoded images. Do not assume undocumented path inputs, attachment handles, or screenshot-suppression options exist.
+- Without T3 inline delivery, validate a requested local file with an available browser. Do not add a framework, dependency, app server, or general-purpose validation system for this workflow.
 
-Follow the host skill's closeout format and retain a link to the local artifact. T3 rendering is inline delivery, not a replacement for the portable file. Stop after delivery and applicable checks; if a check fails or is unavailable, report the exact failure or verification gap without claiming validated output.
+## Interaction and closeout
+
+Inline HTML supports reader interaction through its JavaScript. Selections do not by themselves message the agent, record decisions, or authorize actions. Keep report selections ephemeral unless the user has requested a separate recording workflow.
+
+The collaborative browser is a separate automation surface. Use its status, open, snapshot, and interaction tools according to current ownership rules when browser testing is needed. Do not assume an inline attachment has an automatable tab or shared state; verify access first. In-page assertions can check report control logic, but do not establish keyboard usability or replace a real browser journey when that behavior matters.
+
+Follow the host's closeout format and link a local file when one was created. After inline delivery, keep chat to information the page does not already convey. Stop after delivery and applicable checks. If a failure cannot be resolved with a focused correction, or a check is unavailable, report the exact failure or verification gap without claiming validated output.

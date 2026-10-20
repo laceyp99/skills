@@ -16,7 +16,7 @@ Create one `plan.md`-style Markdown artifact that a human can review and a codin
 
 ## Optional report mode
 
-Create a companion report only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue the plan without generating a report. Do not default to HTML or video. For requested HTML, use `/html-communication` for a companion explanation; `plan.md` remains canonical. Create multiple formats only when requested.
+When a companion visual explanation would help the user review the plan, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Honor explicit output requests; a short handoff can stay in chat. Keep `plan.md` canonical and summarize the decisions rather than copying the whole plan into a second report. Do not ask for a medium when the default resolves it. Create multiple formats only when requested.
 
 When the user requests a narrated walkthrough, invoke `/video-communication` after drafting the plan. Supply the audience, `plan.md`, inspected revision, proposed mechanism, risks, and requested destination. Label proposed behavior as proposed. Keep the video package outside the worktree by default; the plan and its checkpoint quiz remain canonical, local, and untracked. Video creation does not authorize implementation, a branch, or publication.
 

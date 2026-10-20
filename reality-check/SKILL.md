@@ -16,16 +16,16 @@ Do not modify the patch while reviewing. When another agent delegated the review
 
 ## Output formats
 
-Report findings in chat by default, using the Findings format below. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
+Use the Findings format below. For substantive reader-facing reviews, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Keep short summaries in chat, honor explicit output requests, and return delegated findings directly to the parent without creating a presentation. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
 
 | Format | Use when | Read |
 |---|---|---|
 | Local record and quiz | A local review has findings that may need implementation work | `references/output-formats/local-file.md` |
 | PR comments | The user explicitly asks to comment on the PR | `references/output-formats/pr-comments.md` |
-| HTML report | The user requests an HTML report | `references/output-formats/html.md` |
+| HTML report | T3 inline HTML is selected by default, or the user requests HTML | `references/output-formats/html.md` |
 | Video report | The user requests a video | `references/output-formats/video.md` |
 
-When the user asks for a report without naming HTML or video, use the established session preference or ask; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+Do not ask for a medium when the default resolves it. Video and multiple formats require a request. Preserve local review records and authorized PR comments as the actionable source of truth.
 
 ## Initial Inspection
 

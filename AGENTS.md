@@ -4,6 +4,12 @@ This is a shared skills repository used across multiple machines. It is the sour
 
 Assume any mention of skills are the skills existing within this workspace, unless further specified. When creating or editing a skill, make and validate the change here, inside the current worktree or another explicitly requested in-repo path. Do not modify global skill directories such as `$CODEX_HOME/skills`, `~/.codex/skills`, `~/.agents/skills` or any other global `~/` paths during ordinary repository work. Only copy, install, or update a global skill when the user explicitly requests that separate downstream action.
 
+## Communication defaults
+
+Prefer T3 inline HTML for substantive reports and visual explanations when `html_preview` and `html_render` are available. Use the repository's `html-communication` skill for delivery and proportionate validation. Keep short answers, progress updates, and simple handoffs in plain chat; honor explicit output requests.
+
+Keep canonical plans and review records in their established formats. Use the destination's native format for PR bodies and comments. Inline delivery does not authorize publishing artifacts, transmitting page selections, or changing global skill directories.
+
 ## Skill catalog completion rule
 
 Every root-level directory containing `SKILL.md` must appear exactly once in both the `README.md` Included Skills table and the `skills` array in `.claude-plugin/plugin.json` (as `./<directory-name>`).

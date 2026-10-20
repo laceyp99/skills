@@ -70,7 +70,7 @@ that were not observed.
 
 ## Visual evidence
 
-Include at least one useful visual in every PR. Actively look for a visual
+Include one useful visual in every PR. Actively look for a visual
 that explains the change or demonstrates its result. Add further visuals when
 each helps answer a different review question, such as how the flow changed,
 what it looks like before and after, or how performance compares. Choose the

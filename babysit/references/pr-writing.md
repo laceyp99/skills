@@ -127,9 +127,9 @@ new syntax may not be supported by GitHub's deployed Mermaid version.
 
 ### Attach and verify images
 
-Check each file's byte size before upload. GitHub's documented limit is
-10 MB per image or GIF. Keep files below that limit. Crop, resize, compress,
-or split oversized visuals while preserving readable labels. Prefer PNG for screenshots,
+Check each file's byte size before upload. Keep each image or GIF below 10 MB.
+Preserve readable text and labels; crop, resize, compress, or split only when
+needed. Prefer PNG for screenshots,
 SVG for static vector plots, and JPEG for photographic content. Use GIF only
 when motion helps explain the change.
 See [GitHub's attachment limits](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)

@@ -88,7 +88,7 @@ Choose by what the reviewer needs to understand:
   scales and show variability when measured; never invent benchmark values.
 - **Other changes:** customize the visual to the question, such as a dependency
   graph, heatmap, waveform, spectrogram, or annotated terminal capture. Export
-  custom charts and HTML views to PNG or SVG for inline review.
+  custom charts to PNG or SVG for inline review.
 
 Give each visual a short takeaway and descriptive alt text. Record the commit
 represented by captured or measured evidence; identify the baseline for
@@ -96,9 +96,8 @@ comparisons. Separate measured results from explanatory illustrations. Inspect
 the rendered image for readable labels, cropping, and light/dark contrast.
 Refresh affected visuals when later commits change what they show.
 
-For interactive HTML or JavaScript charts, attach a static preview and link to
-an accessible report when one exists. PR Markdown does not run arbitrary HTML
-apps or iframe embeds. Do not create public hosting just to satisfy this rule.
+Use native Mermaid diagrams or image attachments for PR visuals. Do not include
+HTML or JavaScript artifacts or interactive report links as visual evidence.
 
 ### Mermaid diagrams
 
@@ -128,16 +127,13 @@ new syntax may not be supported by GitHub's deployed Mermaid version.
 
 ### Attach and verify images
 
-Check each file's byte size before upload. GitHub's documented limits are
-10 MB per image or GIF, 10 MB per video for free repository-owner plans,
-100 MB per video for paid plans subject to uploader eligibility, and 25 MB for
-other attachments. Keep files below the applicable limit; use the 10 MB video
-limit unless the higher allowance is verified. Crop, resize, compress, or split
-oversized visuals while preserving readable labels. Prefer PNG for screenshots,
-SVG for static vector plots, and JPEG for photographic content. Use video or
-GIF only when motion helps explain the change; prefer H.264 MP4 for video.
+Check each file's byte size before upload. GitHub's documented limit is
+10 MB per image or GIF. Keep files below that limit. Crop, resize, compress,
+or split oversized visuals while preserving readable labels. Prefer PNG for screenshots,
+SVG for static vector plots, and JPEG for photographic content. Use GIF only
+when motion helps explain the change.
 See [GitHub's attachment limits](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
-if an upload is rejected or plan eligibility is unclear.
+if an upload is rejected.
 
 Check the installed command's help for `--attach` before relying on it. Where
 supported, write local image paths into the body file and pass the same paths
@@ -159,9 +155,9 @@ filesystem paths in a published body. Do not add generated images to Git solely
 to work around an unavailable uploader. See
 [CLI attachment behavior](https://docs.github.com/en/github-cli/github-cli/attaching-files-with-github-cli).
 
-After posting, verify that the images load and any report links work for the
-intended reviewers. Do not use expiring Actions artifact download URLs as
-inline image sources. If uploading or rendering is blocked, retain the local
+After posting, verify that the images load for the intended reviewers. Do not
+use expiring Actions artifact download URLs as inline image sources. If
+uploading or rendering is blocked, retain the local
 assets and report the blocker and unverified visuals in the handoff; do not
 claim they were published or replace missing evidence with fabricated output.
 

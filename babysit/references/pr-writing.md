@@ -26,7 +26,7 @@ One to three plain-language sentences: what changes, why, and who notices.
 **Review weight:** Low | Medium | High - one-line reason
 
 ## Visual evidence
-At least one useful visual, its takeaway, and the evidence commit. Add more
+One useful visual, its takeaway, and the evidence commit. Add more
 when each answers a different review question.
 For an exempt change: one sentence explaining why a visual adds no value.
 

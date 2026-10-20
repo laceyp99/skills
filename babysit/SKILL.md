@@ -73,7 +73,7 @@ or `review-findings.md` when present for intent and validation context, but
 never treat them as proof or publish their private scratch content. Use
 [references/pr-writing.md](references/pr-writing.md) for titles, bodies,
 templates, visual evidence and attachment limits, incremental comments, and
-the review summary comment. Actively seek at least one useful visual in each
+the review summary comment. Actively seek one useful visual in each
 PR body and add more when they answer distinct review questions. Explain a
 brief exemption if none can be produced; prefer image attachments for
 screenshots and plots.

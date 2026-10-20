@@ -108,6 +108,38 @@ Write `Unchanged.` under Merge danger when the update does not move the
 assessment. Otherwise restate only the lines that changed, and update the PR
 body so its Merge danger section stays current.
 
+## Review summary comment
+
+After a corrective push, post one comment covering every finding from the
+delegated and automated reviews and every check repair. It replaces the
+incremental update comment for that push. Post nothing when no corrective push
+is made:
+
+```markdown
+## Review summary
+Reviewed `<base-sha>..<head-sha>` with <reviewer(s)>.
+
+| Finding | Verdict | Reason |
+|---|---|---|
+| RC-001 Short title | Fixed in `<sha>` | ... |
+| RC-002 Short title | Rejected | ... |
+| <bot> [thread](<url>) Short title | Needs user decision | ... |
+
+## Check repairs
+- `<check>` failed because ...; fixed in `<sha>`.
+
+## Testing
+- `command` - passed
+
+## Merge danger
+- Unchanged.
+```
+
+Use the reviewer's finding ID, or the bot name and thread link when there is
+none. Write `No findings.` in place of an empty table, and omit
+`Check repairs` when there were none. State reasons in terms of the code and
+project direction; do not quote private conversation or scratch artifacts.
+
 ## Templates and plans
 
 Preserve applicable template headings and leave checklist items unchecked unless

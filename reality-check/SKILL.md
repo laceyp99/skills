@@ -10,17 +10,22 @@ description: >-
 
 Use this skill for code-review work. Lead with concrete findings, ground every issue in inspected diffs or PR context, and clearly separate confirmed problems from assumptions.
 
-For GitHub PRs, use inline review comments when the user asks for comments or when the review is being conducted as part of the PR workflow. For a local review artifact to route back into `/assembly` or `/prelude`, maintain `review-findings.md` at the repository root as an untracked-by-default record of actionable findings and recommended next actions. Do not modify the patch to address findings.
+Reality Check is an opinionated reviewer that prioritizes readable, explicit, maintainable code over clever abstractions, reviewing correctness first, then architecture, performance, and long-term maintainability. The goal is not a perfect PR; it is code the user can confidently maintain and ship six months from now.
 
-## Report mode
+Do not modify the patch while reviewing. When another agent delegated the review, report back and leave fixes to that agent.
 
-Enter report mode only when requested, using the user's specified medium or established session preference. Ask if the medium is missing; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+## Output formats
 
-For video, invoke `/video-communication` after the review. Pass the audience, inspected revision, confirmed findings using the Findings format below, source evidence for factual grounding, review limits, and destination. Apply the same reader-facing content rules to the video; do not add evidence or disposition sections. Keep actionable findings in `review-findings.md` or the authorized GitHub review. The video package stays outside the worktree by default; it does not authorize code changes or additional publication. For a video-only report, keep the actionable findings and checkpoint quiz in local untracked `review-findings.md` and link it beside the MP4; use the ordinary chat closeout format with the video link.
+Report findings in chat by default, using the Findings format below. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
 
-For an HTML Reality Check report, perform the review and use `/html-communication` to create a local HTML report as the main reader-facing result. Use the Findings format below, making severity, fix complexity, decision needs, review scope and limits, and the next action easy to inspect. Choose visuals or interaction to suit the reviewed change; do not impose a fixed layout. Keep GitHub comments or `review-findings.md` as the actionable record where applicable. In chat, link the report and briefly state the review conclusion and next action.
+| Format | Use when | Read |
+|---|---|---|
+| Local record and quiz | A local review has findings that may need implementation work | `references/output-formats/local-file.md` |
+| PR comments | The user explicitly asks to comment on the PR | `references/output-formats/pr-comments.md` |
+| HTML report | The user requests an HTML report | `references/output-formats/html.md` |
+| Video report | The user requests a video | `references/output-formats/video.md` |
 
-Reality Check is an opinionated, language-aware reviewer that prioritizes readable, explicit, maintainable code over clever abstractions. Review like an experienced engineer with healthy skepticism toward complexity, AI-generated code, and unnecessary work. Focus on correctness first, then architecture, performance, and long-term maintainability. When Python is present, apply especially close scrutiny to Python-specific correctness, packaging, typing, test, and runtime issues. Pay special attention to AI workflows by questioning model usage, validating LLM outputs, identifying wasted computation, and spotting opportunities to simplify or eliminate code. Recommend deleting abstractions or features when they do not provide meaningful value. The goal is not to produce a perfect PR; it is to make sure the code is something the user can confidently maintain and ship six months from now.
+When the user asks for a report without naming HTML or video, use the established session preference or ask; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
 
 ## Initial Inspection
 
@@ -32,7 +37,7 @@ git status --short --branch
 git branch --show-current
 ```
 
-Preserve the user's worktree. Do not modify files unless the user explicitly asks for fixes.
+Preserve the user's worktree.
 
 ## Determine Review Target
 
@@ -102,11 +107,15 @@ Use an opinionated, pragmatic code-review stance:
 - Prioritize bugs, behavioral regressions, security/privacy issues, data loss risks, CI or packaging risks, and important edge cases.
 - Prefer readable, explicit, well-typed, testable code over clever, overly generic, or speculative abstractions.
 - For Python changes, check typing, import boundaries, package/module layout, async/sync mistakes, exception handling, context managers, pathlib versus string paths, mutable defaults, dataclass/Pydantic use, serialization boundaries, pytest coverage, and unnecessary dependency or environment assumptions.
-- Be skeptical of AI-generated-looking code: duplicated logic, vague wrappers, unnecessary indirection, broad exception handling, unvalidated outputs, excessive configurability, and code that appears to solve imagined requirements.
-- For AI and LLM workflows, check model selection, prompt/output contracts, retry behavior, failure modes, cost and latency impact, token or request waste, validation of model outputs, and fallback behavior.
-- Identify wasted computation, unnecessary network/model calls, avoidable serialization, repeated parsing, or work that can be moved out of hot paths.
+- Be skeptical of unnecessary complexity: duplicated logic, vague wrappers, unnecessary indirection, broad exception handling, unvalidated outputs, excessive configurability, and code that appears to solve imagined requirements.
+- For AI and LLM workflows, check model selection, prompt/output contracts, validation of model outputs, retry, fallback, and failure behavior.
+- Identify wasted computation and its cost or latency impact: unnecessary network or model calls, token or request waste, avoidable serialization, repeated parsing, or work that can move out of hot paths.
+- Flag changes outside the requested scope, such as drive-by refactors, renames, or reformatting unrelated to the task.
+- Flag leftovers from the change: superseded code, stale comments, or docs that no longer match the new behavior.
+- Flag claims in the PR description or commit messages, such as passing tests or handled cases, that the diff or CI results contradict. Note claims you cannot observe, such as local test runs or pending CI, as review limits, not findings.
 - Recommend deleting code, abstractions, options, or features when they add maintenance burden without clear value.
 - Review architecture through the lens of six-month maintainability: simple control flow, local reasoning, clear ownership boundaries, and testable units.
+- Flag patch content that violates authoring rules in applicable `AGENTS.md` or `CLAUDE.md` files, such as test or documentation conventions.
 - Report missing tests as findings only when tied to a concrete regression risk that existing coverage does not catch.
 - Avoid broad style commentary unless it affects correctness, maintainability, or future defect risk.
 - Do not invent issues. If there are no concrete findings, say so clearly.
@@ -154,33 +163,9 @@ Keep severity, fix complexity, and decision needs independent. A difficult fix c
 
 Keep straightforward findings concise. Expand only to explain meaningful consequences, dependencies, uncertainty, or trade-offs; do not add detail solely because severity is high. Avoid repeating the problem in the recommendation or turning a finding into an implementation plan.
 
-## Checkpoint Quiz Section
-
-After findings are gathered, and before finalizing the review record, write a quiz section into the very bottom of `review-findings.md`, after all findings, so the user can review the record and then test what they retained. Source questions from the highest-severity confirmed findings. Use decision-capture questions for unresolved User decision items; do not require user selection for None or Technical choice items unless they also depend on user intent. Confirm the user's selections with them and update the relevant Decision needed and Recommendation fields in `review-findings.md`, or fold them into the final report and authorized inline comments when no local file is used.
-
-In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
-
-## Optional PR Commenting
-
-Only add GitHub PR comments when the user explicitly asks to comment on the PR.
-
-When commenting:
-
-- Comment only on actionable issues.
-- Do not duplicate existing comments or unresolved threads.
-- Prefer inline comments for line-specific findings.
-- Use a general PR comment only for cross-cutting concerns.
-- Summarize exactly what comments were added.
-
-If line-specific commenting is not possible with available tools, report the blocker and provide suggested comment text instead of guessing.
-
 ## Final Response
 
-In HTML report mode, put the detailed findings in the HTML report; use the final chat reply to link it and summarize the conclusion and next action. Otherwise, lead with findings using the Findings format above.
-
-When the review is local and findings may need implementation work, write or update `review-findings.md` using the same findings format, with a recommended `/assembly` task or `/prelude` question. Keep it untracked and never stage or commit it. For GitHub reviews, the inline comments remain the primary record; use the local file only when a durable local handoff is useful.
-
-Then include:
+Lead with findings using the Findings format above, unless a loaded format file says otherwise. Then include:
 
 - Open questions or assumptions.
 - What was inspected.

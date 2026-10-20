@@ -61,11 +61,9 @@ Review PR #<number> in <owner/repo> as a read-only reviewer.
 First run `git rev-parse HEAD` in the worktree. If it does not equal <head-sha>,
 stop and report the mismatch.
 
-Use the reality-check skill to review <base-sha>..<head-sha>, invoked the way
-your harness runs skills (for example `/reality-check` in Claude Code or
-`$reality-check` in Codex). If the skill is unavailable, stop and say so. Read
-the PR title and description with `gh pr view <number> --repo <owner/repo>`
-for the requested scope and claims.
+Use the reality-check skill to review <base-sha>..<head-sha>. If the skill is 
+unavailable, stop and say so. Read the PR title and description with 
+`gh pr view <number> --repo <owner/repo>` for the requested scope and claims.
 
 Do not edit files, commit, push, or post PR comments. Report in chat only:
 findings in the Reality Check findings format, then open questions and review

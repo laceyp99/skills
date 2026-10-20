@@ -25,12 +25,9 @@ One to three plain-language sentences: what changes, why, and who notices.
 
 **Review weight:** Low | Medium | High - one-line reason
 
-## How it works
-```mermaid
-flowchart LR
-    A[Request] --> B[Changed component]
-    B --> C[(Store)]
-```
+## Visual evidence
+One useful diagram or attached image, its takeaway, and the evidence commit.
+For an exempt change: one sentence explaining why a visual adds no value.
 
 ## Changes
 - ...
@@ -56,8 +53,8 @@ Section rules:
 - **Review weight** tells the reviewer how carefully to look. Derive it from
   the merge danger assessment: a one-way door or a wide blast radius is at
   least Medium; a one-way door with a wide blast radius is High.
-- **How it works** is optional. Include it only when the rules in Mermaid
-  diagrams apply; otherwise omit the heading entirely.
+- **Visual evidence** contains the simplest useful visual under the rules
+  below, or a brief exemption. Replace the example instructions with evidence.
 - **Changes** groups the diff by behavior or area, not by commit. Call out the
   files that most deserve review attention.
 - **Testing** appears only when tests were run or a passing result was directly
@@ -70,7 +67,36 @@ Section rules:
 Never claim approvals, screenshots, deployments, passing CI, or test results
 that were not observed.
 
-## Mermaid diagrams
+## Visual evidence
+
+Include one visual that explains the changed behavior or demonstrates the
+result. Prefer image attachments for before/after screenshots, comparison
+plots, and custom visualizations; use native Mermaid when a small diagram is
+clearer. Do not require both. For copy-only edits, routine dependency bumps,
+or other changes where a visual adds no information, state the reason briefly.
+Choose by what the reviewer needs to understand:
+
+- **Behavior or architecture:** Mermaid flow, sequence, or state diagram.
+- **UI or rendered output:** labeled before/after images captured with the same
+  viewport, input, and relevant state; annotate the changed area.
+- **Performance or data:** a comparison plot from observed measurements. Name
+  the baseline, units, sample size, and measurement conditions. Use comparable
+  scales and show variability when measured; never invent benchmark values.
+- **Other changes:** customize the visual to the question, such as a dependency
+  graph, heatmap, waveform, spectrogram, or annotated terminal capture. Export
+  custom charts and HTML views to PNG or SVG for inline review.
+
+Give each visual a short takeaway and descriptive alt text. Record the commit
+represented by captured or measured evidence; identify the baseline for
+comparisons. Separate measured results from explanatory illustrations. Inspect
+the rendered image for readable labels, cropping, and light/dark contrast.
+Refresh affected visuals when later commits change what they show.
+
+For interactive HTML or JavaScript charts, attach a static preview and link to
+an accessible report when one exists. PR Markdown does not run arbitrary HTML
+apps or iframe embeds. Do not create public hosting just to satisfy this rule.
+
+### Mermaid diagrams
 
 GitHub renders fenced `mermaid` blocks in PR bodies. Use a diagram when it
 shows something faster than prose:
@@ -81,11 +107,59 @@ shows something faster than prose:
   flows that the change touches.
 - `stateDiagram-v2` for changed status or lifecycle transitions.
 
-Omit the diagram for single-file fixes, copy changes, dependency bumps, and
-anything a diagram would only restate. Keep diagrams to about 12 nodes, draw
-only what the diff shows, and highlight the changed part, for example with a
-`classDef changed` style or a `(new)` / `(changed)` label. Quote labels that
-contain punctuation (`A["parse(input)"]`) so the diagram renders.
+Keep diagrams to about 12 nodes, draw only what the diff shows, and highlight
+the changed part with a `classDef changed` style or a `(new)` / `(changed)`
+label. For example, when validation moves ahead of a write:
+
+```mermaid
+flowchart LR
+    A[Request] --> B{"Valid? (changed)"}
+    B -->|Yes| C[(Store)]
+    B -->|No| D[Reject]
+```
+
+Quote labels that
+contain punctuation (`A["parse(input)"]`). Preview the actual GitHub rendering;
+new syntax may not be supported by GitHub's deployed Mermaid version.
+
+### Attach and verify images
+
+Check each file's byte size before upload. GitHub's documented limits are
+10 MB per image or GIF, 10 MB per video for free repository-owner plans,
+100 MB per video for paid plans subject to uploader eligibility, and 25 MB for
+other attachments. Keep files below the applicable limit; use the 10 MB video
+limit unless the higher allowance is verified. Crop, resize, compress, or split
+oversized visuals while preserving readable labels. Prefer PNG for screenshots,
+SVG for static vector plots, and JPEG for photographic content. Use video or
+GIF only when motion helps explain the change; prefer H.264 MP4 for video.
+See [GitHub's attachment limits](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files)
+if an upload is rejected or plan eligibility is unclear.
+
+Check the installed command's help for `--attach` before relying on it. Where
+supported, write local image paths into the body file and pass the same paths
+with repeated `--attach` flags; the CLI rewrites them to uploaded URLs:
+
+```markdown
+![Before: validation writes an invalid record](before.png)
+![After: validation rejects the record before writing](after.png)
+```
+
+```text
+gh pr create --repo OWNER/REPO --base BASE --head HEAD --body-file pr-body.md --attach before.png --attach after.png
+```
+
+Use the corresponding `gh pr edit` or `gh pr comment` command for updates.
+Uploads require repository push access. If the flag is unavailable, use browser
+uploads or existing image URLs accessible to reviewers; do not leave local
+filesystem paths in a published body. Do not add generated images to Git solely
+to work around an unavailable uploader. See
+[CLI attachment behavior](https://docs.github.com/en/github-cli/github-cli/attaching-files-with-github-cli).
+
+After posting, verify that the images load and any report links work for the
+intended reviewers. Do not use expiring Actions artifact download URLs as
+inline image sources. If uploading or rendering is blocked, retain the local
+assets and report the blocker and unverified visuals in the handoff; do not
+claim they were published or replace missing evidence with fabricated output.
 
 ## Incremental updates
 
@@ -107,6 +181,8 @@ change since the last pushed commit visible on the PR:
 Write `Unchanged.` under Merge danger when the update does not move the
 assessment. Otherwise restate only the lines that changed, and update the PR
 body so its Merge danger section stays current.
+Refresh the body's affected visual evidence and include a new image or diagram
+in the update only when it helps explain the incremental change.
 
 ## Review summary comment
 
@@ -146,7 +222,7 @@ Preserve applicable template headings and leave checklist items unchecked unless
 directly verified. Remove placeholder instructions when replacing them with
 real content; do not invent issue links, screenshots, reviewers, approvals, or
 deployment notes. Unless the template already has an equivalent, add the
-Review weight line near the top, a diagram when the Mermaid diagram rules
-apply, and `## Merge danger` as the last section. If `plan.md` exists, use it
+Review weight line near the top, a Visual evidence section following the rules
+above, and `## Merge danger` as the last section. If `plan.md` exists, use it
 as intent context, not proof; the observed diff and command output win when
 they conflict.

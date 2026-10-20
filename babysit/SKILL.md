@@ -72,7 +72,9 @@ CI workflows, and PR templates. Read `plan.md`, `decisions.md`, `review.md`,
 or `review-findings.md` when present for intent and validation context, but
 never treat them as proof or publish their private scratch content. Use
 [references/pr-writing.md](references/pr-writing.md) for titles, bodies,
-templates, incremental comments, and the review summary comment.
+templates, visual evidence and attachment limits, incremental comments, and
+the review summary comment. Include a useful visual or a brief exemption in
+each PR body; prefer image attachments for screenshots and plots.
 
 Run the repository's documented or clearly inferable local checks before
 publication and after each repair. Report commands actually run; do not claim

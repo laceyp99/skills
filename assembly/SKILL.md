@@ -22,7 +22,9 @@ git diff --stat
 git diff --cached --stat
 ```
 
-Read `plan.md` or `decisions.md` files fully before making changes, if they exist. Identify planning artifacts that must remain untracked and uncommitted, including `plan.md`, `decisions.md`, or another scratch or review markdown file. Check whether Git already tracks each artifact before writing it. Leave untracked artifacts untracked; if one is tracked unexpectedly, warn the user and do not change its tracking state or include its modifications in a commit.
+Read any workspace plans and decisions fully before making changes. New session Markdown defaults to repository-root `artifacts/<filename>`. Check whether Git tracks each target before writing; warn if unexpectedly tracked and do not change its tracking state or include its modifications in a commit.
+
+Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 
 If `plan.md` is missing, ensure you have enough conversational context to change intent map into work units, if not, stop and ask clarifying questions for direction.
 

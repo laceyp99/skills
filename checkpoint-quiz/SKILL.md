@@ -23,6 +23,8 @@ Keep comprehension answers hidden until the user reveals them or selects an opti
 
 Write the quiz as a section in the host's markdown artifact:
 
+Reuse the host's resolved artifact path; do not create a separate quiz file when the host owns a record. When a standalone Markdown quiz is requested without a host record, default to repository-root `artifacts/quiz.md`. Check whether Git tracks the target before writing; warn if unexpectedly tracked and preserve its tracking state. Never stage or commit generated quizzes. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
+
 Use short lettered options (A/B/C/D). Put comprehension feedback inside a `<details><summary>Reveal answer</summary>` block so the user can answer first, then reveal.
 
 ## HTML Report Mode

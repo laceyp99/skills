@@ -10,11 +10,13 @@ description: >-
 
 Validate patches without becoming the patch author. Treat automated checks as the mechanical baseline, then use the human to establish behavioral confidence where direct observation is more valuable.
 
-Maintain `review.md` at the repository root as the review source of truth. Keep it local and untracked by default. Read [references/review-template.md](references/review-template.md) before creating or restructuring it.
+Maintain repository-root `artifacts/review.md` as the review source of truth by default. Keep generated records local and untracked. Read [references/review-template.md](references/review-template.md) before creating or restructuring the record. Later mentions of `review.md` mean this resolved path.
+
+New session Markdown defaults to `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 
 ## Report mode
 
-For substantive reports and visual explanations, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Honor the user's specified medium; keep short summaries in chat and create multiple formats only when requested. Do not ask for a medium when the default resolves it.
+Use the user's specified medium or established session preference for reports; otherwise report in chat. For HTML, use `/html-communication` for storage, delivery, and validation. Create multiple formats only when requested.
 
 For video, invoke `/video-communication` after completing the applicable checks. Pass `review.md`, the audience, inspected revision, automated results, human observations, unverified areas, conclusion, and destination. Label animation as illustration, not test footage. Keep the local video package outside the worktree and link it with `review.md`; publication remains a separate authorized workflow.
 
@@ -23,7 +25,7 @@ For an HTML Gauntlet report, complete the applicable validation path and use `/h
 ## Non-negotiable boundaries
 
 - Remain read-only with respect to the patch and committed project files. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
-- Permit writing only to `review.md`, plus the local communication artifact selected above, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
+- Permit writing only to the resolved review record, the narrow local exclusion update described above, and the local communication artifact selected above, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
 - Never run auto-fix or write-mode formatting commands. Prefer check-only forms.
 - Never install, upgrade, or change dependencies, lockfiles, migrations, generated code, or environment configuration without explicit user intent outside this review workflow.
 - An explicitly requested video permits isolated renderer setup outside the worktree under `/video-communication`; it does not permit changing the application's environment or dependencies.
@@ -42,7 +44,7 @@ Accept a PR number, branch name, or both.
 4. If both are supplied, verify they refer to the same change set.
 5. Record target identity and review start state in `review.md`.
 6. If the current worktree does not match the target required for execution, stop before tests and tell the user exactly what needs to be switched.
-7. When `plan.md` is available, read its acceptance criteria, phase tasks, verification plan, risks, and stop conditions as intent context for the validation map.
+7. Read any workspace plan's acceptance criteria, phase tasks, verification plan, risks, and stop conditions as intent context for the validation map.
 
 Never assume the base branch when it can be determined from PR metadata, remote tracking, or repository conventions.
 
@@ -166,7 +168,7 @@ Treat `review.md` as the authoritative local record of review progress.
 
 - Create it only after Phase 2 has produced a concrete testing path, unless a light review needs a short record.
 - Keep it untracked by default. Check whether Git already tracks it before writing. If it is tracked unexpectedly, warn the user and do not alter repository tracking state.
-- Never add `review.md` to `.gitignore`, stage it, commit it, or publish it automatically.
+- Never stage, commit, or publish the review record automatically. Keep generated records ignored using the local exclusion guidance above.
 - Package or publish it only when the user explicitly asks.
 - On a later agent session, read `review.md` before resuming.
 - If the user's remembered progress is ahead of the last documented checkpoint, return to the last documented step and repeat the undocumented validation rather than retroactively marking it complete.

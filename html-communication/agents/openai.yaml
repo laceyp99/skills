@@ -1,7 +1,7 @@
 interface:
   display_name: "HTML Communication"
-  short_description: "Deliver readable reports through T3 inline HTML"
-  default_prompt: "Use $html-communication to explain this material with one self-contained HTML document, preferring T3 inline delivery and one evidence-bearing preview with targeted rechecks when needed."
+  short_description: "Create portable HTML reports and inline visuals"
+  default_prompt: "Use $html-communication to explain this material with self-contained HTML, following session delivery preferences. Save reports under artifacts/reports/ and inspect one render plus meaningful controls, adding checks for specific risks or failures."
 
 policy:
   allow_implicit_invocation: true

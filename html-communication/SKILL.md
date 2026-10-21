@@ -1,7 +1,7 @@
 ---
 name: html-communication
 description: >-
-  Prefer T3 inline HTML for substantive reports and visual explanations, or use when the user requests a local HTML artifact or another skill invokes HTML report mode.
+  Use when the user requests an HTML explanation or report, another skill invokes HTML report mode, or session instructions select HTML delivery.
   Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report".
   Do not use for short answers, progress updates, or simple handoffs that read clearly in chat.
 ---
@@ -12,11 +12,13 @@ Produce a readable HTML explanation or report. The invoking skill defines its pu
 
 Keep the document clear, self-contained, and appropriate to the material. Choose the structure and visual treatment that best communicates the content; do not force every request into a fixed template.
 
-Prefer T3 inline delivery when `html_preview` and `html_render` are available. Honor explicit output requests. Without inline delivery, use plain chat unless a local HTML artifact is requested or required by the host. Video remains opt-in.
+Follow the user's requested delivery and session preferences. When inline delivery is selected and T3's `html_preview` and `html_render` are available, use them; otherwise deliver the portable file. This skill defines HTML mechanics, not a default medium for other skills. Video remains opt-in.
 
 Use one self-contained document with inline CSS and only necessary vanilla JavaScript, without external runtime dependencies or network access. Choose one presentation by default; add variations only when requested. Share content between requested views instead of copying report bodies. Add controls only when they help the reader.
 
-Save a portable UTF-8 file for substantive reports, explicit file requests, or host requirements. A brief inline visual explanation need not create a second artifact. Keep one HTML content value for the file, when needed, and tool calls; regenerate it only to fix a problem. Keep file styling portable while honoring T3's inline layout guidance.
+Save reports as portable UTF-8 files under repository-root `artifacts/reports/` with descriptive filenames. Brief inline illustrations need no file unless requested. Outside a repository, use the requested destination or a local artifacts directory.
+
+Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. Before writing, check whether Git tracks the target; if unexpectedly tracked, warn the user and leave its tracking state unchanged. Never stage or commit reports automatically. Keep one HTML content value for the file and tool calls; regenerate it only to fix a problem. Keep file styling portable while honoring T3's inline layout guidance.
 
 This is a communication artifact, not a coding plan artifact. If the user wants an executable project plan, implementation plan, or engineering handoff, use the `/blueprint` skill instead.
 
@@ -28,11 +30,11 @@ Reveal the contract's feedback after selection, using accessible controls and a 
 
 ## Checks and delivery
 
-- Use existing repository checks where applicable. Check a saved file's UTF-8 encoding and check JavaScript syntax once when scripts are present. A separate `HTMLParser.feed()` pass is optional and establishes parsing only, not valid markup, usable layout, or working controls.
-- Default to one `html_preview` before `html_render`, following current tool guidance. Choose a width that covers the main layout risk, including narrow wrapping or navigation when relevant. Inspect its screenshot and console output. Exercise meaningful controls, including quiz feedback, through available browser tools or small in-page assertions that emit compact console results in that preview. Keep syntax, visual, and interaction evidence distinct.
-- Add a preview only to check an observed fix or a named coverage gap, such as a materially different layout, hidden view, keyboard behavior, or control state. Recheck behavior affected by an edit before delivery. One preview is a default, not permission to skip a needed check. Stop when applicable checks pass; do not repeat successful checks for cosmetic reassurance.
+- Default to one rendered inspection: use `html_preview` before `html_render` for T3 inline delivery, or an available browser for file-only delivery. Inspect the layout and available console errors at a width suited to the content. Exercise meaningful controls, including navigation and quiz feedback, when present. Small in-page assertions can check control logic; they do not establish keyboard usability.
+- Add checks for complex interactions, explicit accessibility requirements, or observed problems. Use another viewport or preview for a concrete layout or state concern, and recheck behavior affected by a fix. Do not repeat successful checks without a specific coverage gap.
+- Use required repository checks. Separate HTML parsing, encoding, and JavaScript syntax checks are not routine prerequisites when the rendered inspection already covers the relevant behavior; use them to diagnose failures or cover a named gap. Keep visual and interaction evidence distinct.
 - Pass the same current HTML value to preview and render without printing the document between calls. Both tools require the full HTML input; reuse does not remove that transmission. Forward screenshots as images and summarize dimensions, console diagnostics, and check results. Do not stringify whole results containing encoded images. Do not assume undocumented path inputs, attachment handles, or screenshot-suppression options exist.
-- Without T3 inline delivery, validate a requested local file with an available browser. Do not add a framework, dependency, app server, or general-purpose validation system for this workflow.
+- The saved file and inline report use the same content; do not run a second validation cycle unless their behavior differs. Do not add a framework, dependency, app server, or general-purpose validation system for this workflow.
 
 ## Interaction and closeout
 

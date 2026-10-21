@@ -68,8 +68,8 @@ ancestor of local HEAD. For an existing PR it must match the observed PR head.
 ### 2. Gather context and validate locally
 
 Inspect the commits, changed files, diff, applicable repository instructions,
-CI workflows, and PR templates. Read `plan.md`, `decisions.md`, `review.md`,
-or `review-findings.md` when present for intent and validation context, but
+CI workflows, and PR templates. Read any workspace planning and review artifacts
+for intent and validation context, but
 never treat them as proof or publish their private scratch content. Use
 [references/pr-writing.md](references/pr-writing.md) for titles, bodies,
 templates, visual evidence and attachment limits, incremental comments, and
@@ -77,6 +77,11 @@ the review summary comment. Actively seek one useful visual in each
 PR body and add more when they answer distinct review questions. Explain a
 brief exemption if none can be produced; prefer image attachments for
 screenshots and plots.
+
+New session Markdown defaults to repository-root `artifacts/<filename>` and stays
+untracked. Check
+whether Git tracks each target before writing; warn if unexpectedly tracked and
+leave its tracking state unchanged. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 
 Run the repository's documented or clearly inferable local checks before
 publication and after each repair. Report commands actually run; do not claim

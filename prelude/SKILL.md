@@ -14,11 +14,13 @@ Use this skill to help the user understand a GitHub issue, bug report, or user s
 
 Use Prelude only for an unchosen-action request: “understand this issue,” “find the actual cause,” “compare options,” or “give me a decision memo before we act.” Do not use it when the user has already chosen an action, such as “implement”, “fix”, “make a branch”, “commit”, “push”, or “open a PR”. The applicable implementation, GitHub, or planning workflow should still inspect the relevant issue and code, but should not produce Prelude’s full pre-investigation report.
 
-Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the local communication artifact, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the local communication artifact, the checkpoint quiz, and the narrow local exclusion update below, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
+
+New session Markdown defaults to repository-root `artifacts/<filename>`, including `artifacts/quiz.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated artifacts. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. Later mentions of `quiz.md` mean the resolved quiz path.
 
 ## Report mode
 
-For substantive reports and visual explanations, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Honor the user's specified medium; keep short summaries in chat and create multiple formats only when requested. Do not ask for a medium when the default resolves it.
+Use the user's specified medium or established session preference for reports; otherwise report in chat. For HTML, use `/html-communication` for storage, delivery, and validation. Create multiple formats only when requested.
 
 For video, invoke `/video-communication` after the investigation. Pass the audience, inspected revision, evidence, root-cause interpretation, options, recommendation, unresolved decisions, and destination. Distinguish observed behavior from hypothetical animation. Keep video artifacts outside the worktree and the checkpoint quiz in local untracked `quiz.md` for video-only delivery. Link both in chat; video creation does not authorize a branch or publication.
 
@@ -131,7 +133,7 @@ Good evidence examples:
 
 ## Final handoff expectation
 
-Prelude does not create a planning or handoff artifact. Deliver the understanding report using the report-mode defaults above. The result should make the next skill call possible without repeating the investigation.
+Prelude does not create a planning or handoff artifact. Deliver the understanding report using the selected medium above. The result should make the next skill call possible without repeating the investigation.
 
 Route the work using this decision tree:
 

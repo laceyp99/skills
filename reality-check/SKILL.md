@@ -14,18 +14,20 @@ Reality Check is an opinionated reviewer that prioritizes readable, explicit, ma
 
 Do not modify the patch while reviewing. When another agent delegated the review, report back and leave fixes to that agent.
 
+New session Markdown defaults to repository-root `artifacts/<filename>`, including `artifacts/review-findings.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated records. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. This exclusion update is permitted during read-only review. Later mentions of `review-findings.md` mean the resolved record path.
+
 ## Output formats
 
-Use the Findings format below. For substantive reader-facing reviews, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Keep short summaries in chat, honor explicit output requests, and return delegated findings directly to the parent without creating a presentation. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
+Use the Findings format below and the user's specified medium or established session preference; otherwise report in chat. Return delegated findings directly to the parent without creating a presentation. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
 
 | Format | Use when | Read |
 |---|---|---|
 | Local record and quiz | A local review has findings that may need implementation work | `references/output-formats/local-file.md` |
 | PR comments | The user explicitly asks to comment on the PR | `references/output-formats/pr-comments.md` |
-| HTML report | T3 inline HTML is selected by default, or the user requests HTML | `references/output-formats/html.md` |
+| HTML report | The user requests HTML or session instructions select it | `references/output-formats/html.md` |
 | Video report | The user requests a video | `references/output-formats/video.md` |
 
-Do not ask for a medium when the default resolves it. Video and multiple formats require a request. Preserve local review records and authorized PR comments as the actionable source of truth.
+Use `/html-communication` for HTML storage, delivery, and validation. Video and multiple formats require a request. Preserve local review records and authorized PR comments as the actionable source of truth.
 
 ## Initial Inspection
 

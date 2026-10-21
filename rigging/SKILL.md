@@ -58,7 +58,7 @@ Separate observed facts, interpretations, and proposed changes. Consider environ
 
 Provide a concise synthesis, explicit coverage/limitations, and traceable evidence for the useful findings. Choose a structure suited to the question, such as an episode narrative, comparison of related sessions, or account of continuity across a handoff. Keep facts, interpretations, and possible next steps easy to distinguish; do not force each finding into a correction/recovery sequence.
 
-Use [html-communication](../html-communication/SKILL.md) for delivery and proportionate validation, preferring T3 inline HTML and saving a portable report. Honor explicit output requests. Choose one presentation suited to the evidence; create alternatives only when requested. For requested alternatives, share the findings and evidence between views rather than duplicating report bodies, and check the affected navigation and layouts. Include technical numbers, statistics, and quantitative comparisons where they reveal useful patterns; state their source, scope, and uncertainty so their meaning is clear.
+Use [html-communication](../html-communication/SKILL.md) for portable report storage, delivery, and validation, following the user's requested medium and session preferences. Choose one presentation suited to the evidence; create alternatives only when requested. For requested alternatives, share the findings and evidence between views rather than duplicating report bodies, and check the affected navigation and layouts. Include technical numbers, statistics, and quantitative comparisons where they reveal useful patterns; state their source, scope, and uncertainty so their meaning is clear.
 
 ## Propose changes where they belong
 

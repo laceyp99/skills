@@ -16,7 +16,7 @@ Create one `plan.md`-style Markdown artifact that a human can review and a codin
 
 ## Optional report mode
 
-When a companion visual explanation would help the user review the plan, follow `/html-communication` delivery defaults, preferring T3 inline HTML when available. Honor explicit output requests; a short handoff can stay in chat. Keep `plan.md` canonical and summarize the decisions rather than copying the whole plan into a second report. Do not ask for a medium when the default resolves it. Create multiple formats only when requested.
+Create a companion report when requested or selected by session instructions, using the user's specified medium or established session preference. Otherwise deliver the plan with a short chat handoff. For HTML, use `/html-communication` for storage, delivery, and validation; keep `plan.md` canonical and explain the decisions rather than copying the whole plan. Create multiple formats only when requested.
 
 When the user requests a narrated walkthrough, invoke `/video-communication` after drafting the plan. Supply the audience, `plan.md`, inspected revision, proposed mechanism, risks, and requested destination. Label proposed behavior as proposed. Keep the video package outside the worktree by default; the plan and its checkpoint quiz remain canonical, local, and untracked. Video creation does not authorize implementation, a branch, or publication.
 
@@ -29,9 +29,10 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 
 ## Core Contract
 
-- Produce one plain Markdown plan named or formatted as `plan.md` unless the user asks otherwise. A requested companion report does not replace it.
+- Produce one plain Markdown plan at repository-root `artifacts/plan.md`. A requested companion report does not replace it.
 - Keep the plan artifact local and untracked by default. Before writing it, check whether Git already tracks the target file. If it is tracked unexpectedly, warn the user and do not change its tracking state.
 - Never stage or commit the plan artifact.
+- New session Markdown defaults to repository-root `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 - Do not put MDX, JSX, custom components, custom classes, inline styles, scripts, iframes, or renderer-specific markup in the plan. A requested companion report uses its communication skill's format.
 - Preserve usefulness when Mermaid or HTML collapsibles do not render.
 - Inspect repo context when available before naming files, frameworks, routes, commands, or test tools.

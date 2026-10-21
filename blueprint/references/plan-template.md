@@ -1,6 +1,6 @@
 # Plan Template
 
-Use this template as the default structure for `plan.md`.
+Use this template as the default structure for repository-root `artifacts/plan.md`.
 
 ````markdown
 # Plan: {{title}}

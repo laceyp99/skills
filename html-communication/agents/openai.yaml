@@ -1,7 +1,6 @@
 interface:
   display_name: "HTML Communication"
-  short_description: "Create readable internal HTML docs"
-  default_prompt: "Use $html-communication and create a clear, self-contained HTML artifact for this material."
+  short_description: "Create portable HTML reports and inline visuals"
 
 policy:
   allow_implicit_invocation: true

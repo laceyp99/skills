@@ -2,7 +2,7 @@
 
 Use for a local review whose findings may need implementation work, so the record can route back into `/assembly` or `/prelude`.
 
-Write or update `review-findings.md` at the repository root using the Findings format, with a recommended `/assembly` task or `/prelude` question. Keep it untracked and never stage or commit it.
+Write or update repository-root `artifacts/review-findings.md` by default using the Findings format, with a recommended `/assembly` task or `/prelude` question. Keep generated records ignored and untracked; never stage or commit them.
 
 ## Checkpoint quiz
 

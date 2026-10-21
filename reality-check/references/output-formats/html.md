@@ -4,4 +4,4 @@ Perform the review and use `/html-communication` to create a local HTML report a
 
 Use `/checkpoint-quiz` HTML report mode to bake an interactive quiz into the bottom of the report, after all findings, instead of writing a markdown quiz into `review-findings.md`. Source questions as in `local-file.md`.
 
-In chat, link the report and briefly state the review conclusion and next action; keep the detailed findings in the report.
+Put the review conclusion and next action in the report. In chat, link its saved file without repeating inline findings; for file-only delivery, briefly state the conclusion and next action.

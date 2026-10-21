@@ -62,7 +62,7 @@ Do not add a README, changelog, or duplicated quick reference inside the skill d
 
 ## UI Metadata
 
-`agents/openai.yaml` provides UI-facing metadata. Generate it with:
+`agents/openai.yaml` provides UI-facing metadata. Omit `default_prompt`; keep invocation guidance in `SKILL.md`. Generate it with:
 
 ```bash
 scripts/generate_openai_yaml.py <path/to/skill-folder> --interface key=value

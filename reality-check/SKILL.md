@@ -14,18 +14,20 @@ Reality Check is an opinionated reviewer that prioritizes readable, explicit, ma
 
 Do not modify the patch while reviewing. When another agent delegated the review, report back and leave fixes to that agent.
 
+Session artifacts default to repository-root `artifacts/<filename>`, including `artifacts/review-findings.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated records. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. This exclusion update is permitted during read-only review. Later mentions of `review-findings.md` mean the resolved record path.
+
 ## Output formats
 
-Report findings in chat by default, using the Findings format below. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
+Use the Findings format below and the user's specified medium or established session preference; otherwise report in chat. Return delegated findings directly to the parent without creating a presentation. Read a format file only when its trigger applies, and skip all of them when the requester asks for chat only.
 
 | Format | Use when | Read |
 |---|---|---|
 | Local record and quiz | A local review has findings that may need implementation work | `references/output-formats/local-file.md` |
 | PR comments | The user explicitly asks to comment on the PR | `references/output-formats/pr-comments.md` |
-| HTML report | The user requests an HTML report | `references/output-formats/html.md` |
+| HTML report | The user requests HTML or session instructions select it | `references/output-formats/html.md` |
 | Video report | The user requests a video | `references/output-formats/video.md` |
 
-When the user asks for a report without naming HTML or video, use the established session preference or ask; continue independent work without generating a report. Do not default to HTML or video. Create multiple formats only when requested.
+Use `/html-communication` for HTML storage, delivery, and validation. Video and multiple formats require a request. Preserve local review records and authorized PR comments as the actionable source of truth.
 
 ## Initial Inspection
 

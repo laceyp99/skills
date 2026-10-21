@@ -2,7 +2,7 @@
 
 This repo is a shared collection of AI agent skills I use in my own workflow. Some are original, some are adapted from patterns or prompts I found useful elsewhere, and some are experiments that are still being tuned.
 
-The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files.
+The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files. Skill metadata omits default prompts; invocation guidance lives in `SKILL.md`.
 
 ## Quickstart
 
@@ -45,11 +45,13 @@ npx skills@latest add laceyp99/skills --list
 | `reality-check` | Explain concrete problems in a diff, their consequences, fix complexity, and decisions needed. | Static code review with concise, actionable findings; expand for meaningful uncertainty or trade-offs. Requested reports use the user-specified communication style. |
 | `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed and presents four visual report variations in one local HTML file; chat closeout links to the report for user review, with existing planning and authoring skills available for requested follow-up. |
 | `checkpoint-quiz` | Define short artifact-based quiz contracts for verification checkpoints and reflective reports. | Host skills own placement and question sources; HTML mechanics use `html-communication`. No scoring or required chat answers. |
-| `html-communication` | Create portable local HTML reports, with T3 inline delivery when available. | Choose layouts and requested variations to suit the evidence; preview before T3 rendering and distinguish parsing, syntax, layout, and interaction checks. Not for planning artifacts or ordinary prose. |
+| `html-communication` | Create portable HTML reports and inline visual explanations when selected. | Choose layouts and requested variations to suit the evidence; preview before T3 rendering and distinguish parsing, syntax, layout, and interaction checks. Not for planning artifacts or ordinary prose. |
 | `video-communication` | Create narrated technical explanations on Windows with Manim and ElevenLabs. | Invoked directly or by planning, investigation, and review skills when video is requested. Uses Eric narration, cached audio, and a shared renderer outside worktrees. Checks prerequisites and requests missing setup. The MP4 is primary, with working files accessible. |
 | `skill-crafter` | Draft or edit a skill for optimal agent instruction. | Use for prompt engineering a skill with the focus of concise detail and effectiveness. |
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
+
+Session artifacts default to ignored, untracked repository-root `artifacts/`: `plan.md`, `decisions.md`, `review.md`, `review-findings.md`, and standalone `quiz.md`. HTML reports use `artifacts/reports/`. Ignored artifacts persist only in the local checkout; preserve them separately before removing a worktree.
 
 See [docs/subagents.md](docs/subagents.md) for the shared delegation approach.
 

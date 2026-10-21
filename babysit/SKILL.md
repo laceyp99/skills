@@ -78,7 +78,7 @@ PR body and add more when they answer distinct review questions. Explain a
 brief exemption if none can be produced; prefer image attachments for
 screenshots and plots.
 
-New session Markdown defaults to repository-root `artifacts/<filename>` and stays
+Session artifacts default to repository-root `artifacts/<filename>` and stay
 untracked. Check
 whether Git tracks each target before writing; warn if unexpectedly tracked and
 leave its tracking state unchanged. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.

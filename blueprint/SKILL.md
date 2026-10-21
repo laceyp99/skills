@@ -32,7 +32,7 @@ If the user asks for both investigation and a plan, investigate enough to avoid 
 - Produce one plain Markdown plan at repository-root `artifacts/plan.md`. A requested companion report does not replace it.
 - Keep the plan artifact local and untracked by default. Before writing it, check whether Git already tracks the target file. If it is tracked unexpectedly, warn the user and do not change its tracking state.
 - Never stage or commit the plan artifact.
-- New session Markdown defaults to repository-root `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
+- Session artifacts default to repository-root `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 - Do not put MDX, JSX, custom components, custom classes, inline styles, scripts, iframes, or renderer-specific markup in the plan. A requested companion report uses its communication skill's format.
 - Preserve usefulness when Mermaid or HTML collapsibles do not render.
 - Inspect repo context when available before naming files, frameworks, routes, commands, or test tools.

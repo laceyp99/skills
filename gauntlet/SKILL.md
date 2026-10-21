@@ -12,15 +12,15 @@ Validate patches without becoming the patch author. Treat automated checks as th
 
 Maintain repository-root `artifacts/review.md` as the review source of truth by default. Keep generated records local and untracked. Read [references/review-template.md](references/review-template.md) before creating or restructuring the record. Later mentions of `review.md` mean this resolved path.
 
-New session Markdown defaults to `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
+Session artifacts default to `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 
 ## Report mode
 
-Use the user's specified medium or established session preference for reports; otherwise report in chat. For HTML, use `/html-communication` for storage, delivery, and validation. Create multiple formats only when requested.
+Use the user's specified medium or established session preference for reports; otherwise report in chat. Create multiple formats only when requested.
 
 For video, invoke `/video-communication` after completing the applicable checks. Pass `review.md`, the audience, inspected revision, automated results, human observations, unverified areas, conclusion, and destination. Label animation as illustration, not test footage. Keep the local video package outside the worktree and link it with `review.md`; publication remains a separate authorized workflow.
 
-For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` for the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. Link the saved report in chat without repeating inline findings.
+For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` for storage, delivery, and validation of the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. Link the saved report in chat without repeating inline findings.
 
 ## Non-negotiable boundaries
 

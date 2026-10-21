@@ -14,7 +14,7 @@ Reality Check is an opinionated reviewer that prioritizes readable, explicit, ma
 
 Do not modify the patch while reviewing. When another agent delegated the review, report back and leave fixes to that agent.
 
-New session Markdown defaults to repository-root `artifacts/<filename>`, including `artifacts/review-findings.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated records. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. This exclusion update is permitted during read-only review. Later mentions of `review-findings.md` mean the resolved record path.
+Session artifacts default to repository-root `artifacts/<filename>`, including `artifacts/review-findings.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated records. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. This exclusion update is permitted during read-only review. Later mentions of `review-findings.md` mean the resolved record path.
 
 ## Output formats
 

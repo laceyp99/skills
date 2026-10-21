@@ -2,7 +2,7 @@
 
 This repo is a shared collection of AI agent skills I use in my own workflow. Some are original, some are adapted from patterns or prompts I found useful elsewhere, and some are experiments that are still being tuned.
 
-The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files.
+The intent is practical sharing: each folder is a standalone skill directory with a `SKILL.md` entrypoint and, where needed, supporting `references/` or `agents/` files. Skill metadata omits default prompts; invocation guidance lives in `SKILL.md`.
 
 ## Quickstart
 
@@ -36,22 +36,22 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; reports follow the user's medium and session preferences. Local quizzes default to ignored `artifacts/quiz.md`. |
+| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; substantive reports prefer T3 inline HTML, with explicit medium requests honored. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |
-| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Defaults to ignored `artifacts/plan.md`; keeps Markdown canonical. Companion reports follow the user's medium and session preferences. |
-| `assembly` | Execute a local plan in controlled units. | Reads workspace planning and decision artifacts. **Hand holding mode** pauses for user commits; **autopilot mode** commits implementation and uses `babysit` to publish and verify the PR, leaving planning artifacts untracked. |
+| `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Keeps the Markdown plan canonical; helpful companion visual explanations prefer T3 inline HTML, with explicit medium requests honored. |
+| `assembly` | Execute a local plan in controlled units. | **Hand holding mode** pauses for user commits; **autopilot mode** commits the plan and uses `babysit` to publish and verify the PR. |
 | `babysit` | Canonical PR workflow: publish ready-for-review, get CI green, then run a delegated `reality-check` review alongside any review bots and fix clear findings. | Inspired by Theo Browne's "babysit" skill/prompt style. Writes reviewer-friendly PR bodies with visual evidence, upload limits, and brief exemptions when visuals add no value. Caps post-push repair cycles at 1. Never force-pushes. |
-| `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Maintains ignored `artifacts/review.md`; reports follow the user's medium and session preferences. |
-| `reality-check` | Explain concrete problems in a diff, their consequences, fix complexity, and decisions needed. | Static review with actionable local findings in ignored `artifacts/review-findings.md`. Honors output preferences; delegated findings return directly to the parent. |
-| `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed; follows delivery preferences with portable HTML reports in ignored `artifacts/reports/`. Alternative views are opt-in and share content. |
+| `gauntlet` | Establish that changed behavior works through automated checks and guided human testing. | Maintains local `review.md`; substantive assessments prefer T3 inline HTML, with explicit medium requests honored. |
+| `reality-check` | Explain concrete problems in a diff, their consequences, fix complexity, and decisions needed. | Substantive reader-facing reviews prefer T3 inline HTML; short summaries and delegated findings stay direct. Preserves actionable records and explicit medium requests. |
+| `rigging` | Review agent sessions to infer useful collaboration insights and guide harness improvements. | Starts with a brief intent interview when needed; prefers one T3 inline presentation with a portable report. Alternative views are opt-in and share content. |
 | `checkpoint-quiz` | Define short artifact-based quiz contracts for verification checkpoints and reflective reports. | Host skills own placement and question sources; HTML mechanics use `html-communication`. No scoring or required chat answers. |
-| `html-communication` | Create portable HTML reports and inline visual explanations when selected. | Saves reports under ignored `artifacts/reports/`; follows requested or session delivery preferences. Checks one render and meaningful controls, escalating for complex interactions, explicit accessibility requirements, or observed problems. |
+| `html-communication` | Create portable HTML reports and inline visual explanations when selected. | Defaults to one evidence-bearing preview, with targeted rechecks for fixes or coverage gaps. Saves portable reports; brief inline explanations need no file. Keeps reader interaction separate from agent automation and preserves canonical records. |
 | `video-communication` | Create narrated technical explanations on Windows with Manim and ElevenLabs. | Invoked directly or by planning, investigation, and review skills when video is requested. Uses Eric narration, cached audio, and a shared renderer outside worktrees. Checks prerequisites and requests missing setup. The MP4 is primary, with working files accessible. |
 | `skill-crafter` | Draft or edit a skill for optimal agent instruction. | Use for prompt engineering a skill with the focus of concise detail and effectiveness. |
 
 See [docs/skills-lifecycle.md](docs/skills-lifecycle.md) for the workflow diagram and lifecycle details.
 
-New session artifacts default to ignored, untracked repository-root `artifacts/`: `plan.md`, `decisions.md`, `review.md`, `review-findings.md`, and standalone `quiz.md`. HTML reports use `artifacts/reports/`. Ignored artifacts persist only in the local checkout; preserve them separately before removing a worktree.
+Session artifacts default to ignored, untracked repository-root `artifacts/`: `plan.md`, `decisions.md`, `review.md`, `review-findings.md`, and standalone `quiz.md`. HTML reports use `artifacts/reports/`. Ignored artifacts persist only in the local checkout; preserve them separately before removing a worktree.
 
 See [docs/subagents.md](docs/subagents.md) for the shared delegation approach.
 

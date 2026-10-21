@@ -16,7 +16,7 @@ Use Prelude only for an unchosen-action request: “understand this issue,” �
 
 Do not edit project files, stage changes, commit, push, or use write-oriented repository operations. Report mode permits the local communication artifact, the checkpoint quiz, and the narrow local exclusion update below, with video packages outside the worktree. You may inspect files, inspect git/GitHub metadata, search the codebase, and run tests or local scenarios when safe.
 
-New session Markdown defaults to repository-root `artifacts/<filename>`, including `artifacts/quiz.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated artifacts. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. Later mentions of `quiz.md` mean the resolved quiz path.
+Session artifacts default to repository-root `artifacts/<filename>`, including `artifacts/quiz.md`. Before writing, check whether Git tracks the target; warn if unexpectedly tracked and leave its tracking state unchanged. Never stage or commit generated artifacts. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. Later mentions of `quiz.md` mean the resolved quiz path.
 
 ## Report mode
 

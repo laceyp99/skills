@@ -10,7 +10,7 @@ description: >-
 
 Validate patches without becoming the patch author. Treat automated checks as the mechanical baseline, then use the human to establish behavioral confidence where direct observation is more valuable.
 
-Maintain repository-root `artifacts/review.md` as the review source of truth by default. Keep generated records local and untracked. Read [references/review-template.md](references/review-template.md) before creating or restructuring the record. Later mentions of `review.md` mean this resolved path.
+Maintain repository-root `artifacts/review.md` as the review source of truth by default. Read [references/review-template.md](references/review-template.md) before creating or restructuring the record. Later mentions of `review.md` mean this resolved path.
 
 Session artifacts default to `artifacts/<filename>`. Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`.
 
@@ -20,12 +20,12 @@ Use the user's specified medium or established session preference for reports; o
 
 For video, invoke `/video-communication` after completing the applicable checks. Pass `review.md`, the audience, inspected revision, automated results, human observations, unverified areas, conclusion, and destination. Label animation as illustration, not test footage. Keep the local video package outside the worktree and link it with `review.md`; publication remains a separate authorized workflow.
 
-For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` for storage, delivery, and validation of the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`, which remains the persistent source of truth. Link the saved report in chat without repeating inline findings.
+For an HTML Gauntlet report, complete the applicable validation path and use `/html-communication` for storage, delivery, and validation of the main reader-facing assessment. Show how changed behaviors map to automated results, human observations, and unverified areas; state the scoped conclusion and next action. Choose visuals or interaction only where they clarify this validation. Derive the report from `review.md`. Link the saved report in chat without repeating inline findings.
 
 ## Non-negotiable boundaries
 
 - Remain read-only with respect to the patch and committed project files. Never fix, refactor, format, rewrite, stage, commit, or otherwise modify the reviewed code.
-- Permit writing only to the resolved review record, the narrow local exclusion update described above, and the local communication artifact selected above, with video packages outside the worktree. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
+- Permit writing only to the resolved review record, the narrow local exclusion update described above, and the local communication artifact selected above. Treat caches or test artifacts produced incidentally by normal checks as tooling side effects, not review output.
 - Never run auto-fix or write-mode formatting commands. Prefer check-only forms.
 - Never install, upgrade, or change dependencies, lockfiles, migrations, generated code, or environment configuration without explicit user intent outside this review workflow.
 - An explicitly requested video permits isolated renderer setup outside the worktree under `/video-communication`; it does not permit changing the application's environment or dependencies.
@@ -164,11 +164,9 @@ Use `Pending`, `Passed`, `Failed`, or `Blocked` consistently for manual test sta
 
 ## `review.md` as persistent review memory
 
-Treat `review.md` as the authoritative local record of review progress.
-
 - Create it only after Phase 2 has produced a concrete testing path, unless a light review needs a short record.
-- Keep it untracked by default. Check whether Git already tracks it before writing. If it is tracked unexpectedly, warn the user and do not alter repository tracking state.
-- Never stage, commit, or publish the review record automatically. Keep generated records ignored using the local exclusion guidance above.
+- Check whether Git already tracks it before writing. If it is tracked unexpectedly, warn the user and do not alter repository tracking state.
+- Never stage or commit the review record automatically.
 - Package or publish it only when the user explicitly asks.
 - On a later agent session, read `review.md` before resuming.
 - If the user's remembered progress is ahead of the last documented checkpoint, return to the last documented step and repeat the undocumented validation rather than retroactively marking it complete.

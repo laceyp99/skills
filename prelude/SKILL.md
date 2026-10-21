@@ -22,7 +22,7 @@ Session artifacts default to repository-root `artifacts/<filename>`, including `
 
 Use the user's specified medium or established session preference for reports; otherwise report in chat. For HTML, use `/html-communication` for storage, delivery, and validation. Create multiple formats only when requested.
 
-For video, invoke `/video-communication` after the investigation. Pass the audience, inspected revision, evidence, root-cause interpretation, options, recommendation, unresolved decisions, and destination. Distinguish observed behavior from hypothetical animation. Keep video artifacts outside the worktree and the checkpoint quiz in local untracked `quiz.md` for video-only delivery. Link both in chat; video creation does not authorize a branch or publication.
+For video, invoke `/video-communication` after the investigation. Pass the audience, inspected revision, evidence, root-cause interpretation, options, recommendation, unresolved decisions, and destination. Distinguish observed behavior from hypothetical animation. Use `quiz.md` for the checkpoint quiz in video-only delivery. Link both in chat; video creation does not authorize a branch or publication.
 
 For an HTML Prelude report, complete the investigation and use `/html-communication` for the main reader-facing result. Shape it around the issue's interpretation, strongest evidence, viable options and trade-offs when relevant, recommendation, and unresolved decisions. Choose visuals or interaction only when they clarify this particular issue. Put the recommended next step in the report; link its saved file in a brief chat closeout without repeating inline findings. The report is a communication artifact, not an implementation plan.
 
@@ -107,7 +107,7 @@ The options phase should include:
 
 ## Checkpoint Quiz
 
-After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into prelude's own local untracked `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Keep `quiz.md` untracked and never stage or commit it. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
+After presenting the evidence and viable options and before the user commits to a path, write a quiz section via `checkpoint-quiz` into `quiz.md`: comprehension questions sourced from the root-cause interpretation and the tradeoffs behind the recommended option, and decision-capture questions for the open decisions the user must make now. Fold confirmed decision-capture selections into the final handoff's "Decisions already made" context.
 
 In HTML report mode, deliver the quiz as the report's baked section through `/checkpoint-quiz` report mode instead.
 

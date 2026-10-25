@@ -96,7 +96,10 @@ Use the reality-check skill to review <base-sha>..<head-sha>. If the skill is
 unavailable, stop and say so. Read the PR title and description with 
 `gh pr view <number> --repo <owner/repo>` for the requested scope and claims.
 
-Do not edit files, commit, push, or post PR comments. Report in chat only:
+Do not modify reviewed source or user data, commit, push, or post PR comments.
+Focused tests and disposable reproductions outside tracked source are allowed
+under Reality Check's isolation and cleanup rules. Preserve the shared worktree;
+use an isolated copy for mutations. Report in chat only:
 findings in the Reality Check findings format, then open questions and review
 limits. Skip the next-action routing.
 ```

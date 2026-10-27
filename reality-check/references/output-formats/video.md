@@ -1,6 +1,8 @@
 # Video report
 
-Invoke `/video-communication` after the review. Pass the audience, inspected revision, confirmed findings using the Findings format, source evidence for factual grounding, review limits, and destination. Apply the same reader-facing content rules to the video; do not add evidence or disposition sections.
+Invoke `/video-communication` for a requested video presentation after the review. Pass the audience, inspected revision, confirmed findings using the full Findings format including Necessity and Reproduction/evidence, review limits, and destination. Explain expected versus observed behavior with concise proof beside the relevant finding; keep lengthy logs and traces in linked artifacts. Omit disposition fields.
+
+A short evidence recording supporting an individual finding does not require a full video presentation. Capture it under the common reproduction and proof rules, and link or embed it in the chosen review format.
 
 Keep actionable findings in `review-findings.md` or the authorized GitHub review. The video package stays outside the worktree by default; it does not authorize code changes or additional publication.
 

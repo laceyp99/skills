@@ -60,6 +60,10 @@ Prefer sequential delegation for context management. Use concurrent workers only
 
 If an appropriate worker role or delegation mechanism is unavailable, implement the unit directly and report the limitation when it prevents safe completion. Do not split a tightly coupled unit merely to use delegation.
 
+## Docs and UI text
+
+Keep docs and UI text scoped to the change. Edit only the docs, copy, and table rows this change makes wrong. Describe current behavior for current users; skip migration, legacy, and edge-case asides unless the plan asks.
+
 ## Hand Holding Mode
 
 In hand holding mode, complete exactly one logical unit, then pause for user review to commit.

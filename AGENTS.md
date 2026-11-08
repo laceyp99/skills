@@ -8,7 +8,7 @@ Assume any mention of skills are the skills existing within this workspace, unle
 
 Every root-level directory containing `SKILL.md` must appear exactly once in both the `README.md` Included Skills table and the `skills` array in `.claude-plugin/plugin.json` (as `./<directory-name>`).
 
-Creating, renaming, or removing a skill includes updating both catalogs in the same change. Update the README purpose and notes when an existing skill's behavior or invocation changes. These updates are part of the requested skill work even when the conversation only discusses skill contents; complete them without asking for a separate reminder or approval. Preserve unrelated plugin metadata and README content.
+Creating, renaming, or removing a skill includes updating both catalogs in the same change. When an existing skill's behavior or invocation changes, update only the README purpose or note wording that the change makes inaccurate. These updates are part of the requested skill work even when the conversation only discusses skill contents; complete them without asking for a separate reminder or approval. Preserve unrelated plugin metadata and README content.
 
 Before reporting skill work complete:
 

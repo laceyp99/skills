@@ -183,6 +183,8 @@ assessment. Otherwise restate only the lines that changed, and update the PR
 body so its Merge danger section stays current.
 Refresh the body's affected visual evidence and include a new image or diagram
 in the update only when it helps explain the incremental change.
+Edit a PR body or comment by writing the full Markdown to a file and passing
+`--body-file`; never string-replace a fetched body.
 
 ## Review summary comment
 

@@ -62,7 +62,7 @@ If an appropriate worker role or delegation mechanism is unavailable, implement 
 
 ## Docs and UI text
 
-Keep docs and UI text scoped to the change. Edit only the docs, copy, and table rows this change makes wrong. Describe current behavior for current users; skip migration, legacy, and edge-case asides unless the plan asks. Create a new doc or changelog file only when requested; if an expected file is missing, ask. Apply these limits to follow-up fixes after review too.
+Keep docs and UI text scoped to the change. Edit only the docs, copy, and table rows this change makes wrong. Describe current behavior for current users; skip migration, legacy, and edge-case asides unless the plan asks.
 
 ## Hand Holding Mode
 

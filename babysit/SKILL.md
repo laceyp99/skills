@@ -9,7 +9,7 @@ description: >-
 # babysit
 
 Publish the current branch as a ready-for-review PR, get its checks green,
-review it with a delegated reviewer and any automated review, then hand the PR
+review it with a delegated reviewer, then hand the PR
 back for human review.
 This skill is the repository's only PR publication workflow; it may create
 focused corrective commit(s) when the user asks it to babysit or get the PR green.
@@ -109,14 +109,27 @@ ready transition when this skill was explicitly invoked.
 ### 4. Watch checks
 
 Determine expected verification from CI workflows, required checks, and checks
-reported on the PR. After the publication push, watch with
-`gh pr checks <number> --watch`, or poll structured results at a bounded
-interval when watch is unavailable. Recheck the PR head and state while polling
-and associate every result with the published head or its test-merge commit.
+reported on the PR. If the repository has no workflows and no checks have
+reported on the PR, skip the watch and report verification as unavailable.
+
+Otherwise, after the publication push, watch with the first available option:
+
+1. **T3 Code:** call `watch_pull_request` once for the PR, then end the turn.
+   T3 wakes the thread when checks fail, required checks pass, or the PR
+   conflicts. The watch stays on across later pushes; do not call it again on a
+   wake. Read results with `pull_request_read` (`include: ["checks"]`) and
+   failing logs with `ci_logs`. Call `unwatch_pull_request` before handback.
+2. **Otherwise:** run `gh pr checks <number> --watch` with a 5-minute timeout,
+   no leading `sleep`, and its output kept. On timeout, identify the pending
+   job and whether it is still progressing before watching again; report a
+   stalled job instead of re-watching it.
+
+Do not combine watch mechanisms or add sleep or polling loops. Associate every
+result with the published head or its test-merge commit.
 
 All expected applicable checks must succeed. Missing, pending, cancelled,
 failed, timed-out, action-required, or unexplained skipped checks are not
-green. If there is no CI, report verification as unavailable.
+green.
 
 When a check fails with a clear cause, inspect its logs, reproduce locally when
 possible, and commit the smallest root-cause repair locally. Do not push it;
@@ -134,14 +147,7 @@ in a local commit, or been reported unavailable. Follow
 reviewer returns, do not edit, stage, commit, check out, or push anything in
 the worktree; it is reading the same checkout.
 
-Also collect automated reviews of the published head delivered through checks,
-comments, or inline threads. Triage those that arrive by the time the delegated
-review returns; if an automated review check is still pending then, wait for it
-up to 10 minutes. Do not infer approval from silence. Read
-[references/review-threads.md](references/review-threads.md) when checking
-whether all automated review threads were retrieved. Identify automation from
-author identity and repository policy, not from the comment's prose. Human
-reviews remain for the user.
+Do not wait for or collect other reviews; human reviews remain for the user.
 
 Triage every finding against the current code and head and the intent
 established in the conversation, plan, and codebase direction:
@@ -155,12 +161,11 @@ established in the conversation, plan, and codebase direction:
   the work so far does not settle. Do not block on it; carry it to the handoff
   with a recommendation.
 
-Resolve only handled threads when permitted. Record issue-level findings or
-unresolvable threads instead of inventing a resolved state. When no corrective
-push follows, report the triage in the handoff only; do not post a PR comment.
+When no corrective push follows, report the triage in the handoff only; do not
+post a PR comment.
 
-If no correction is needed, finish once the checks and reviews are accounted
-for.
+If no correction is needed, finish once the checks and the review are
+accounted for.
 
 ### 6. One corrective push
 
@@ -173,8 +178,8 @@ For local check repairs and findings triaged as Fix:
    repairs explicitly to the PR head branch, verify the remote and PR heads,
    and post the review summary comment from
    [references/pr-writing.md](references/pr-writing.md).
-5. Watch the new head's CI with `gh pr checks <number> --watch` (or bounded
-   structured polling). Report its final check results, including failures or
+5. Watch the new head's CI as in step 4; an active T3 watch already covers
+   it. Report its final check results, including failures or
    unavailable checks. Do not run another review or make another corrective
    push. Return the PR to the user for human review.
 
@@ -184,8 +189,7 @@ that branch is explicitly the PR head.
 ## Completion and handoff
 
 Report the PR URL, final head SHA, check results and the SHA they cover,
-delegated and automated review outcomes (including unavailable, failed, or
-timed out),
+the delegated review outcome (including unavailable, failed, or timed out),
 each finding with its verdict and reason, Needs user decision items with a
 recommendation, the review summary comment URL when posted, corrective
 commit(s) or none, and local validation gaps. After a corrective push,

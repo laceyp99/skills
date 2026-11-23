@@ -4,7 +4,7 @@ description: >-
   Review agent collaboration across sessions to infer useful insights and guide harness improvements.
   Trigger phrases include "review my recent sessions", "find where I had to correct agents", and
   "help me improve my harness".
-  Use prelude for investigating an individual issue and skill-crafter for authoring a chosen skill change.
+  Use skill-crafter for authoring a chosen skill change.
 ---
 
 # Rigging
@@ -76,7 +76,7 @@ For each candidate, show the supporting episodes, rationale, target location, dr
 | Fragile or deterministic operation | Supporting script or existing tool |
 | Tool availability, loading, or connections | Runtime configuration |
 
-Use [prelude](../prelude/SKILL.md) when an individual issue needs further investigation or [blueprint](../blueprint/SKILL.md) for a requested executable plan. Do not duplicate their workflows. Prepare a focused issue only when requested.
+Use [blueprint](../blueprint/SKILL.md) for a requested executable plan. Do not duplicate their workflows. Prepare a focused issue only when requested.
 
 ## Completion and boundaries
 

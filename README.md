@@ -36,7 +36,6 @@ npx skills@latest add laceyp99/skills --list
 
 | Skill | Purpose | Notes |
 |---|---|---|
-| `prelude` | Investigate GitHub issues, bugs, or user stories before implementation. | Understand behavior before choosing a solution; requested reports use the user-specified communication style. |
 | `grill-me` | Relentlessly interview a user about a plan or design until the decision tree is clear. | Inspired by Matt Pocock's "grill me" skill/prompt style. The **default mode** goes one question at a time, but **batch mode** will group up to 5 connected questions. |
 | `blueprint` | Create GitHub-safe and VS Code-safe project plans in a single `plan.md`. | Uses structured Markdown, Mermaid diagrams, and HTML details blocks; requested companion reports use the user's chosen medium while preserving the canonical plan. |
 | `assembly` | Execute a local plan in controlled units. | **Autopilot mode** (default) commits the plan and uses `babysit` to publish and verify the PR; **hand holding mode** pauses for user commits. |

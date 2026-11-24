@@ -164,8 +164,8 @@ established in the conversation, plan, and codebase direction:
 When no corrective push follows, report the triage in the handoff only; do not
 post a PR comment.
 
-If no correction is needed, finish once the checks and the review are
-accounted for.
+If no correction is needed, finish once the checks have settled and the review
+is triaged.
 
 ### 6. One corrective push
 

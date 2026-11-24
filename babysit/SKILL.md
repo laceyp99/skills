@@ -125,7 +125,7 @@ Otherwise, after the publication push, watch with the first available option:
    stalled job instead of re-watching it.
 
 Do not combine watch mechanisms or add sleep or polling loops. Associate every
-result with the published head or its test-merge commit.
+result with the published head or the merge commit GitHub tests for the PR.
 
 All expected applicable checks must succeed. Missing, pending, cancelled,
 failed, timed-out, action-required, or unexplained skipped checks are not

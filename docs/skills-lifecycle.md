@@ -4,8 +4,7 @@ The workflow is intentionally flexible. `/grill-me` and `/blueprint` are optiona
 
 ```mermaid
 flowchart TD
-    START([Task arrives]) --> PRELUDE["/prelude<br/>Understand and scope task"]
-    PRELUDE --> NARROW{Does the direction<br/>need more narrowing?}
+    START([Task arrives]) --> NARROW{Does the direction<br/>need more narrowing?}
 
     NARROW -- Yes --> GRILL["/grill-me<br/>Resolve key decisions"]
     GRILL --> PLAN_DECISION
@@ -33,7 +32,7 @@ flowchart TD
 
     FINDINGS -- No --> DONE([Task lifecycle complete])
     FINDINGS -- Yes --> DECISION[Human decision point<br/>Interpret findings and choose next action]
-    DECISION -. Re-scope or clarify .-> PRELUDE
+    DECISION -. Re-scope or clarify .-> NARROW
     DECISION -. Revise implementation .-> ASSEMBLY
     DECISION -. Ignore or justify findings .-> DONE
 ```

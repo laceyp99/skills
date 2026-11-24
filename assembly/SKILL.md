@@ -32,8 +32,8 @@ If `plan.md` is missing, ensure you have enough conversational context to change
 
 Use the user's current request to choose the mode.
 
-- **Hand holding mode**: Use when the user asks to implement or walk through the plan together. If the user doesn't explicitly ask for commits, assume this mode of implementation.
-- **Autopilot mode**: Use only when the user explicitly asks the agent to make commits, walk the commit plan autonomously, or run in autopilot. Complete the plan, commit its units, then use the `babysit` workflow to push the branch, publish the PR ready for review, and verify it.
+- **Autopilot mode**: The default. Use unless the user asks for hand holding mode. Complete the plan, commit its units, then use the `babysit` workflow to push the branch, publish the PR ready for review, and verify it.
+- **Hand holding mode**: Use only when the user explicitly asks to walk through the plan together, review each unit before it is committed, make the commits themselves, or run in hand holding mode.
 
 Treat plan commit entries as logical work boundaries in both modes. Do not run `git commit` in hand holding mode, even if the plan contains commit messages; just pass those onto the user.
 

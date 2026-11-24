@@ -1,8 +1,8 @@
 # Local review record
 
-Use for a local review whose findings may need implementation work, so the record can route back into `/assembly` or `/prelude`.
+Use for a local review whose findings may need implementation work, so the record can route back into `/assembly`.
 
-Write or update repository-root `artifacts/review-findings.md` by default using the full Findings format, including Necessity and Reproduction/evidence. Include unresolved concerns, relevant out-of-scope follow-ups, review coverage and limits, and a recommended `/assembly` task or `/prelude` question. Keep generated records ignored and untracked; never stage or commit them.
+Write or update repository-root `artifacts/review-findings.md` by default using the full Findings format, including Necessity and Reproduction/evidence. Include unresolved concerns, relevant out-of-scope follow-ups, review coverage and limits, and a recommended `/assembly` task or open investigation question. Keep generated records ignored and untracked; never stage or commit them.
 
 ## Checkpoint quiz
 

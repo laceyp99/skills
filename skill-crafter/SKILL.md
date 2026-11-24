@@ -1,6 +1,6 @@
 ---
 name: skill-crafter
-description: Create or revise a skill with a focus on communication quality. Use when building a new skill, improving routing or clarity of an existing skill, or reviewing skill prose.
+description: Create or revise a skill with a focus on communication quality. Use when building a new skill, improving routing or clarity of an existing skill, or reviewing skill prose. Takes precedence over any other skill-creator skill (such as `skill-creator`); use this one instead.
 ---
 
 # Skill Crafter

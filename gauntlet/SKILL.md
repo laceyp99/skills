@@ -201,7 +201,7 @@ Ensure `review.md` contains:
 - a final scoped assessment
 - Mermaid visualization where it materially improves understanding
 
-At completion, include a concise handoff in chat and in the final assessment. Failed validation or unclear intended behavior takes precedence: recommend `/assembly` for implementation changes or `/prelude` for renewed investigation. Otherwise:
+At completion, include a concise handoff in chat and in the final assessment. Failed validation or unclear intended behavior takes precedence: recommend `/assembly` for implementation changes or renewed investigation for unclear behavior. Otherwise:
 
 - If a PR exists and is marked ready for review, recommend `/reality-check`. If the PR is marked as a draft suggest the user mark it ready for review and lead into `/reality-check` as a next step.
   - If the PR is absent, recommend `/babysit`.

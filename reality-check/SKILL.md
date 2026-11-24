@@ -204,7 +204,7 @@ Lead with findings using the Findings format above, unless a loaded format file 
 - Whether existing PR comments/threads and CI were checked.
 - Review limits, such as unavailable `gh`, inaccessible CI, ambiguous base, or partial diff scope.
 
-Include one explicit next action before any automatic quiz: return to `/assembly` for a concrete implementation finding, return to `/prelude` for an unclear problem or consequential unresolved investigation, or proceed toward completion when no actionable findings remain and the limits permit it.
+Include one explicit next action before any automatic quiz: return to `/assembly` for a concrete implementation finding, investigate further for an unclear problem or consequential unresolved question, or proceed toward completion when no actionable findings remain and the limits permit it.
 
 If no findings are found, say "No actionable findings within this scope" and provide the same coverage and limits. Passing tests and an absence of findings do not prove correctness.
 

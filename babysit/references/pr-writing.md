@@ -190,19 +190,19 @@ updates; never edit it through a shell variable, which can drop line breaks.
 ## Review summary comment
 
 After a corrective push, post one comment covering every finding from the
-delegated and automated reviews and every check repair. It replaces the
+delegated review and every check repair. It replaces the
 incremental update comment for that push. Post nothing when no corrective push
 is made:
 
 ```markdown
 ## Review summary
-Reviewed `<base-sha>..<head-sha>` with <reviewer(s)>.
+Reviewed `<base-sha>..<head-sha>` with <reviewer>.
 
 | Finding | Verdict | Reason |
 |---|---|---|
 | RC-001 Short title | Fixed in `<sha>` | ... |
 | RC-002 Short title | Rejected | ... |
-| <bot> [thread](<url>) Short title | Needs user decision | ... |
+| RC-003 Short title | Needs user decision | ... |
 
 ## Check repairs
 - `<check>` failed because ...; fixed in `<sha>`.
@@ -214,8 +214,7 @@ Reviewed `<base-sha>..<head-sha>` with <reviewer(s)>.
 - Unchanged.
 ```
 
-Use the reviewer's finding ID, or the bot name and thread link when there is
-none. Write `No findings.` in place of an empty table, and omit
+Use the reviewer's finding ID. Write `No findings.` in place of an empty table, and omit
 `Check repairs` when there were none. State reasons in terms of the code and
 project direction; do not quote private conversation or scratch artifacts.
 

@@ -1,9 +1,9 @@
 ---
 name: html-communication
 description: >-
-  Use when the user requests an HTML explanation or report, another skill invokes HTML report mode, or session instructions select HTML delivery.
-  Trigger phrases include "turn this into a visual summary", "create a comparison page", and "make an internal report".
-  Do not use for short answers, progress updates, or simple handoffs that read clearly in chat.
+  Use when the user requests an explanation that benefits from visual communication, another skill invokes HTML report mode, or session instructions select HTML delivery. 
+  Trigger phrases include "explain this to me", "create a comparison", and "make a report".
+  Do not use for one-line answers or quick status pings.
 ---
 
 # HTML Communication

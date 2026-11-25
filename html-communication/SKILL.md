@@ -1,7 +1,7 @@
 ---
 name: html-communication
 description: >-
-  Use when the user requests an explanation that benefits from visual communication, another skill invokes HTML report mode, or session instructions select HTML delivery. 
+  Use when the user requests an explanation that benefits from visual communication, another skill invokes HTML report mode, or session instructions select HTML delivery.
   Trigger phrases include "explain this to me", "create a comparison", and "make a report".
   Do not use for one-line answers or quick status pings.
 ---

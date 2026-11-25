@@ -8,11 +8,11 @@ description: >-
 
 # HTML Communication
 
-Produce a readable HTML explanation or report. The invoking skill defines its purpose and source of truth; preserve canonical plans and review records.
+Produce readable HTML, from brief inline visuals in chat to full reports. The invoking skill defines its purpose and source of truth; preserve canonical plans and review records.
 
 Keep the document clear, self-contained, and appropriate to the material. Choose the structure and visual treatment that best communicates the content; do not force every request into a fixed template.
 
-Follow the user's requested delivery and session preferences. When inline delivery is selected and T3's `html_preview` and `html_render` are available, use them; otherwise deliver the portable file. This skill defines HTML mechanics, not a default medium for other skills. Video remains opt-in.
+Follow the user's requested delivery and session preferences. When inline delivery is selected and T3's `html_preview` and `html_render` are available, use them; otherwise deliver the portable file. This skill defines HTML mechanics, not a default medium for other skills' canonical artifacts. Video remains opt-in.
 
 Use one self-contained document with inline CSS and only necessary vanilla JavaScript, without external runtime dependencies or network access. Choose one presentation by default; add variations only when requested. Share content between requested views instead of copying report bodies. Add controls only when they help the reader.
 
@@ -21,6 +21,15 @@ Save reports as portable UTF-8 files under repository-root `artifacts/reports/` 
 Keep artifacts ignored and untracked; if needed, append `/artifacts/` to the local exclude file located by `git rev-parse --git-path info/exclude`. Before writing, check whether Git tracks the target; if unexpectedly tracked, warn the user and leave its tracking state unchanged. Never stage or commit reports automatically. Keep one HTML content value for the file and tool calls; regenerate it only to fix a problem. Keep file styling portable while honoring T3's inline layout guidance.
 
 This is a communication artifact, not a coding plan artifact. If the user wants an executable project plan, implementation plan, or engineering handoff, use the `/blueprint` skill instead.
+
+## Inline visuals in chat
+
+Reach for a brief inline visual when the reply would otherwise be a wall of text the user will skim. Good fits: request or data flow, before vs after, 3+ option tradeoffs, what changed across files, test or benchmark results.
+
+- Put the takeaway in the visual's title, so the first line delivers the point.
+- Prefer scannable shapes: tables, labeled cards, status chips, step diagrams. Fit one screen.
+- Let the visual replace the prose it covers. Chat text adds only what the visual leaves out, such as a decision you need from the user.
+- Keep it light: no saved file, no controls, one `html_preview` then `html_render` pass. Save to `artifacts/reports/` only for full reports.
 
 ## Quiz Report Mode
 
